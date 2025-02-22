@@ -1,0 +1,63 @@
+{/* Dialog Card */}
+      {dialogData && (
+      <dialog ref={dialog_card} className="modal rounded-lg shadow-lg p-6 bg-white w-4/5 relative">
+        {/* Cancel Icon */}
+        <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onClick={() => toggleModal(false)} aria-label="Close" >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div className='w-full flex flex-row'>
+          <div className='w-1/2'>
+              <p className="">
+                <span className='font-semibold font-poppins text-lg'> {dialogData.name} </span>
+              </p>
+              <p className="mb-1">
+                <i className="fa-duotone fa-light fa-map-location pr-1"></i> <span className='text-xs'> Pickup: {dialogData.pickup} </span> 
+              </p>
+              <img src={dialogData.img} alt="" className='items-center' />
+              <p className='font-poppins text-sm'> <span className='font-bold text-lg'> ${dialogData.price} </span> for 1 day </p>
+              <p className='text-xs font-poppins'> <i class="fa-solid fa-user-tie-hair mr-1"></i> Driver included </p>
+              </div>
+          <div className='w-1/2'>
+            <form className="space-y-4 mt-4" onSubmit={handlePaymentSubmit}>
+              <div className="flex mb-4 items-center">
+                <i class="fa-brands fa-cc-visa text-3xl mr-2"></i> 
+                <span className='text-xl font-semibold font-poppins'> Payment details here </span>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Cardholder Name</label>
+                <input type="text" name='holder-name' onChange={handleInput} placeholder="John Doe" className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Card Number</label>
+                <input type="text" name='cardNo' onChange={handleInput} placeholder="1234 5678 9012 3456" className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Expiration Date</label>
+                  <input type="text" name='expired' onChange={handleInput} placeholder="MM/YY" className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">CVV</label>
+                  <input type="text" name='cvv' onChange={handleInput} placeholder="123" className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required />
+                </div>
+              </div>
+
+              <div className="flex justify-end space-x-4 mt-5">
+                <button className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400" onClick={() => toggleModal(false)} >
+                  Cancel
+                </button>
+                <button type="submit" className="px-4 py-2 bg-sky-700 text-white rounded-md hover:bg-sky-800">
+                  Confirm
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+
+        
+      </dialog>
+      )}

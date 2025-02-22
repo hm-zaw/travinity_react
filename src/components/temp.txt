@@ -1,0 +1,228 @@
+
+
+
+  
+
+  
+
+  return (
+    <>
+      <Header />
+      <HeaderBg title={`Travinity  >  Attractions  >  ${countryName}`} style={"text-sm font-semibold"} images={images} flag={true} height="350px" bgColor={"bg-gray-800 bg-opacity-80"} />
+      {countryDetails && <Blog countryDetail={countryDetails} images={images} />}
+
+      {countryDetails && (
+        <>
+          <div className='flex flex-row space-x-5 mr-16'>
+            <div className='w-3/5'>
+              <div className="flex flex-row items-baseline ">
+                <h2 className="text-blue-800 font-bold font-poppins text-5xl ml-16 mt-16">
+                  {countryDetails.country_name}
+                </h2>
+                <span className="mt-16 ml-4 text-lg font-bold font-poppins">
+                  {countryDetails.continent_name}
+                </span>
+              </div>
+              <div className='my-7 ml-16 pr-36 font-poppins text-base text-justify text-gray-700 leading-relaxed'>
+                {countryDetails.blog_content}
+              </div>
+            </div>
+            <div className='w-2/5 mr-20 mt-10'>
+              <div className="space-y-2 mt-10" id="accordionExample">
+                {faqItems.map((item, index) => (
+                  <div key={index} className="faq-item bg-gray-100 bg-opacity-20 shadow rounded-lg">
+                    <div className="faq-header py-3 px-4 cursor-pointer flex justify-between items-center" id={`heading${index}`} onClick={() => toggleFaq(index)}>
+                      <h5 className="text-sm font-poppins font-semibold text-gray-800">
+                        {item.question}
+                      </h5>
+                      <span className={`transform transition-transform duration-700 ease-in-out ${openIndex === index ? "rotate-180" : ""}`}>
+                        <i className="fa-solid fa-caret-down"></i>
+                      </span>
+                    </div>
+                    <div id={`collapse${index}`} className={`faq-content overflow-hidden transition-all duration-700 ease-in-out ${openIndex === index ? "max-h-[500px] opacity-100 translate-y-0 scale-100" : "max-h-0 opacity-0 -translate-y-2 scale-95"}`} style={{ transitionProperty: "max-height, opacity, transform" }}>
+                      <div className="p-4 border-t border-gray-200 text-gray-700">
+                        {item.answer}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="h-44 my-24 flex flex-row w-full bg-slate-100 rounded-lg">
+            <div className="w-1/3 text-center flex flex-row items-center justify-center">
+              <img src="../images/adventurer.png" alt="we're here" className="w-24 h-24 mr-5" />
+              <div className="text-left">
+                <p className="font-poppins text-lg font-semibold">Explore Top Destinations</p>
+                <p className="text-xs font-light">Hidden gems, and guided exploration.</p>
+              </div>
+            </div>
+            <div className="w-1/3 text-center flex flex-row items-center justify-center">
+              <img src="../images/hobby.png" alt="we're here" className="w-24 h-24 mr-5" />
+              <div className="text-left">
+                <p className="font-poppins text-lg font-semibold">Local Insights</p>
+                <p className="text-xs font-light">Expert-recommended local experiences.</p>
+              </div>
+            </div>
+            <div className="w-1/3 text-center flex flex-row items-center justify-center">
+              <img src="../images/tourist.png" alt="we're here" className="w-24 h-24 mr-5" />
+              <div className="text-left">
+                <p className="font-poppins text-lg font-semibold">Breathtaking Moments</p>
+                <p className="text-xs font-light">Stunning visuals, amazing destinations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className='bg-blue-50 h-[800px] mx-12 my-40 rounded-[40px]'>
+            <h1 className="bg-gradient-to-r px-16 pt-14 font-extrabold text-xl font-mono inline-block text-transparent bg-clip-text from-purple-600 via-pink-500 to-red-500">
+              01 / What To Do
+            </h1>
+            <h1 className='font-bold text-5xl font-poppins px-16 pt-5'> Must Visit Destinations </h1>
+
+            <div className='my-16 mx-20'>
+              {/* Swiper Container */}
+              <div className="flex items-center">
+                <div className="w-full h-full bg-transparent relative">
+                  <Swiper
+                    spaceBetween={20}
+                    slidesPerView={3}
+                    onSlideChange={() => console.log("slide change")}
+                    onSwiper={(swiper) => console.log(swiper)}
+                  >
+
+                    <SwiperSlide>
+                      <div className="bg-white h-[475px] p-4 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold">Card 1</h3>
+                        <p>Content for card 1</p>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="bg-white h-[475px] p-4 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold">Card 2</h3>
+                        <p>Content for card 2</p>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="bg-white h-[475px] p-4 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold">Card 3</h3>
+                        <p>Content for card 3</p>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="bg-white h-[475px] p-4 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold">Card 4</h3>
+                        <p>Content for card 4</p>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="bg-white h-[475px] p-4 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold">Card 5</h3>
+                        <p>Content for card 5</p>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="bg-white h-[475px] p-4 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold">Card 6</h3>
+                        <p>Content for card 6</p>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
+              
+              </div>
+              <div className="flex justify-end mt-4 w-full pr-10">
+                  <CustomPrevArrow />
+                  <div className="mx-2"></div>
+                  <CustomNextArrow />
+                </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+// Define CustomNextArrow and CustomPrevArrow inside the Swiper component
+const CustomNextArrow = () => {
+  const swiper = useSwiper();
+  return (
+    <button
+      className="bg-white py-2 px-4 rounded-full shadow-md border-2 border-gray-400 hover:bg-gray-100 transition-all"
+      onClick={() => swiper.slideNext()}
+    >
+      <i className="fa-solid fa-chevron-right"></i>
+    </button>
+  );
+};
+
+const CustomPrevArrow = () => {
+  const swiper = useSwiper();
+  return (
+    <button
+      className="bg-white py-2 px-4 rounded-full shadow-md border-2 border-gray-400 hover:bg-gray-100 transition-all"
+      onClick={() => swiper.slidePrev()}
+    >
+      <i className="fa-solid fa-chevron-left"></i>
+    </button>
+  );
+};
+
+export default GuidePage;
+
+
+----------------------------------
+
+Ma thone lyk ya thw
+
+<div className="bg-yellow-50 py-16 px-4 mx-14 mb-14 -mt-6 rounded-[40px]">
+            <h1 className="bg-gradient-to-r px-16 font-extrabold text-xl font-mono inline-block text-transparent bg-clip-text from-purple-600 via-pink-500 to-red-500">
+              02 / What To Eat
+            </h1>
+            <h1 className="font-bold text-5xl font-poppins px-16 pt-5">
+              {" "}
+              Must Try Food in {countryDetails.country_name}{" "}
+            </h1>
+
+            <p className="px-16 text-lg font-semibold font-poppins pt-14">
+              {" "}
+              Editor's Choice Food{" "}
+            </p>
+            <div className="ml-14 mr-14">
+              <Swiper
+                modules={[Autoplay]}
+                spaceBetween={20}
+                slidesPerView={4}
+                autoplay={{ delay: 2000, disableOnInteraction: false }}
+                loop={true}
+                speed={2000}
+              >
+                {[...countryDetails.food].map((ff, index) => {
+                  fetchFoodPhoto(ff.name);
+
+                  return (
+                    <SwiperSlide key={index}>
+                      <div className="border border-black p-4 rounded-3xl mt-4">
+                        <div className="relative hover:scale-105 duration-200">
+                          <img className="hidden dark:block rounded-3xl" src={foodImg[ff.name]} alt={ff.name} />
+                          <img className="block dark:hidden rounded-3xl h-44 w-full" src={foodImg[ff.name]} alt={ff.name} />
+                          <BsHeartFill className="absolute -top-2 -left-2 h-8 w-8 p-2 rounded-lg flex items-center justify-center bg-white shadow-lg dark:bg-primary text-[#ff4757] text-xl" />
+                        </div>
+                        <div className="flex flex-col items-start space-y-1 mt-3 md:space-y-0 md:flex-row md:items-center justify-between">
+                          <div>
+                            <h5 className="text-lg font-poppins dark:text-white font-semibold">
+                              {ff.name}
+                            </h5>
+                            <p className="text-xs my-4 text-primary font-medium dark:text-gray-400">
+                              {ff.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </div>
+          </div>
