@@ -44,7 +44,6 @@ const CarRental = () => {
     })
 
     const [newFilteredCarData, setNewFilteredCarData] = useState([]);
-    
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [dropoffSuggestions, setDropoffSuggestions] = useState([]);
     const [pickupValue, setPickupValue] = useState('');

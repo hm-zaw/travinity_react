@@ -6,6 +6,7 @@ import CarView from './components/Car_Rental/CarView';
 import Attracts_main from './components/Attractions/attracts_main';
 import GuidePage from './components/Attractions/GuidePage';
 import PaymentSuccess from './components/UI/PaymentSuccess';
+import Hotel from './components/Hotel_Flight/hotel';
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
           <Route path='/car_view' element={ <CarView /> }/>
           <Route path='/attractions' element={ <Attracts_main/>}></Route>
           <Route path='/attractions/:countryName' element={ <GuidePage /> }></Route>
+
+          <Route path='/hotel' element={ <Hotel /> }></Route>
         </Routes>
       </main>
 

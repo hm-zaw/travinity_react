@@ -4,12 +4,12 @@ const HeaderBg = ({ title, images = [], flag = true, bgColor, height = '300px', 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    if (images.length > 0) {
+    if (images.length > 1) {
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 5500); // Change image every 5 seconds
+      }, 5500);
 
-      return () => clearInterval(interval); // Cleanup interval on component unmount
+      return () => clearInterval(interval);
     }
   }, [images]);
 

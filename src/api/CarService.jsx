@@ -19,6 +19,12 @@ export async function checkPayment({ paymentInfo }){
     return await axios.post(service_url, paymentInfo);
 }
 
+export async function checkPaymentHotel({ paymentInfo }){
+    const service_url = `${API_URL}/payment_hotel`; 
+    return await axios.post(service_url, paymentInfo);
+}
+
+
 export async function getAttractions({ city }){
     const service_url = `${API_URL}/city`;
     return await axios.get(service_url, { params: city });

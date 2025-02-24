@@ -6,10 +6,7 @@ const PaymentSuccess = () => {
     const queryParams = new URLSearchParams(location.search);
 
     const carName = queryParams.get('car_name');
-    const transactionDate = queryParams.get('transaction_date');
-    const formattedDate = transactionDate ? transactionDate.split('T')[0] : '';
-
-    const pickupPlace = queryParams.get('pickup_place');
+    const hotelName = queryParams.get('hotel_name');
 
   return (
         <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
@@ -34,12 +31,20 @@ const PaymentSuccess = () => {
                         </a>
                     </p>
                 </div>
-                <div class="mt-8 text-center">
-                    <a href={'/car_rental'}
-                        class="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600">
+                {carName ? (
+                    <div className="mt-8 text-center">
+                        <a href="/car_rental" className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600">
                         Back to Home
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                ) : hotelName ? (
+                    <div className="mt-8 text-center">
+                        <a href="/hotel" className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600" >
+                        Back to Home
+                        </a>
+                    </div>
+                ) : null}
+                
             </div>
         </div>
     );
