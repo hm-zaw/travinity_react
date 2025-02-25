@@ -7,4 +7,12 @@ export default defineConfig({
   optimizeDeps: {
     include: ['clsx', 'tailwind-merge'],
   },
+  css: {
+    devSourcemap: true, 
+  },
+  postcss: {
+    map: {
+      inline: false, 
+    },
+  },
 })

@@ -3,15 +3,18 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 import Header from '../Header';
 import HeaderBg from '../HeaderBg';
 import { checkPaymentHotel } from '../../api/CarService';
 
 const Hotel = () => {
   const location = useLocation();
+  const dataCarry = location.state;
   const [hotels, setHotels] = useState([]);
   const [dayDifference, setDayDifference] = useState(0);
   const [error, setError] = useState('');
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const [priceCounts, setPriceCounts] = useState(0);
   const [reviewCounts, setReviewCounts] = useState(0);
@@ -26,14 +29,7 @@ const Hotel = () => {
   const checkOutDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
   const [activeTab, setActiveTab] = useState('recommended');
-  const [searchState, setSearchState] = useState({
-    destination: location.state?.original?.destination || '',
-    checkInDate: location.state?.original?.checkInDate || checkInDate,
-    checkOutDate: location.state?.original?.checkOutDate || checkOutDate,
-    rooms: location.state?.original?.rooms || 1,
-    adults: location.state?.original?.adults || 2,
-    children: location.state?.original?.children || 0,
-  });
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,13 +40,9 @@ const Hotel = () => {
       }));
   };
 
-  useEffect(() => {
-    console.log(searchState);
-  }, [searchState]);
-
   // hmz code
   const handleSubmitForm = async (e) => {
-    e.preventDefault();
+    if(e) e.preventDefault();
     console.log("handleSubmitForm is called");
 
     const checkin = new Date(searchState.checkInDate);
@@ -65,11 +57,46 @@ const Hotel = () => {
       });
       console.log(response);
       setHotels(response.data);
+      setFilteredHotels(response.data);
     } catch (error) {
       console.error('Error fetching hotels:', error);
       setError('Failed to fetch hotels. Please try again.');
     }
   };
+
+  const [searchState, setSearchState] = useState({
+    destination: "",
+    checkInDate: checkInDate,
+    checkOutDate: checkOutDate,
+    rooms: 1,
+    adults: 2,
+    children: 0,
+  });
+
+  useEffect(() => {
+    if (location.state && !hasSubmitted) {
+      setSearchState({
+        destination: dataCarry.destination,
+        checkInDate: dataCarry.checkinDate,
+        checkOutDate: dataCarry.checkoutDate,
+        rooms: dataCarry.rooms,
+        adults: dataCarry.adults,
+        children: dataCarry.children,
+      });
+      setHasSubmitted(true); // Set the flag to true after submitting
+    }
+  }, [location.state, dataCarry, hasSubmitted]);
+
+  useEffect(() => {
+    if (hasSubmitted) {
+      handleSubmitForm(); // Automatically call handleSubmitForm
+    }
+  }, [hasSubmitted]);
+
+  useEffect(() => {
+    console.log(searchState);
+  }, [searchState]);
+
 
   const getRandomTime = () => {
     const isHours = Math.random() < 0.5; // Randomly decide between mins and hrs
