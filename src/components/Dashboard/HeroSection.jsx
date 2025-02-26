@@ -342,6 +342,10 @@ const HeroSection = () => {
           </div>
         );
 
+      case "Cruises":
+        // Redirect to localhost:5173/cruises
+        window.location.href = "http://localhost:5173/cruises";
+        return null;
       // Other cases (Hotels & Homes, Trains, Cars, Attractions & Tours, Flight + Hotel) remain unchanged
       default:
         return null;
@@ -377,7 +381,7 @@ const HeroSection = () => {
               }`}
               onClick={() => setActiveTab(tab.name)}
             >
-              <span className="text-lg sm:text-xl">{tab.icon}</span>
+              <span className="lg:text-lg sm:text-xl">{tab.icon}</span>
               {tab.name}
             </button>
           ))}

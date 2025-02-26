@@ -1,0 +1,2445 @@
+{
+    "DepartureCities":[
+      {
+        "City": "Abu Dhabi",
+        "Ships": ["7890130", "3816988"]
+      },
+      {
+        "City": "Antalya",
+        "Ships": ["2345674"]
+      },
+      {
+        "City": "Athens",
+        "Ships": ["5678904", "6789015"]
+      },
+      {
+        "City": "Auckland",
+        "Ships": ["5678906", "6789017"]
+      },
+      {
+        "City": "Bali",
+        "Ships": ["2345673"]
+      },
+      {
+        "City": "Bangkok",
+        "Ships": ["3456795"]
+      },
+      {
+        "City": "Barcelona",
+        "Ships": ["2345671", "3456792", "3816989"]
+      },
+      {
+        "City": "Belize City",
+        "Ships": ["8901256"]
+      },
+      {
+        "City": "Bergen",
+        "Ships": ["2345678"]
+      },
+      {
+        "City": "Bordeaux",
+        "Ships": ["6789014"]
+      },
+      {
+        "City": "Boston",
+        "Ships": ["4567891"]
+      },
+      {
+        "City": "Brest",
+        "Ships": ["4567890"]
+      },
+      {
+        "City": "Bridgetown",
+        "Ships": ["3456789"]
+      },
+      {
+        "City": "Broome",
+        "Ships": ["6789013"]
+      },
+      {
+        "City": "Buenos Aires",
+        "Ships": ["8901241", "9012352"]
+      },
+      {
+        "City": "Busan",
+        "Ships": ["7890134"]
+      },
+      {
+        "City": "Cairns",
+        "Ships": ["8901245"]
+      },
+      {
+        "City": "Callao",
+        "Ships": ["3456702"]
+      },
+      {
+        "City": "Canton of Puntarenas",
+        "Ships": ["3456791"]
+      },
+      {
+        "City": "Cape Canaveral",
+        "Ships": ["3456793"]
+      },
+      {
+        "City": "Cape Town",
+        "Ships": ["7890126", "8901237"]
+      },
+      {
+        "City": "Catania",
+        "Ships": ["6789023"]
+      },
+      {
+        "City": "Chioggia",
+        "Ships": ["7890125"]
+      },
+      {
+        "City": "City of Los Angeles",
+        "Ships": ["1234568", "2345679", "3456790"]
+      },
+      {
+        "City": "Civitavecchia",
+        "Ships": ["4567892"]
+      },
+      {
+        "City": "Colombo",
+        "Ships": ["1234574"]
+      },
+      {
+        "City": "Colon",
+        "Ships": ["9012367"]
+      },
+      {
+        "City": "Copenhagen",
+        "Ships": ["5678907", "6789018"]
+      },
+      {
+        "City": "Dakar",
+        "Ships": ["5678903"]
+      },
+      {
+        "City": "Darwin",
+        "Ships": ["7890145"]
+      },
+      {
+        "City": "Dubai",
+        "Ships": ["4567896", "9012345"]
+      },
+      {
+        "City": "Dublin",
+        "Ships": ["3456781"]
+      },
+      {
+        "City": "Dubrovnik",
+        "Ships": ["6789023"]
+      },
+      {
+        "City": "Dunedin",
+        "Ships": ["2345690"]
+      },
+      {
+        "City": "Durban",
+        "Ships": ["9012348"]
+      },
+      {
+        "City": "Fairlie",
+        "Ships": ["4567812"]
+      },
+      {
+        "City": "Fort De France",
+        "Ships": ["5678905"]
+      },
+      {
+        "City": "Fort Lauderdale",
+        "Ships": ["4567890", "5678901"]
+      },
+      {
+        "City": "Fredrikstad",
+        "Ships": ["2345675"]
+      },
+      {
+        "City": "Fremantle",
+        "Ships": ["3456701"]
+      },
+      {
+        "City": "Fukuoka",
+        "Ships": ["9012350"]
+      },
+      {
+        "City": "Galveston",
+        "Ships": ["5678902", "6789013"]
+      },
+      {
+        "City": "Galveston County",
+        "Ships": ["9012351"]
+      },
+      {
+        "City": "Genoa",
+        "Ships": ["7890130"]
+      },
+      {
+        "City": "Glasgow",
+        "Ships": ["4567891"]
+      },
+      {
+        "City": "Guam",
+        "Ships": ["7890123"]
+      },
+      {
+        "City": "Halifax",
+        "Ships": ["2345676"]
+      },
+      {
+        "City": "Hamburg",
+        "Ships": ["9012368"]
+      },
+      {
+        "City": "Helsinki",
+        "Ships": ["5678912"]
+      },
+      {
+        "City": "Hong Kong",
+        "Ships": ["9012349"]
+      },
+      {
+        "City": "Honiara",
+        "Ships": ["3456792"]
+      },
+      {
+        "City": "Honolulu",
+        "Ships": ["7890129", "8901240"]
+      },
+      {
+        "City": "Incheon",
+        "Ships": ["4567893"]
+      },
+      {
+        "City": "Ishigaki",
+        "Ships": ["9012367"]
+      },
+      {
+        "City": "Istanbul",
+        "Ships": ["3456702"]
+      },
+      {
+        "City": "Itajai",
+        "Ships": ["4567813"]
+      },
+      {
+        "City": "Jacksonville",
+        "Ships": ["6789015"]
+      },
+      {
+        "City": "Kagoshima",
+        "Ships": ["4567894"]
+      },
+      {
+        "City": "Kangerlussuaq",
+        "Ships": ["7890146"]
+      },
+      {
+        "City": "Keelung",
+        "Ships": ["4567895"]
+      },
+      {
+        "City": "Kiel",
+        "Ships": ["5678908"]
+      },
+      {
+        "City": "Kobe",
+        "Ships": ["2345674"]
+      },
+      {
+        "City": "La Romana",
+        "Ships": ["5678924"]
+      },
+      {
+        "City": "La Seyne-sur-Mer",
+        "Ships": ["3456789"]
+      },
+      {
+        "City": "Las Palmas",
+        "Ships": ["8901236"]
+      },
+      {
+        "City": "Las Palmas de Gran Canaria - Cuenca del Guiniguada",
+        "Ships": ["9012347"]
+      },
+      {
+        "City": "Lautoka",
+        "Ships": ["1234570"]
+      },
+      {
+        "City": "Lisbon",
+        "Ships": ["6789035"]
+      },
+      {
+        "City": "London",
+        "Ships": ["1234579"]
+      },
+      {
+        "City": "Longyearbyen",
+        "Ships": ["3456701"]
+      },
+      {
+        "City": "Malaga",
+        "Ships": ["3456794"]
+      },
+      {
+        "City": "Marghera",
+        "Ships": ["6789017"]
+      },
+      {
+        "City": "Marigot",
+        "Ships": ["5678907"]
+      },
+      {
+        "City": "Marseille",
+        "Ships": ["2345670"]
+      },
+      {
+        "City": "Melbourne",
+        "Ships": ["3456790"]
+      },
+      {
+        "City": "Miami",
+        "Ships": ["1234567", "2345678", "3456789"]
+      },
+      {
+        "City": "Milwaukee",
+        "Ships": ["9012346"]
+      },
+      {
+        "City": "Mindelo",
+        "Ships": ["7890145"]
+      },
+      {
+        "City": "Monte Carlo",
+        "Ships": ["7890124"]
+      },
+      {
+        "City": "Montreal",
+        "Ships": ["9012347", "1234570"]
+      },
+      {
+        "City": "Mumbai",
+        "Ships": ["1234572"]
+      },
+      {
+        "City": "Naha",
+        "Ships": ["1234574"]
+      },
+      {
+        "City": "Naples",
+        "Ships": ["5678903"]
+      },
+      {
+        "City": "Nassau",
+        "Ships": ["7890125"]
+      },
+      {
+        "City": "New Orleans",
+        "Ships": ["7890128"]
+      },
+      {
+        "City": "New York",
+        "Ships": ["4567891", "5678903"]
+      },
+      {
+        "City": "Nice",
+        "Ships": ["6789034"]
+      },
+      {
+        "City": "Nosy Be",
+        "Ships": ["6789012"]
+      },
+      {
+        "City": "Osaka",
+        "Ships": ["2345679"]
+      },
+      {
+        "City": "Oslo",
+        "Ships": ["2345678"]
+      },
+      {
+        "City": "Palermo",
+        "Ships": ["2345690"]
+      },
+      {
+        "City": "Palma de Mallorca",
+        "Ships": ["1234571"]
+      },
+      {
+        "City": "Papeete",
+        "Ships": ["4567897"]
+      },
+      {
+        "City": "Philadelphia",
+        "Ships": ["5678905"]
+      },
+      {
+        "City": "Philipsburg",
+        "Ships": ["8901235"]
+      },
+      {
+        "City": "Phuket",
+        "Ships": ["6789035"]
+      },
+      {
+        "City": "Piraeus",
+        "Ships": ["8901256"]
+      },
+      {
+        "City": "Pointe A Pitre",
+        "Ships": ["6789014"]
+      },
+      {
+        "City": "Port Canaveral",
+        "Ships": ["1234575"]
+      },
+      {
+        "City": "Port Louis",
+        "Ships": ["9012351"]
+      },
+      {
+        "City": "Quebec City",
+        "Ships": ["8901236"]
+      },
+      {
+        "City": "Ravenna",
+        "Ships": ["7890134"]
+      },
+      {
+        "City": "Recife",
+        "Ships": ["3456781"]
+      },
+      {
+        "City": "Reykjavik",
+        "Ships": ["9012349"]
+      },
+      {
+        "City": "Rio de Janeiro",
+        "Ships": ["1234575"]
+      },
+      {
+        "City": "Rome",
+        "Ships": ["4567892"]
+      },
+      {
+        "City": "Rosyth",
+        "Ships": ["3456794"]
+      },
+      {
+        "City": "Saint-Pierre",
+        "Ships": ["1234570"]
+      },
+      {
+        "City": "Salvador",
+        "Ships": ["6789023"]
+      },
+      {
+        "City": "San Diego",
+        "Ships": ["4567901"]
+      },
+      {
+        "City": "San Francisco",
+        "Ships": ["2345670", "3456791"]
+      },
+      {
+        "City": "San Juan",
+        "Ships": ["6789012"]
+      },
+      {
+        "City": "Santa Cruz de Tenerife",
+        "Ships": ["3456795"]
+      },
+      {
+        "City": "Santo Domingo",
+        "Ships": ["2345678"]
+      },
+      {
+        "City": "Sao Paulo",
+        "Ships": ["5678912"]
+      },
+      {
+        "City": "Sasebo",
+        "Ships": ["4567893"]
+      },
+      {
+        "City": "Savona",
+        "Ships": ["2345671"]
+      },
+      {
+        "City": "Seattle",
+        "Ships": ["7890124", "8901235"]
+      },
+      {
+        "City": "Singapore",
+        "Ships": ["7890127", "8901238", "8901234"]
+      },
+      {
+        "City": "Southampton",
+        "Ships": ["2345674", "3456795"]
+      },
+      {
+        "City": "Stockholm",
+        "Ships": ["5678908"]
+      },
+      {
+        "City": "Sydney",
+        "Ships": ["2345673", "3456794"]
+      },
+      {
+        "City": "Tampa",
+        "Ships": ["5678924"]
+      },
+      {
+        "City": "Taranto",
+        "Ships": ["3456791"]
+      },
+      {
+        "City": "Tarragona",
+        "Ships": ["1234570"]
+      },
+      {
+        "City": "Tokyo",
+        "Ships": ["1234572"]
+      },
+      {
+        "City": "Toronto",
+        "Ships": ["8901256"]
+      },
+      {
+        "City": "Trieste",
+        "Ships": ["2345674"]
+      },
+      {
+        "City": "Tromso",
+        "Ships": ["7890145"]
+      },
+      {
+        "City": "Ushuaia",
+        "Ships": ["2345672", "3456793"]
+      },
+      {
+        "City": "Valencia",
+        "Ships": ["5678903"]
+      },
+      {
+        "City": "Valletta",
+        "Ships": ["5678923"]
+      },
+      {
+        "City": "Valparaiso",
+        "Ships": ["8901241"]
+      },
+      {
+        "City": "Vancouver",
+        "Ships": ["9012346", "1234569"]
+      },
+      {
+        "City": "Venice",
+        "Ships": ["5678912"]
+      },
+      {
+        "City": "Victoria",
+        "Ships": ["2345675", "3456796"]
+      },
+      {
+        "City": "Walvis Bay",
+        "Ships": ["8901240"]
+      },
+      {
+        "City": "Whittier",
+        "Ships": ["4567813"]
+      },
+      {
+        "City": "Willemstad",
+        "Ships": ["5678924"]
+      },
+      {
+        "City": "Yokohama",
+        "Ships": ["7890146"]
+      }
+    ],
+    
+    "DestinationCities":[
+      {
+        "Destination": "Mediterranean",
+        "Ships": ["1234567", "2345678", "3816989"]
+      },
+      {
+        "Destination": "Western Europe",
+        "Ships": ["3456789", "4567890"]
+      },
+      {
+        "Destination": "Caribbean",
+        "Ships": ["5678901", "6789012", "7890123"]
+      },
+      {
+        "Destination": "Getaway at Sea",
+        "Ships": ["8901234"]
+      },
+      {
+        "Destination": "Long Cruise Segment",
+        "Ships": ["9012345"]
+      },
+      {
+        "Destination": "Northern Europe",
+        "Ships": ["1234578", "2345689"]
+      },
+      {
+        "Destination": "Greek Isles",
+        "Ships": ["3456790"]
+      },
+      {
+        "Destination": "Asia",
+        "Ships": ["4567801", "5678912"]
+      },
+      {
+        "Destination": "South America",
+        "Ships": ["6789023", "7890134"]
+      },
+      {
+        "Destination": "Bahamas",
+        "Ships": ["8901245", "9012356"]
+      },
+      {
+        "Destination": "Africa",
+        "Ships": ["1234589"]
+      },
+      {
+        "Destination": "South Pacific",
+        "Ships": ["2345690", "3456701"]
+      },
+      {
+        "Destination": "Pacific Coastal",
+        "Ships": ["4567812"]
+      },
+      {
+        "Destination": "Australia",
+        "Ships": ["5678923", "6789034"]
+      },
+      {
+        "Destination": "Japan",
+        "Ships": ["7890145"]
+      },
+      {
+        "Destination": "Arctic",
+        "Ships": ["8901256"]
+      },
+      {
+        "Destination": "Panama Canal",
+        "Ships": ["9012367"]
+      },
+      {
+        "Destination": "Canada/New England",
+        "Ships": ["1234580"]
+      },
+      {
+        "Destination": "Mexico",
+        "Ships": ["2345691"]
+      },
+      {
+        "Destination": "Middle East",
+        "Ships": ["3456702", "3816988"]
+      },
+      {
+        "Destination": "Alaska",
+        "Ships": ["4567813", "5678924"]
+      },
+      {
+        "Destination": "Transatlantic",
+        "Ships": ["6789035"]
+      },
+      {
+        "Destination": "Hawaii",
+        "Ships": ["7890146"]
+      },
+      {
+        "Destination": "West Coast",
+        "Ships": ["8901257"]
+      },
+      {
+        "Destination": "New Zealand",
+        "Ships": ["9012368"]
+      },
+      {
+        "Destination": "Bermuda",
+        "Ships": ["1234579", "2345680"]
+      },
+      {
+        "Destination": "Antarctic",
+        "Ships": ["3456791", "4567802"]
+      }
+    ],
+  
+    "Ships": [ 
+      {
+        "CruiseId": "3816988", 
+        "CruiseLine": "MSC Cruises",
+        "LicenseNo": "02943",
+        "Tonnage": 75904,
+        "Date of Renovation": 2020,
+        "Decks": 13,
+        "DepartCity": "Abu Dhabi",
+        "Destination": "Middle East",
+        "TripType": "Round Trip",
+        "Length": 879.25,
+        "Beam(width)": 121.39,
+        "Speed": 24,
+        "Ship Name": "Anthem of the Seas",
+        "Time": "10:00 - 18:00",
+        "Port": "Dubai, UAE",
+        "Max Passengers": 4825,
+        "Crew": 1300,
+        "price": 779,
+        "Description": "7-Night Middle East Cruise",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "200 squared ft",
+            "Decks": "4-6",
+            "Number of Guests": "1-3",
+            "Price": 779,
+            "Description": "Comfortable stateroom with two twin beds that convert to a Royal King, sitting area, and private bathroom.",
+            "Category Code": "INS",
+            "Available Rooms": 5
+          },
+          {
+            "Category": "Interior",
+            "Name": "Deluxe Inside",
+            "Room Size": "210 squared ft",
+            "Decks": "7-8",
+            "Number of Guests": "1-4",
+            "Price": 829,
+            "Description": "Upgraded interior stateroom with added amenities and more space.",
+            "Category Code": "DLX",
+            "Available Rooms": 0
+          },
+          {
+            "Category": "Interior",
+            "Name": "Family Inside",
+            "Room Size": "230 squared ft",
+            "Decks": "9-10",
+            "Number of Guests": "1-5",
+            "Price": 899,
+            "Description": "Spacious interior stateroom suitable for families, with additional bedding options.",
+            "Category Code": "FAM",
+            "Available Rooms": 3
+          },
+          {
+            "Category": "Interior",
+            "Name": "Studio Inside",
+            "Room Size": "150 squared ft",
+            "Decks": "10-11",
+            "Number of Guests": "1",
+            "Price": 729,
+            "Description": "Compact and efficient interior stateroom designed for solo travelers.",
+            "Category Code": "STU",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "214 squared ft",
+            "Decks": "2-8",
+            "Number of Guests": "1-3",
+            "Price": 999,
+            "Description": "Stateroom with a large picture window providing a beautiful view of the ocean.",
+            "Category Code": "OV",
+            "Available Rooms": 10
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Deluxe Ocean View",
+            "Room Size": "240 squared ft",
+            "Decks": "3-6",
+            "Number of Guests": "1-4",
+            "Price": 1099,
+            "Description": "Enhanced ocean view stateroom with extra space and upgraded amenities.",
+            "Category Code": "DOV",
+            "Available Rooms": 4
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Family Ocean View",
+            "Room Size": "260 squared ft",
+            "Decks": "4-8",
+            "Number of Guests": "1-5",
+            "Price": 1149,
+            "Description": "Spacious ocean view stateroom suitable for families, with additional bedding options.",
+            "Category Code": "FOV",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Studio Ocean View",
+            "Room Size": "180 squared ft",
+            "Decks": "6-7",
+            "Number of Guests": "1",
+            "Price": 899,
+            "Description": "Efficient ocean view stateroom perfect for solo travelers, with a large window for great views.",
+            "Category Code": "SOV",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "248 squared ft",
+            "Decks": "6-12",
+            "Number of Guests": "1-4",
+            "Price": 1299,
+            "Description": "Spacious stateroom with a private balcony, two twin beds that convert to a Royal King, sitting area, and private bathroom.",
+            "Category Code": "BAL",
+            "Available Rooms": 7
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Deluxe Balcony",
+            "Room Size": "270 squared ft",
+            "Decks": "8-12",
+            "Number of Guests": "1-4",
+            "Price": 1399,
+            "Description": "Upgraded balcony stateroom with additional living space and premium amenities.",
+            "Category Code": "DBL",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Extended Balcony",
+            "Room Size": "300 squared ft",
+            "Decks": "10-12",
+            "Number of Guests": "1-4",
+            "Price": 1499,
+            "Description": "Balcony stateroom with extended balcony space and upgraded features.",
+            "Category Code": "EBL",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Studio Balcony",
+            "Room Size": "200 squared ft",
+            "Decks": "8-10",
+            "Number of Guests": "1",
+            "Price": 1199,
+            "Description": "Compact balcony stateroom designed for solo travelers, with private balcony and stunning views.",
+            "Category Code": "SBL",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Grand Suite",
+            "Room Size": "371 squared ft",
+            "Decks": "10-12",
+            "Number of Guests": "1-4",
+            "Price": 2499,
+            "Description": "Luxurious suite with a separate bedroom, large balcony, and additional living space.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding, and concierge service.",
+            "Benefits": "Access to exclusive areas such as the suite lounge and private sundeck, reserved seating in entertainment venues, and priority reservations for dining and spa services.",
+            "Category Code": "SRS",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Owner's Suite",
+            "Room Size": "471 squared ft",
+            "Decks": "11-12",
+            "Number of Guests": "1-4",
+            "Price": 2999,
+            "Description": "Exclusive suite with a large private balcony, living and dining areas, and luxurious amenities.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding, and concierge service.",
+            "Benefits": "Access to exclusive areas such as the suite lounge and private sundeck, reserved seating in entertainment venues, and priority reservations for dining and spa services.",
+            "Category Code": "OWN",
+            "Available Rooms": 0
+          },
+          {
+            "Category": "Suite",
+            "Name": "Junior Suite",
+            "Room Size": "300 squared ft",
+            "Decks": "9-10",
+            "Number of Guests": "1-4",
+            "Price": 1999,
+            "Description": "Cozy suite with a private balcony and additional living space.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding.",
+            "Benefits": "Access to reserved seating in entertainment venues and priority reservations for dining and spa services.",
+            "Category Code": "JRS",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Studio Suite",
+            "Room Size": "220 squared ft",
+            "Decks": "11-12",
+            "Number of Guests": "1",
+            "Price": 1799,
+            "Description": "Luxurious suite for solo travelers, with a private balcony and premium amenities.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding.",
+            "Benefits": "Access to reserved seating in entertainment venues and priority reservations for dining and spa services.",
+            "Category Code": "STS",
+            "Available Rooms": 1
+          }
+        ],
+  
+        "Entertainment": [
+          {
+            "Category": "Leisure",
+            "Name": "Headliner's Comedy Club",
+            "Decks": 6,
+            "Price": "Free",
+            "Description": "The Headliner's Comedy Club is a popular entertainment venue on the ship. It offers a variety of comedy shows and performances, as well as a bar and restaurant."
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Speciality Restaurants",
+            "Name": "Illusionarium",
+            "Decks": 6,
+            "Price": "Charges apply",
+            "Description": "Enjoy the ambiance in the Illusionarium, our intimate theatre experience featuring a variety of musical entertainment."
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "Charges apply",
+            "Description": "UNLIMITED WI-FI: General web browsing, emails and messaging. Does not support streaming functions. $29.99/per day for 1 device; $45.98/per day for 2 devices. UNLIMITED PREMIUM WI-FI: Includes audio and video streaming via your favorite provider or app plus VPN access. $39.99/per day for 1 device; $65.98/per day for 2 devices. (The Wi-Fi Information are provided here for reference only. The details of use and price on board shall prevail.)"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.5,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Le Havre (Paris)",
+            "PortCountry": "France",
+            "Date": "Thu Mar 20, 2025",
+            "Departure": "08:30 PM"
+          },
+          {
+            "Day": 2,
+            "PortCity": "Southampton (London)",
+            "PortCountry": "United Kingdom",
+            "Date": "Fri Mar 21, 2025",
+            "Arrival": "07:00 AM",
+            "Departure": "07:30 PM"
+          },
+          {
+            "Day": 3,
+            "PortCity": "At Sea",
+            "Date": "Sat Mar 22, 2025"
+          },
+          {
+            "Day": 4,
+            "PortCity": "Hamburg",
+            "PortCountry": "Germany",
+            "Date": "Sun Mar 23, 2025",
+            "Arrival": "07:00 AM"
+          }
+        ]
+      },
+      {
+        "CruiseId": "3816989",
+        "CruiseLine": "Norwegian Cruise Line",
+        "LicenseNo": "02944",
+        "Tonnage": 91000,
+        "Date of Renovation": 2021,
+        "Decks": 15,
+        "DepartCity": "Barcelona",
+        "Destination": "Mediterranean",
+        "TripType": "Round Trip",
+        "Length": 970.5,
+        "Beam(width)": 136.42,
+        "Speed": 23,
+        "Ship Name": "Symphony of the Seas",
+        "Time": "11:00 - 19:00",
+        "Port": "Palma de Mallorca, Spain",
+        "Max Passengers": 5400,
+        "Crew": 1550,
+        "price": 850,
+        "Description": "7-Night Mediterranean Cruise",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "180 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-3",
+            "Price": 850,
+            "Description": "Comfortable stateroom with two twin beds that convert to a Royal King, sitting area, and private bathroom.",
+            "Category Code": "INS",
+            "Available Rooms": 5
+          },
+          {
+            "Category": "Interior",
+            "Name": "Deluxe Inside",
+            "Room Size": "190 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-4",
+            "Price": 900,
+            "Description": "Upgraded interior stateroom with added amenities and more space.",
+            "Category Code": "DLX",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Interior",
+            "Name": "Family Inside",
+            "Room Size": "210 squared ft",
+            "Decks": "4-6",
+            "Number of Guests": "1-5",
+            "Price": 950,
+            "Description": "Spacious interior stateroom suitable for families, with additional bedding options.",
+            "Category Code": "FAM",
+            "Available Rooms": 3
+          },
+          {
+            "Category": "Interior",
+            "Name": "Studio Inside",
+            "Room Size": "160 squared ft",
+            "Decks": "5-6",
+            "Number of Guests": "1",
+            "Price": 800,
+            "Description": "Compact and efficient interior stateroom designed for solo travelers.",
+            "Category Code": "STU",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "211 squared ft",
+            "Decks": "2-7",
+            "Number of Guests": "1-3",
+            "Price": 1050,
+            "Description": "Stateroom with a large picture window providing a beautiful view of the ocean.",
+            "Category Code": "OV",
+            "Available Rooms": 7
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Deluxe Ocean View",
+            "Room Size": "230 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1100,
+            "Description": "Enhanced ocean view stateroom with extra space and upgraded amenities.",
+            "Category Code": "DOV",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Family Ocean View",
+            "Room Size": "250 squared ft",
+            "Decks": "4-8",
+            "Number of Guests": "1-5",
+            "Price": 1150,
+            "Description": "Spacious ocean view stateroom suitable for families, with additional bedding options.",
+            "Category Code": "FOV",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Studio Ocean View",
+            "Room Size": "180 squared ft",
+            "Decks": "6-7",
+            "Number of Guests": "1",
+            "Price": 1000,
+            "Description": "Efficient ocean view stateroom perfect for solo travelers, with a large window for great views.",
+            "Category Code": "SOV",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "245 squared ft",
+            "Decks": "6-14",
+            "Number of Guests": "1-4",
+            "Price": 1350,
+            "Description": "Spacious stateroom with a private balcony, two twin beds that convert to a Royal King, sitting area, and private bathroom.",
+            "Category Code": "BAL",
+            "Available Rooms": 5
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Deluxe Balcony",
+            "Room Size": "270 squared ft",
+            "Decks": "8-14",
+            "Number of Guests": "1-4",
+            "Price": 1400,
+            "Description": "Upgraded balcony stateroom with additional living space and premium amenities.",
+            "Category Code": "DBL",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Extended Balcony",
+            "Room Size": "290 squared ft",
+            "Decks": "10-14",
+            "Number of Guests": "1-4",
+            "Price": 1450,
+            "Description": "Balcony stateroom with extended balcony space and upgraded features.",
+            "Category Code": "EBL",
+            "Available Rooms": 2
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Studio Balcony",
+            "Room Size": "210 squared ft",
+            "Decks": "8-10",
+            "Number of Guests": "1",
+            "Price": 1300,
+            "Description": "Compact balcony stateroom designed for solo travelers, with private balcony and stunning views.",
+            "Category Code": "SBL",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Grand Suite",
+            "Room Size": "370 squared ft",
+            "Decks": "11-15",
+            "Number of Guests": "1-4",
+            "Price": 2599,
+            "Description": "Luxurious suite with a separate bedroom, large balcony, and additional living space.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding, and concierge service.",
+            "Benefits": "Access to exclusive areas such as the suite lounge and private sundeck, reserved seating in entertainment venues, and priority reservations for dining and spa services.",
+            "Category Code": "SRS",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Owner's Suite",
+            "Room Size": "450 squared ft",
+            "Decks": "12-15",
+            "Number of Guests": "1-4",
+            "Price": 3000,
+            "Description": "Exclusive suite with a large private balcony, living and dining areas, and luxurious amenities.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding, and concierge service.",
+            "Benefits": "Access to exclusive areas such as the suite lounge and private sundeck, reserved seating in entertainment venues, and priority reservations for dining and spa services.",
+            "Category Code": "OWN",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Junior Suite",
+            "Room Size": "320 squared ft",
+            "Decks": "10-12",
+            "Number of Guests": "1-4",
+            "Price": 2200,
+            "Description": "Cozy suite with a private balcony and additional living space.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding.",
+            "Benefits": "Access to reserved seating in entertainment venues and priority reservations for dining and spa services.",
+            "Category Code": "JRS",
+            "Available Rooms": 1
+          },
+          {
+            "Category": "Suite",
+            "Name": "Studio Suite",
+            "Room Size": "240 squared ft",
+            "Decks": "12-14",
+            "Number of Guests": "1",
+            "Price": 1800,
+            "Description": "Luxurious suite for solo travelers, with a private balcony and premium amenities.",
+            "Facilities": "Private balcony, enhanced room service, complimentary laundry service, priority boarding.",
+            "Benefits": "Access to reserved seating in entertainment venues and priority reservations for dining and spa services.",
+            "Category Code": "STS",
+            "Available Rooms": 1
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Leisure",
+            "Name": "Aqua Theater",
+            "Decks": 6,
+            "Price": "Free",
+            "Description": "The Aqua Theater offers spectacular water-based performances, including acrobatics, diving, and synchronized swimming shows."
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Speciality Restaurants",
+            "Name": "Chops Grille",
+            "Decks": 6,
+            "Price": "Charges apply",
+            "Description": "Chops Grille offers a sophisticated dining experience with premium cuts of steak and a selection of fine wines."
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "Charges apply",
+            "Description": "UNLIMITED WI-FI: General web browsing, emails, and messaging. Does not support streaming functions. $29.99/per day for 1 device; $45.98/per day for 2 devices. UNLIMITED PREMIUM WI-FI: Includes audio and video streaming via your favorite provider or app plus VPN access. $39.99/per day for 1 device; $65.98/per day for 2 devices. (The Wi-Fi Information is provided here for reference only. The details of use and price on board shall prevail.)"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.6,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Barcelona",
+            "PortCountry": "Spain",
+            "Date": "Sun Mar 23, 2025",
+            "Departure": "05:00 PM"
+          },
+          {
+            "Day": 2,
+            "PortCity": "Palma de Mallorca",
+            "PortCountry": "Spain",
+            "Date": "Mon Mar 24, 2025",
+            "Arrival": "08:00 AM",
+            "Departure": "06:00 PM"
+          },
+          {
+            "Day": 3,
+            "PortCity": "At Sea",
+            "Date": "Tue Mar 25, 2025"
+          },
+          {
+            "Day": 4,
+            "PortCity": "Marseille",
+            "PortCountry": "France",
+            "Date": "Wed Mar 26, 2025",
+            "Arrival": "09:00 AM"
+          }
+        ]
+      },
+      {
+            "CruiseId": "1234567",
+            "CruiseLine": "Royal Caribbean",
+            "LicenseNo": "02945",
+            "Tonnage": 85000,
+            "Date of Renovation": 2022,
+            "Decks": 14,
+            "DepartCity": "Miami",
+            "Destination": "Mediterranean",
+            "TripType": "One Way",
+            "Length": 965.0,
+            "Beam(width)": 125.8,
+            "Speed": 22,
+            "Ship Name": "Oasis of the Seas",
+            "Time": "09:00 - 17:00",
+            "Port": "Naples, Italy",
+            "Max Passengers": 5200,
+            "Crew": 1500,
+            "price": 899,
+            "Description": "14-Night Mediterranean Adventure",
+            "Staterooms": [
+              {
+                "Category": "Interior",
+                "Name": "Inside",
+                "Room Size": "180 squared ft",
+                "Decks": "3-5",
+                "Number of Guests": "1-3",
+                "Price": 899,
+                "Description": "Comfortable stateroom with two twin beds that convert to a Royal King, sitting area, and private bathroom.",
+                "Category Code": "INS",
+                "Available Rooms": 8
+              },
+              {
+                "Category": "Interior",
+                "Name": "Deluxe Inside",
+                "Room Size": "190 squared ft",
+                "Decks": "6-8",
+                "Number of Guests": "1-4",
+                "Price": 949,
+                "Description": "Upgraded interior stateroom with added amenities and more space.",
+                "Category Code": "DLX",
+                "Available Rooms": 5
+              },
+              {
+                "Category": "Ocean View",
+                "Name": "Ocean View",
+                "Room Size": "220 squared ft",
+                "Decks": "3-7",
+                "Number of Guests": "1-4",
+                "Price": 1099,
+                "Description": "Stateroom with a large picture window providing ocean views.",
+                "Category Code": "OV",
+                "Available Rooms": 6
+              },
+              {
+                "Category": "Balcony",
+                "Name": "Balcony",
+                "Room Size": "250 squared ft",
+                "Decks": "6-13",
+                "Number of Guests": "1-4",
+                "Price": 1399,
+                "Description": "Private balcony stateroom with stunning ocean views.",
+                "Category Code": "BAL",
+                "Available Rooms": 10
+              },
+              {
+                "Category": "Suite",
+                "Name": "Grand Suite",
+                "Room Size": "380 squared ft",
+                "Decks": "10-14",
+                "Number of Guests": "1-4",
+                "Price": 2699,
+                "Description": "Luxurious suite with separate living area and private balcony.",
+                "Facilities": "Private balcony, priority boarding, concierge service",
+                "Benefits": "Suite lounge access, priority dining reservations",
+                "Category Code": "GDS",
+                "Available Rooms": 2
+              }
+            ],
+            "Entertainment": [
+              {
+                "Category": "Shows",
+                "Name": "Broadway Theater",
+                "Decks": 4,
+                "Price": "Free",
+                "Description": "Broadway-style theater productions featuring live performances"
+              },
+              {
+                "Category": "Activities",
+                "Name": "FlowRider",
+                "Decks": 15,
+                "Price": "Free",
+                "Description": "Surf simulator offering both beginner and advanced sessions"
+              }
+            ],
+            "Dining & Bars": [
+              {
+                "Category": "Main Dining",
+                "Name": "Grand Restaurant",
+                "Decks": 3,
+                "Price": "Included",
+                "Description": "Main dining room serving breakfast, lunch, and dinner"
+              },
+              {
+                "Category": "Specialty",
+                "Name": "Giovanni's Table",
+                "Decks": 8,
+                "Price": "$35 per person",
+                "Description": "Italian restaurant serving family-style dishes"
+              }
+            ],
+            "Services": [
+              {
+                "Name": "WIFI",
+                "Price": "$19.99/day",
+                "Description": "High-speed internet access throughout the ship"
+              },
+              {
+                "Name": "Spa Services",
+                "Price": "Varies",
+                "Description": "Full-service spa offering massages and treatments"
+              }
+            ],
+            "Reviews": {},
+            "Rating": 4.7,
+            "Itinerary": [
+              {
+                "Day": 1,
+                "PortCity": "Miami",
+                "PortCountry": "United States",
+                "Date": "Sat Mar 22, 2025",
+                "Departure": "16:30"
+              },
+              {
+                "Day": 2,
+                "PortCity": "At Sea",
+                "Date": "Sun Mar 23, 2025"
+              },
+              {
+                "Day": 3,
+                "PortCity": "At Sea",
+                "Date": "Mon Mar 24, 2025"
+              },
+              {
+                "Day": 4,
+                "PortCity": "Naples",
+                "PortCountry": "Italy",
+                "Date": "Tue Mar 25, 2025",
+                "Arrival": "07:00"
+              }
+            ]
+      },
+      {
+        "CruiseId": "2345678",
+        "CruiseLine": "Carnival Cruise Line",
+        "LicenseNo": "02946",
+        "Tonnage": 82500,
+        "Date of Renovation": 2023,
+        "Decks": 13,
+        "DepartCity": "Miami",
+        "Destination": "Mediterranean",
+        "TripType": "Round Trip",
+        "Length": 945.0,
+        "Beam(width)": 121.2,
+        "Speed": 23,
+        "Ship Name": "Allure of the Seas",
+        "Time": "10:00 - 18:00",
+        "Port": "Rome (Civitavecchia), Italy",
+        "Max Passengers": 4900,
+        "Crew": 1400,
+        "price": 849,
+        "Description": "12-Night Mediterranean Explorer",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "175 squared ft",
+            "Decks": "4-6",
+            "Number of Guests": "1-3",
+            "Price": 849,
+            "Description": "Cozy interior stateroom with modern amenities",
+            "Category Code": "INS",
+            "Available Rooms": 12
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "215 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1049,
+            "Description": "Bright stateroom with ocean views",
+            "Category Code": "OV",
+            "Available Rooms": 8
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "245 squared ft",
+            "Decks": "7-12",
+            "Number of Guests": "1-4",
+            "Price": 1349,
+            "Description": "Private balcony with seating area",
+            "Category Code": "BAL",
+            "Available Rooms": 15
+          },
+          {
+            "Category": "Suite",
+            "Name": "Royal Suite",
+            "Room Size": "360 squared ft",
+            "Decks": "10-13",
+            "Number of Guests": "1-4",
+            "Price": 2599,
+            "Description": "Luxury suite with separate bedroom and living area",
+            "Facilities": "Private balcony, premium amenities, priority service",
+            "Benefits": "Exclusive lounge access, priority boarding",
+            "Category Code": "RS",
+            "Available Rooms": 3
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "AquaTheater",
+            "Decks": 6,
+            "Price": "Free",
+            "Description": "High-diving and acrobatic performances"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Rock Climbing Wall",
+            "Decks": 14,
+            "Price": "Free",
+            "Description": "40-foot climbing wall with multiple difficulty levels"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Vista Dining Room",
+            "Decks": 4,
+            "Price": "Included",
+            "Description": "Elegant main dining venue with varied menu"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "150 Central Park",
+            "Decks": 9,
+            "Price": "$45 per person",
+            "Description": "Fine dining restaurant with seasonal menu"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$18.99/day",
+            "Description": "Ship-wide internet access"
+          },
+          {
+            "Name": "Fitness Center",
+            "Price": "Included",
+            "Description": "State-of-the-art gym equipment and classes"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.6,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Miami",
+            "PortCountry": "United States",
+            "Date": "Sun Mar 23, 2025",
+            "Departure": "17:00"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Mon Mar 24, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Rome",
+            "PortCountry": "Italy",
+            "Date": "Tue Mar 25, 2025",
+            "Arrival": "08:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "3456789",
+        "CruiseLine": "Princess Cruises",
+        "LicenseNo": "02947",
+        "Tonnage": 83500,
+        "Date of Renovation": 2021,
+        "Decks": 14,
+        "DepartCity": "Bridgetown",
+        "Destination": "Western Europe",
+        "TripType": "One Way",
+        "Length": 955.0,
+        "Beam(width)": 123.5,
+        "Speed": 22,
+        "Ship Name": "Brilliance of the Seas",
+        "Time": "08:00 - 16:00",
+        "Port": "Lisbon, Portugal",
+        "Max Passengers": 4800,
+        "Crew": 1450,
+        "price": 929,
+        "Description": "10-Night Western Europe Discovery",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "170 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-3",
+            "Price": 929,
+            "Description": "Modern interior stateroom with contemporary furnishings",
+            "Category Code": "INS",
+            "Available Rooms": 10
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "210 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1129,
+            "Description": "Spacious room with panoramic ocean view window",
+            "Category Code": "OV",
+            "Available Rooms": 7
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "240 squared ft",
+            "Decks": "7-12",
+            "Number of Guests": "1-4",
+            "Price": 1429,
+            "Description": "Private balcony with stunning ocean views",
+            "Category Code": "BAL",
+            "Available Rooms": 12
+          },
+          {
+            "Category": "Suite",
+            "Name": "Royal Suite",
+            "Room Size": "355 squared ft",
+            "Decks": "10-13",
+            "Number of Guests": "1-4",
+            "Price": 2799,
+            "Description": "Luxurious suite with separate living area",
+            "Facilities": "Private balcony, concierge service, priority check-in",
+            "Benefits": "Suite lounge access, specialty dining privileges",
+            "Category Code": "RS",
+            "Available Rooms": 2
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "Pacifica Theater",
+            "Decks": 5,
+            "Price": "Free",
+            "Description": "Live entertainment venue featuring musical productions"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Mini Golf Course",
+            "Decks": 13,
+            "Price": "Free",
+            "Description": "9-hole mini golf course with ocean views"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Sapphire Dining Room",
+            "Decks": 4,
+            "Price": "Included",
+            "Description": "Main restaurant serving international cuisine"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Izumi Asian Cuisine",
+            "Decks": 8,
+            "Price": "$40 per person",
+            "Description": "Asian fusion restaurant with sushi bar"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$19.99/day",
+            "Description": "High-speed internet throughout the ship"
+          },
+          {
+            "Name": "Vitality Spa",
+            "Price": "Varies",
+            "Description": "Full-service spa and wellness center"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.5,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Bridgetown",
+            "PortCountry": "Barbados",
+            "Date": "Wed Mar 26, 2025",
+            "Departure": "17:30"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Thu Mar 27, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Lisbon",
+            "PortCountry": "Portugal",
+            "Date": "Fri Mar 28, 2025",
+            "Arrival": "08:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "4567890",
+        "CruiseLine": "Celebrity Cruises",
+        "LicenseNo": "02948",
+        "Tonnage": 81000,
+        "Date of Renovation": 2022,
+        "Decks": 13,
+        "DepartCity": "Brest",
+        "Destination": "Western Europe",
+        "TripType": "Round Trip",
+        "Length": 935.0,
+        "Beam(width)": 120.8,
+        "Speed": 21,
+        "Ship Name": "Adventure of the Seas",
+        "Time": "09:30 - 17:30",
+        "Port": "Amsterdam, Netherlands",
+        "Max Passengers": 4600,
+        "Crew": 1400,
+        "price": 879,
+        "Description": "8-Night Western Europe Explorer",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "165 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-3",
+            "Price": 879,
+            "Description": "Comfortable interior stateroom with modern amenities",
+            "Category Code": "INS",
+            "Available Rooms": 15
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "205 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1079,
+            "Description": "Bright stateroom with large ocean view window",
+            "Category Code": "OV",
+            "Available Rooms": 8
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "235 squared ft",
+            "Decks": "6-11",
+            "Number of Guests": "1-4",
+            "Price": 1379,
+            "Description": "Private balcony stateroom with sitting area",
+            "Category Code": "BAL",
+            "Available Rooms": 10
+          },
+          {
+            "Category": "Suite",
+            "Name": "Owner's Suite",
+            "Room Size": "350 squared ft",
+            "Decks": "9-12",
+            "Number of Guests": "1-4",
+            "Price": 2699,
+            "Description": "Premium suite with separate bedroom and living room",
+            "Facilities": "Private balcony, luxury amenities, butler service",
+            "Benefits": "Priority embarkation, exclusive lounge access",
+            "Category Code": "OWN",
+            "Available Rooms": 2
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "Royal Theater",
+            "Decks": 4,
+            "Price": "Free",
+            "Description": "Main theater featuring Broadway-style shows"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Ice Skating Rink",
+            "Decks": 3,
+            "Price": "Free",
+            "Description": "Indoor ice skating rink with shows and free skate sessions"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Atlantis Dining Room",
+            "Decks": 3,
+            "Price": "Included",
+            "Description": "Traditional dining room with European cuisine"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Chops Grille",
+            "Decks": 7,
+            "Price": "$42 per person",
+            "Description": "Premium steakhouse experience"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$18.99/day",
+            "Description": "Fast internet connectivity ship-wide"
+          },
+          {
+            "Name": "Royal Spa",
+            "Price": "Varies",
+            "Description": "Luxury spa treatments and wellness services"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.4,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Brest",
+            "PortCountry": "France",
+            "Date": "Fri Mar 28, 2025",
+            "Departure": "16:00"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Sat Mar 29, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Amsterdam",
+            "PortCountry": "Netherlands",
+            "Date": "Sun Mar 30, 2025",
+            "Arrival": "07:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "5678901",
+        "CruiseLine": "Disney Cruise Line",
+        "LicenseNo": "02949",
+        "Tonnage": 84500,
+        "Date of Renovation": 2023,
+        "Decks": 15,
+        "DepartCity": "Fort Lauderdale",
+        "Destination": "Caribbean",
+        "TripType": "Round Trip",
+        "Length": 968.0,
+        "Beam(width)": 126.0,
+        "Speed": 22,
+        "Ship Name": "Freedom of the Seas",
+        "Time": "07:00 - 16:00",
+        "Port": "San Juan, Puerto Rico",
+        "Max Passengers": 4900,
+        "Crew": 1500,
+        "price": 799,
+        "Description": "7-Night Eastern Caribbean Holiday",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "185 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-4",
+            "Price": 799,
+            "Description": "Comfortable interior stateroom with modern amenities",
+            "Category Code": "INS",
+            "Available Rooms": 20
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "215 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 999,
+            "Description": "Bright stateroom with panoramic ocean view",
+            "Category Code": "OV",
+            "Available Rooms": 15
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "245 squared ft",
+            "Decks": "6-14",
+            "Number of Guests": "1-4",
+            "Price": 1299,
+            "Description": "Private balcony with Caribbean views",
+            "Category Code": "BAL",
+            "Available Rooms": 18
+          },
+          {
+            "Category": "Suite",
+            "Name": "Grand Suite",
+            "Room Size": "375 squared ft",
+            "Decks": "10-14",
+            "Number of Guests": "1-4",
+            "Price": 2499,
+            "Description": "Luxurious suite with separate living area",
+            "Facilities": "Private balcony, concierge service, priority boarding",
+            "Benefits": "Suite lounge access, specialty dining perks",
+            "Category Code": "GS",
+            "Available Rooms": 4
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "Caribbean Theater",
+            "Decks": 5,
+            "Price": "Free",
+            "Description": "Live Caribbean-themed shows and performances"
+          },
+          {
+            "Category": "Activities",
+            "Name": "FlowRider",
+            "Decks": 15,
+            "Price": "Free",
+            "Description": "Surfing simulator with instruction available"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Coral Dining Room",
+            "Decks": 3,
+            "Price": "Included",
+            "Description": "Main restaurant with Caribbean-inspired cuisine"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Portofino",
+            "Decks": 8,
+            "Price": "$39 per person",
+            "Description": "Italian fine dining experience"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$17.99/day",
+            "Description": "High-speed internet throughout the ship"
+          },
+          {
+            "Name": "Freedom Spa",
+            "Price": "Varies",
+            "Description": "Full-service spa with ocean views"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.6,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Fort Lauderdale",
+            "PortCountry": "United States",
+            "Date": "Sat Mar 29, 2025",
+            "Departure": "16:30"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Sun Mar 30, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "San Juan",
+            "PortCountry": "Puerto Rico",
+            "Date": "Mon Mar 31, 2025",
+            "Arrival": "07:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "6789012",
+        "CruiseLine": "MSC Cruises",
+        "LicenseNo": "02950",
+        "Tonnage": 82000,
+        "Date of Renovation": 2022,
+        "Decks": 14,
+        "DepartCity": "San Juan",
+        "Destination": "Caribbean",
+        "TripType": "Round Trip",
+        "Length": 945.0,
+        "Beam(width)": 122.0,
+        "Speed": 22,
+        "Ship Name": "Jewel of the Seas",
+        "Time": "08:00 - 17:00",
+        "Port": "St. Maarten",
+        "Max Passengers": 4600,
+        "Crew": 1400,
+        "price": 849,
+        "Description": "7-Night Southern Caribbean Adventure",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "175 squared ft",
+            "Decks": "2-4",
+            "Number of Guests": "1-4",
+            "Price": 849,
+            "Description": "Cozy interior room with modern furnishings",
+            "Category Code": "INS",
+            "Available Rooms": 16
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "205 squared ft",
+            "Decks": "2-6",
+            "Number of Guests": "1-4",
+            "Price": 1049,
+            "Description": "Spacious room with ocean views",
+            "Category Code": "OV",
+            "Available Rooms": 12
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "235 squared ft",
+            "Decks": "7-13",
+            "Number of Guests": "1-4",
+            "Price": 1349,
+            "Description": "Private balcony with tropical views",
+            "Category Code": "BAL",
+            "Available Rooms": 14
+          },
+          {
+            "Category": "Suite",
+            "Name": "Owner's Suite",
+            "Room Size": "365 squared ft",
+            "Decks": "10-13",
+            "Number of Guests": "1-4",
+            "Price": 2599,
+            "Description": "Luxury suite with premium amenities",
+            "Facilities": "Private balcony, butler service, priority access",
+            "Benefits": "Exclusive lounge, specialty dining included",
+            "Category Code": "OS",
+            "Available Rooms": 3
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "Coral Theater",
+            "Decks": 4,
+            "Price": "Free",
+            "Description": "Evening entertainment and musical shows"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Rock Climbing Wall",
+            "Decks": 14,
+            "Price": "Free",
+            "Description": "Professional instruction available"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Tides Dining Room",
+            "Decks": 4,
+            "Price": "Included",
+            "Description": "Elegant main dining venue"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Chops Grille",
+            "Decks": 9,
+            "Price": "$45 per person",
+            "Description": "Signature steakhouse experience"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$18.99/day",
+            "Description": "Ship-wide internet access"
+          },
+          {
+            "Name": "Vitality Spa",
+            "Price": "Varies",
+            "Description": "Luxury spa and fitness center"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.5,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "San Juan",
+            "PortCountry": "Puerto Rico",
+            "Date": "Sun Mar 30, 2025",
+            "Departure": "17:30"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Mon Mar 31, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Philipsburg",
+            "PortCountry": "St. Maarten",
+            "Date": "Tue Apr 1, 2025",
+            "Arrival": "08:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "7890123",
+        "CruiseLine": "Norwegian Cruise Line",
+        "LicenseNo": "02951",
+        "Tonnage": 83500,
+        "Date of Renovation": 2023,
+        "Decks": 14,
+        "DepartCity": "Guam",
+        "Destination": "Caribbean",
+        "TripType": "One Way",
+        "Length": 958.0,
+        "Beam(width)": 123.5,
+        "Speed": 22,
+        "Ship Name": "Voyager of the Seas",
+        "Time": "10:00 - 19:00",
+        "Port": "St. Thomas",
+        "Max Passengers": 4700,
+        "Crew": 1450,
+        "price": 1299,
+        "Description": "21-Night Trans-Pacific Caribbean Journey",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "180 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-4",
+            "Price": 1299,
+            "Description": "Comfortable interior stateroom with modern amenities",
+            "Category Code": "INS",
+            "Available Rooms": 18
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "210 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1499,
+            "Description": "Spacious room with ocean views",
+            "Category Code": "OV",
+            "Available Rooms": 14
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "240 squared ft",
+            "Decks": "6-13",
+            "Number of Guests": "1-4",
+            "Price": 1799,
+            "Description": "Private balcony with panoramic views",
+            "Category Code": "BAL",
+            "Available Rooms": 16
+          },
+          {
+            "Category": "Suite",
+            "Name": "Royal Suite",
+            "Room Size": "370 squared ft",
+            "Decks": "10-13",
+            "Number of Guests": "1-4",
+            "Price": 2999,
+            "Description": "Luxury suite with premium amenities",
+            "Facilities": "Private balcony, butler service, priority access",
+            "Benefits": "Exclusive lounge, specialty dining included",
+            "Category Code": "RS",
+            "Available Rooms": 4
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "La Scala Theater",
+            "Decks": 4,
+            "Price": "Free",
+            "Description": "Broadway-style shows and live performances"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Ice Skating Rink",
+            "Decks": 3,
+            "Price": "Free",
+            "Description": "Professional ice shows and open skating"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Pacific Dining Room",
+            "Decks": 3,
+            "Price": "Included",
+            "Description": "Main dining venue with international cuisine"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Izumi",
+            "Decks": 8,
+            "Price": "$45 per person",
+            "Description": "Japanese cuisine and sushi bar"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$19.99/day",
+            "Description": "High-speed internet throughout the ship"
+          },
+          {
+            "Name": "Vitality Spa",
+            "Price": "Varies",
+            "Description": "Full-service spa and fitness center"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.5,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Guam",
+            "PortCountry": "USA",
+            "Date": "Mon Mar 31, 2025",
+            "Departure": "17:00"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Tue Apr 1, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Charlotte Amalie",
+            "PortCountry": "St. Thomas",
+            "Date": "Wed Apr 2, 2025",
+            "Arrival": "08:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "8901234",
+        "CruiseLine": "Princess Cruises",
+        "LicenseNo": "02952",
+        "Tonnage": 86000,
+        "Date of Renovation": 2024,
+        "Decks": 15,
+        "DepartCity": "Singapore",
+        "Destination": "Mediterranean",
+        "TripType": "One Way",
+        "Length": 972.0,
+        "Beam(width)": 127.0,
+        "Speed": 23,
+        "Ship Name": "Radiance of the Seas",
+        "Time": "09:00 - 18:00",
+        "Port": "Venice, Italy",
+        "Max Passengers": 5100,
+        "Crew": 1500,
+        "price": 1499,
+        "Description": "28-Night Asia to Mediterranean Journey",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "185 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-4",
+            "Price": 1499,
+            "Description": "Modern interior stateroom with deluxe amenities",
+            "Category Code": "INS",
+            "Available Rooms": 20
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "215 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1699,
+            "Description": "Panoramic ocean view room",
+            "Category Code": "OV",
+            "Available Rooms": 15
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "245 squared ft",
+            "Decks": "6-14",
+            "Number of Guests": "1-4",
+            "Price": 1999,
+            "Description": "Private balcony with extended seating area",
+            "Category Code": "BAL",
+            "Available Rooms": 18
+          },
+          {
+            "Category": "Suite",
+            "Name": "Owner's Suite",
+            "Room Size": "380 squared ft",
+            "Decks": "10-14",
+            "Number of Guests": "1-4",
+            "Price": 3299,
+            "Description": "Premium suite with luxury amenities",
+            "Facilities": "Private balcony, butler service, priority access",
+            "Benefits": "Exclusive lounge, specialty dining included",
+            "Category Code": "OS",
+            "Available Rooms": 5
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "Star Theater",
+            "Decks": 5,
+            "Price": "Free",
+            "Description": "International entertainment and productions"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Adventure Ocean",
+            "Decks": 12,
+            "Price": "Free",
+            "Description": "Youth and teen activity center"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Cascades Dining Room",
+            "Decks": 4,
+            "Price": "Included",
+            "Description": "Main restaurant with global cuisine"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Chef's Table",
+            "Decks": 9,
+            "Price": "$95 per person",
+            "Description": "Exclusive dining experience with wine pairing"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$20.99/day",
+            "Description": "Premium high-speed internet"
+          },
+          {
+            "Name": "Royal Spa",
+            "Price": "Varies",
+            "Description": "Luxury spa and wellness center"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.7,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Singapore",
+            "PortCountry": "Singapore",
+            "Date": "Tue Apr 1, 2025",
+            "Departure": "18:00"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Wed Apr 2, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Venice",
+            "PortCountry": "Italy",
+            "Date": "Thu Apr 3, 2025",
+            "Arrival": "09:00"
+          }
+        ]
+      },
+      {
+        "CruiseId": "9012345",
+        "CruiseLine": "Carnival Cruise Line",
+        "LicenseNo": "02953",
+        "Tonnage": 84500,
+        "Date of Renovation": 2023,
+        "Decks": 14,
+        "DepartCity": "Dubai",
+        "Destination": "Western Europe",
+        "TripType": "One Way",
+        "Length": 962.0,
+        "Beam(width)": 125.0,
+        "Speed": 22,
+        "Ship Name": "Serenade of the Seas",
+        "Time": "08:00 - 17:00",
+        "Port": "Barcelona, Spain",
+        "Max Passengers": 4800,
+        "Crew": 1450,
+        "price": 1399,
+        "Description": "24-Night Arabian Sea to Europe Journey",
+        "Staterooms": [
+          {
+            "Category": "Interior",
+            "Name": "Inside",
+            "Room Size": "182 squared ft",
+            "Decks": "3-5",
+            "Number of Guests": "1-4",
+            "Price": 1399,
+            "Description": "Stylish interior stateroom with modern decor",
+            "Category Code": "INS",
+            "Available Rooms": 16
+          },
+          {
+            "Category": "Ocean View",
+            "Name": "Ocean View",
+            "Room Size": "212 squared ft",
+            "Decks": "3-7",
+            "Number of Guests": "1-4",
+            "Price": 1599,
+            "Description": "Oceanview room with sitting area",
+            "Category Code": "OV",
+            "Available Rooms": 12
+          },
+          {
+            "Category": "Balcony",
+            "Name": "Balcony",
+            "Room Size": "242 squared ft",
+            "Decks": "6-13",
+            "Number of Guests": "1-4",
+            "Price": 1899,
+            "Description": "Private balcony with ocean views",
+            "Category Code": "BAL",
+            "Available Rooms": 14
+          },
+          {
+            "Category": "Suite",
+            "Name": "Grand Suite",
+            "Room Size": "375 squared ft",
+            "Decks": "10-13",
+            "Number of Guests": "1-4",
+            "Price": 3199,
+            "Description": "Luxury suite with premium features",
+            "Facilities": "Private balcony, concierge service, priority access",
+            "Benefits": "Suite lounge access, specialty dining perks",
+            "Category Code": "GS",
+            "Available Rooms": 3
+          }
+        ],
+        "Entertainment": [
+          {
+            "Category": "Shows",
+            "Name": "Safari Club",
+            "Decks": 4,
+            "Price": "Free",
+            "Description": "Live music and entertainment venue"
+          },
+          {
+            "Category": "Activities",
+            "Name": "Rock Climbing Wall",
+            "Decks": 13,
+            "Price": "Free",
+            "Description": "Outdoor climbing with ocean views"
+          }
+        ],
+        "Dining & Bars": [
+          {
+            "Category": "Main Dining",
+            "Name": "Reflections Dining Room",
+            "Decks": 4,
+            "Price": "Included",
+            "Description": "Main dining venue with international menu"
+          },
+          {
+            "Category": "Specialty",
+            "Name": "Giovanni's Table",
+            "Decks": 8,
+            "Price": "$35 per person",
+            "Description": "Italian trattoria experience"
+          }
+        ],
+        "Services": [
+          {
+            "Name": "WIFI",
+            "Price": "$19.99/day",
+            "Description": "High-speed internet access"
+          },
+          {
+            "Name": "Vitality Spa",
+            "Price": "Varies",
+            "Description": "Full-service spa and fitness facility"
+          }
+        ],
+        "Reviews": {},
+        "Rating": 4.6,
+        "Itinerary": [
+          {
+            "Day": 1,
+            "PortCity": "Dubai",
+            "PortCountry": "UAE",
+            "Date": "Wed Apr 2, 2025",
+            "Departure": "17:00"
+          },
+          {
+            "Day": 2,
+            "PortCity": "At Sea",
+            "Date": "Thu Apr 3, 2025"
+          },
+          {
+            "Day": 3,
+            "PortCity": "Barcelona",
+            "PortCountry": "Spain",
+            "Date": "Fri Apr 4, 2025",
+            "Arrival": "08:00"
+          }
+        ]
+      }
+    ]
+  }

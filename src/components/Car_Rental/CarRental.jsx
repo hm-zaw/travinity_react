@@ -596,7 +596,7 @@ const CarRental = () => {
             {/* Car Result Display */}
             <div className="space-y-4 flex-1">
                 <AdsScroller />
-                <CarDetail className="w-full" data={newFilteredCarData} dayDifference={dayDifference}/>
+                <CarDetail className="w-full" data={newFilteredCarData} fromDate={carDetail.pickupDate} toDate={carDetail.dropOffDate} dayDifference={dayDifference}/>
             </div>
         </div>
             

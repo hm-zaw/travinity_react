@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { checkPayment } from '../../api/CarService';
 
 
-const CarDetail = ({ data, flag, dayDifference }) => {
+const CarDetail = ({ data, flag, dayDifference, fromDate, toDate }) => {
 
   console.log("Day difference got at component:", dayDifference);
   {/* Payment Backend Here */}
@@ -69,18 +69,26 @@ const CarDetail = ({ data, flag, dayDifference }) => {
   
     const validPrice = Math.round(car.price * 100);
     const today = new Date();
+
+    const formatDate = (date) => {
+      const d = new Date(date);
+      return d.toISOString().split("T")[0]; // Converts to "yyyy-MM-dd"
+  };
   
     // Directly use the valid data without relying on state update
     const paymentInfo = {
       amount: validPrice,
       name: car.name,
-      pickup_place: car.pickup,
       quantity: validDayDifference,
       multiplier: 100,
       currency: 'USD',
       email: 'hmzzzz2004@gmail.com', // to replace with user's email
       user_id: 1, // to replace with user's id
+      product_id: car.v_id,
+      fromDate: formatDate,
+      toDate: toDate,
       status: "PAID",
+      category: "car",
       transaction_date: today.toISOString()
     };
   

@@ -13,6 +13,10 @@ export default {
   ],
   theme: {
   	extend: {
+		screens: {
+			'sm-custom': '400px',
+			'lg-custom': '1300px',
+		},
   		fontFamily: {
   			poppins: [
   				'Poppins',

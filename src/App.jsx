@@ -9,6 +9,8 @@ import PaymentSuccess from './components/UI/PaymentSuccess';
 import Hotel from './components/Hotel_Flight/hotel';
 import UserDashboard from './components/Dashboard/UserDashboard';
 import Flight from './components/Hotel_Flight/flight';
+import Cruise from './components/Cruise/Cruise';
+import CruiseBooking from './components/Cruise/CruiseBooking';
 
 function App() {
 
@@ -23,8 +25,13 @@ function App() {
           <Route path='/attractions' element={ <Attracts_main/>}></Route>
           <Route path='/attractions/:countryName' element={ <GuidePage /> }></Route>
 
+          {/* Hpl Route */}
           <Route path='/hotel' element={ <Hotel /> }></Route>
           <Route path='/flight' element={ <Flight />}> </Route>
+
+          {/* Akm Route */}
+          <Route path='/cruises' element={ <Cruise />}></Route>
+          <Route path='/cruises/:CruiseId' element={ <CruiseBooking /> }></Route>
         </Routes>
       </main>
 

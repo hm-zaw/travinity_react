@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import Header from '../Header';
+import Header from '../Cruise/CruiseHeader';
 import HeaderBg from '../HeaderBg';
 import { checkPaymentHotel } from '../../api/CarService';
 
@@ -270,13 +270,16 @@ const Hotel = () => {
     const paymentInfo = {
       amount: validAmount,
       name: hotel.hotel_name,
-      pickup_place: hotel.city,
+      product_id: hotel.hotel_id,
+      fromDate: searchState.checkInDate,
+      toDate: searchState.checkOutDate,
       quantity: validDayDifference,
       multiplier: 100,
       currency: 'USD',
       email: 'hmzzzz2004@gmail.com', // to replace with user's email
       user_id: 1, // to replace with user's id
       status: "PAID",
+      category: "hotel",
       transaction_date: today.toISOString()
     };
 
