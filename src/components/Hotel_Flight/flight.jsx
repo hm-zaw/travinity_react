@@ -16,6 +16,10 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
+import Header from '../Cruise/CruiseHeader';
+import Footer from '../Dashboard/Footer';
+import SubscriptionSection from '../Dashboard/SubscriptionSection';
+
 
 const Flight = () => {
   const location = useLocation();
@@ -25,6 +29,14 @@ const Flight = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filteredPlanes, setFilteredPlanes] = useState(flights);
+  const [selectedPrice, setSelectedPrice] = useState(null);
+  const [selectedRating, setSelectedRating] = useState(null);
+  const [selectedReview, setSelectedReview] = useState(null);
+
+  const [priceCounts, setPriceCounts] = useState(0);
+  const [reviewCounts, setReviewCounts] = useState(0);
+  const [ratingCounts, setRatingCounts] = useState(0);
 
   const [searchState, setSearchState] = useState({
     from: location.state?.original?.from || '',
@@ -49,11 +61,7 @@ const Flight = () => {
     if (location.state?.converted) {
       handleAutoSearch();
     }
-  }, []);
-
-  useEffect(() => {
-    applyFilters();
-  }, [flights, selectedAirlines, priceRange, selectedCabinClass]);
+  }, [location.state]);
 
   const fetchSuggestions = async (query, fieldType) => {
     if (!query || query.length < 3) {
@@ -96,6 +104,115 @@ const Flight = () => {
     return () => clearTimeout(timer);
   }, [searchState[activeField], activeField]);
 
+  const categorizeFlightsByPrice = (flights) => {
+    const priceRanges = {
+      "US$50 - US$250": 0,
+      "US$250 - US$450": 0,
+      "US$450 - US$700": 0,
+      "US$700 - US$1000": 0,
+      "US$1000 and above": 0,
+    };
+  
+    flights.forEach((flight) => {
+      const price = parseFloat(flight.price.amount.toFixed(2));
+  
+      if (price <= 250) {
+        priceRanges["US$50 - US$250"]++;
+      } else if (price >250 && price <= 450) {
+        priceRanges["US$250 - US$450"]++;
+      } else if (price >450 && price <= 700) {
+        priceRanges["US$450 - US$700"]++;
+      } else if (price >700 && price <= 1000) {
+        priceRanges["US$700 - US$1000"]++;
+      } else {
+        priceRanges["US$1000 and above"]++;
+      }
+    });
+  
+    return priceRanges;
+  };
+
+  const categorizeFlightsByRating = (flights) => {
+    const ratings = {
+      "9+": 0,
+      "8+": 0,
+      "7+": 0,
+    };
+  
+    // hotels.forEach((hotel) => {
+    //   const rrr = parseFloat(hotel.review_score);
+  
+    //   if (rrr > 9) {
+    //     ratings["9+"]++;
+    //   } else if (rrr > 8) {
+    //     ratings["8+"]++;
+    //   } else if (rrr > 7) {
+    //     ratings["7+"]++;
+    //   } 
+    // });
+  
+    return ratings;
+  };
+
+  const categorizeFlightsByReview = (flights) => {
+    const reviews = {
+      "Superb": 0,
+      "Fabulous": 0,
+      "Very good": 0,
+      "Good": 0
+    };
+  
+    // hotels.forEach((hotel) => {
+    //   if (reviews.hasOwnProperty(hotel.review_score_word)) {
+    //     reviews[hotel.review_score_word]++;
+    //   }
+    // });
+  
+    return reviews;
+  };
+  
+  useEffect(() => {
+    const priceCts = categorizeFlightsByPrice(flights);
+    const ratingCts = categorizeFlightsByRating(flights);
+    const reviewCts = categorizeFlightsByReview(flights);
+
+    setPriceCounts(priceCts);
+    setRatingCounts(ratingCts);
+    setReviewCounts(reviewCts);
+  }, [flights]);
+
+  
+  const priceRanges = {
+    "US$50 - US$250": [50, 250],
+    "US$250 - US$450": [250, 450],
+    "US$450 - US$700": [450, 700],
+    "US$700 - US$1000": [700, 1000],
+    "US$1000 and above": [1000, Infinity]
+  };
+
+  const applyFilters = (price, rating, review) => {
+    let newFlights = flights;
+
+    if (price) {
+      const [min, max] = priceRanges[price];
+      newFlights = newFlights.filter(ff => {
+        const dollar = parseFloat(flight.price.amount.toFixed(2));
+        return dollar >= min && dollar.toFixed(2) <= max;
+    });
+    }
+
+    if (rating) {
+      const minRating = parseInt(rating);
+      newFlights = newFlights.filter(hotel => hotel.review_score >= minRating && hotel.review_score < minRating + 1);
+    }
+
+    if (review) {
+      newFlights = newFlights.filter(hotel => hotel.review_score_word === review);
+    }
+
+    setFilteredHotels(newFlights);
+  };
+
   const handleSuggestionClick = (fieldType, name, id) => {
     setSearchState((prev) => ({
       ...prev,
@@ -126,6 +243,7 @@ const Flight = () => {
 
       const flightData = response.data.data?.flightOffers || [];
       setFlights(flightData.map(formatFlightData));
+      setFilteredPlanes(flightData.map(formatFlightData));
     } catch (err) {
       setError(err.response?.data?.message || 'Error loading flights');
     } finally {
@@ -157,6 +275,9 @@ const Flight = () => {
 
       const flightData = response.data.data?.flightOffers || [];
       setFlights(flightData.map(formatFlightData));
+      setFilteredPlanes(flightData.map(formatFlightData));
+
+      console.log(filteredPlanes);
     } catch (err) {
       setError(err.response?.data?.message || 'Error searching flights');
     } finally {
@@ -254,37 +375,37 @@ const Flight = () => {
     currency: priceData?.currencyCode || 'USD',
   });
 
-  const applyFilters = () => {
-    let filtered = flights;
 
-    // Filter by selected airlines
-    if (selectedAirlines.length > 0) {
-      filtered = filtered.filter((flight) => selectedAirlines.includes(flight.airlineName));
-    }
-
-    // Filter by price range
-    filtered = filtered.filter((flight) => flight.price.amount <= priceRange);
-
-    // Filter by cabin class
-    if (selectedCabinClass) {
-      filtered = filtered.filter((flight) => flight.cabinClass === selectedCabinClass);
-    }
-
-    setFilteredFlights(filtered);
+  const handlePriceChange = (value) => {
+    console.log("the selected price: ", value);
+    setSelectedPrice(value === selectedPrice ? null : value);
+    applyFilters(value === selectedPrice ? null : value, selectedRating, selectedReview);
   };
+
+  const handleRatingChange = (value) => {
+    setSelectedRating(value === selectedRating ? null : value);
+    applyFilters(selectedPrice, value === selectedRating ? null : value, selectedReview);
+  };
+
+  const handleReviewChange = (value) => {
+    setSelectedReview(value === selectedReview ? null : value);
+    applyFilters(selectedPrice, selectedRating, value === selectedReview ? null : value);
+  };
+
 
   return (
     <>
-      <section id="flight-search" className="bg-cover bg-center w-full relative top-0 min-h-[640px] cruise-sm-custom:min-h-[400px]">
+      <Header />
+      <section id="flight-search" className="bg-cover bg-center w-full relative top-0 min-h-[740px] md:min-h-[500px]">
         <img
           className="absolute inset-0 w-full h-full object-cover brightness-90"
-          src="https://static.tripcdn.com/modules/vacation/vacationpic/cruise/trippc/homebanner_new.jpg"
+          src={"/images/filght-header-bg.jpg"}
           alt="Flight Background"
         />
         <div className="absolute inset-0 flex justify-center items-center">
-          <div className="w-full max-w-6xl space-y-0 px-5">
-            <h1 className="text-6xl font-bold text-white mb-4">Flights</h1>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white bg-opacity-100 p-5 rounded-lg shadow-lg mx-auto">
+          <div className="w-full max-w-6xl space-y-0 md:px-2 px-[10%]">
+            <h1 className="text-6xl font-bold text-white mb-4 mt-10">Flights</h1>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white bg-opacity-100 px-10 pt-6 pb-8 rounded-lg shadow-lg mx-auto">
               <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <label className="text-sm font-medium text-gray-700">From</label>
@@ -380,11 +501,7 @@ const Flight = () => {
                   <label className="text-sm font-medium text-gray-700">Cabin Class</label>
                   <div className="flex items-center bg-gray-100 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-blue-500">
                     <FontAwesomeIcon icon={faUser} className="text-gray-500 mr-3 flex-shrink-0" />
-                    <select
-                      value={searchState.cabinClass}
-                      onChange={handleCabinClassChange}
-                      className="w-full bg-transparent focus:outline-none appearance-none"
-                    >
+                    <select value={searchState.cabinClass} onChange={handleCabinClassChange} className="w-full bg-transparent focus:outline-none appearance-none" >
                       <option value="ECONOMY">Economy</option>
                       <option value="PREMIUM_ECONOMY">Premium Economy</option>
                       <option value="BUSINESS">Business</option>
@@ -413,121 +530,69 @@ const Flight = () => {
         </div>
       </section>
 
-      <section id="flight-content" className="px-6 py-10 bg-gray-100 rounded-t-[30px] w-full -translate-y-12">
+      <section id="flight-content" className="px-8 py-16 bg-white rounded-t-[30px] w-full -translate-y-12">
         <div className="container mx-auto">
           <div className="md:hidden sticky top-4 z-50 mb-4 flex justify-end">
-            <button
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                />
+            <button onClick={() => setIsFilterOpen(!isFilterOpen)} className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
               </svg>
             </button>
           </div>
 
           <div className="flex flex-col md:flex-row gap-6">
-            <div
-              className={`w-full md:w-1/4 bg-white p-6 rounded-lg shadow-md fixed md:static transform ${
-                isFilterOpen ? 'translate-x-0' : '-translate-x-full'
-              } md:translate-x-0 transition-transform duration-300 ease-in-out z-40`}
-              style={{ top: '0', left: '0', height: '100vh', overflowY: 'auto' }}
-            >
-              <h2 className="text-xl font-bold mb-4">Filters</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Airlines</label>
-                  <div className="mt-2 space-y-2">
-                    {[...new Set(flights.map((flight) => flight.airlineName))].map((airline) => (
-                      <label key={airline} className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          checked={selectedAirlines.includes(airline)}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedAirlines([...selectedAirlines, airline]);
-                            } else {
-                              setSelectedAirlines(selectedAirlines.filter((a) => a !== airline));
-                            }
-                          }}
-                          className="rounded text-blue-600 focus:ring-blue-500"
-                        />
-                        <span>{airline}</span>
+            {/* Filter card */}
+              <div className='flex flex-col space-y-6 w-full md:w-72'>
+                <div id="filter-section" className={`w-full md:w-72 p-4 md:p-8 rounded-lg shadow-md bg-white transition-all duration-300 overflow-hidden max-h-screen opacity-100 `} >
+                  <div className='flex justify-between items-center'>
+                    <h3 className='text-lg font-poppins font-semibold'> Filter </h3>
+                    <p className='text-blue-500 text-xs text-right font-poppins' onClick={() => {
+                      setSelectedPrice(null);
+                      setSelectedRating(null);
+                      setSelectedReview(null);
+                      setFilteredPlanes(hotels);
+                    }}> Clear all filter </p>
+                  </div>
+                  <hr className='my-5 border-t-1 border-gray-300'/>
+
+                  {/* Price Filter */}
+                  <div className='space-y-1'>
+                    <h3 className='text-sm font-semibold'>Price</h3>
+                    {Object.keys(priceRanges).map((range) => (
+                      <label key={range} className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <input 
+                            type="checkbox" 
+                            checked={selectedPrice === range}
+                            onChange={() => handlePriceChange(range)}
+                          />
+                          <span className="text-sm ml-2">{range}</span>
+                        </div>
+                        <p className="text-xs font-poppins font-semibold">{priceCounts[range]}</p>
                       </label>
                     ))}
                   </div>
-                </div>
+                  <hr className='my-5 border-t-1 border-gray-300'/>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Price Range</label>
-                  <div className="mt-2">
-                    <input
-                      type="range"
-                      min={0}
-                      max={Math.max(...flights.map((f) => f.price.amount), 2000)}
-                      step={10}
-                      value={priceRange}
-                      onChange={(e) => setPriceRange(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600">
-                      <span>$0</span>
-                      <span>${priceRange}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Cabin Class</label>
-                  <select
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    value={searchState.cabinClass}
-                    onChange={handleCabinClassChange}
-                  >
-                    <option value="ECONOMY">Economy</option>
-                    <option value="PREMIUM_ECONOMY">Premium Economy</option>
-                    <option value="BUSINESS">Business</option>
-                    <option value="FIRST">First Class</option>
-                  </select>
+              
                 </div>
               </div>
-            </div>
 
             <div className="w-full md:w-3/4">
               {error && <div className="text-red-500 mb-4 p-3 bg-red-50 rounded-lg">{error}</div>}
 
               {/* Flight Results */}
               <div className="grid gap-6">
-                {filteredFlights.map((flight) => (
-                  <div
-                    key={flight.id}
-                    className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-200"
-                  >
-                    {/* Best Deal Ribbon */}
-                    <div className="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                      Best Deal
-                    </div>
+                {filteredPlanes.map((flight) => (
+                  <div key={flight.id} className="bg-white p-10 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-200">
+                    
+                    <div></div>
 
                     {/* Airline & Flight Route Info */}
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-4">
                         {flight.airlineLogo && (
-                          <img
-                            src={flight.airlineLogo}
-                            alt={flight.airlineName}
-                            className="w-16 h-16 object-contain rounded-md shadow-md"
-                          />
+                          <img src={flight.airlineLogo} alt={flight.airlineName} className="w-16 h-16 object-contain rounded-md shadow-md" />
                         )}
                         <div>
                           <h3 className="text-xl font-bold text-gray-900">{flight.airlineName}</h3>
@@ -540,7 +605,7 @@ const Flight = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-4xl font-bold text-green-600">{flight.price.amount.toFixed(2)}</p>
+                        <p className="text-4xl font-bold text-blue-600">{flight.price.amount.toFixed(2)}</p>
                         <p className="text-sm text-gray-500">{flight.price.currency}</p>
                       </div>
                     </div>
@@ -593,7 +658,7 @@ const Flight = () => {
                     </div>
 
                     {/* Additional Info */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-2">
                       <div className="flex items-center gap-2">
                         <FontAwesomeIcon icon={faUser} className="text-indigo-500" />
                         <div>
@@ -632,7 +697,7 @@ const Flight = () => {
                     </div>
 
                     {/* Book Now Button */}
-                    <div className="flex justify-end items-center border-t pt-4">
+                    {/* <div className="flex justify-end items-center border-t pt-4">
                       <button
                         className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-lg hover:shadow-xl transition flex items-center gap-2 text-lg font-semibold"
                         onClick={() => window.open(flight.bookingLink, '_blank')}
@@ -640,7 +705,7 @@ const Flight = () => {
                         <FontAwesomeIcon icon={faDollarSign} />
                         Book Now
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 ))}
               </div>
@@ -648,6 +713,9 @@ const Flight = () => {
           </div>
         </div>
       </section>
+
+      <SubscriptionSection />
+      <Footer />
     </>
   );
 };

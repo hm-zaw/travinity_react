@@ -1,5 +1,5 @@
 import '../../index.css';
-import Header from '../Header';
+import Header from '../Cruise/CruiseHeader';
 import HeaderBg from '../HeaderBg';
 import CarDetail from '../Car_Rental/CarDetail';
 import AdsScroller from '../Car_Rental/AdsScroller';
@@ -8,6 +8,8 @@ import axios from 'axios';
 import { getDetailsOfCars } from '../../api/CarService';
 import "jquery-ui/ui/widgets/autocomplete";
 import FilterSection from './FilterSection';
+import Footer from '../Dashboard/Footer';
+import SubscriptionSection from '../Dashboard/SubscriptionSection';
 
 // Main Page of Car Rental
 
@@ -599,6 +601,12 @@ const CarRental = () => {
                 <CarDetail className="w-full" data={newFilteredCarData} fromDate={carDetail.pickupDate} toDate={carDetail.dropOffDate} dayDifference={dayDifference}/>
             </div>
         </div>
+
+        <div className={data.length === 0 ? 'mt-[600px]' : ''}>
+            <SubscriptionSection />
+            <Footer />
+        </div>
+
             
         </>
     )

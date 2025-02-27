@@ -1,6 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="bg-white text-gray-900 py-12">
       <div className="container mx-auto px-6">
@@ -67,9 +74,12 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <a href="#" className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg">
-          <i className="bi bi-chevron-double-up"></i>
-        </a>
+        <button 
+          onClick={scrollToTop} 
+          className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-slate-50 py-4 px-5 rounded-full shadow-lg"
+        >
+          <i className="bi bi-chevron-double-up text-slate-50"></i>
+        </button>
       </div>
     </footer>
   );

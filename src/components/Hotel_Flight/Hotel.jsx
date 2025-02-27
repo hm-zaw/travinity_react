@@ -7,6 +7,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Header from '../Cruise/CruiseHeader';
 import HeaderBg from '../HeaderBg';
 import { checkPaymentHotel } from '../../api/CarService';
+import Footer from '../Dashboard/Footer';
+import SubscriptionSection from '../Dashboard/SubscriptionSection';
 
 const Hotel = () => {
   const location = useLocation();
@@ -560,6 +562,11 @@ const Hotel = () => {
           <></>
         )
       }
+
+      <div className={hotels.length === 0 ? 'mt-[600px]' : ''}>
+          <SubscriptionSection />
+          <Footer />
+      </div>
     </>
   );
 };

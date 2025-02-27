@@ -2,6 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import vdo from "/vdo/vdo.mp4";
+import {
+  faPlaneDeparture,
+  faPlaneArrival,
+  faClock,
+  faChair,
+  faExchangeAlt,
+  faDollarSign,
+  faCalendarAlt,
+  faUser,
+  faSuitcase,
+  faBriefcase,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState("Hotels & Homes");
@@ -91,7 +104,9 @@ const HeroSection = () => {
   };
 
   // Handle search button click for flights
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+
+    e.preventDefault();
     const searchData = {
       original: {
         from,
@@ -102,8 +117,8 @@ const HeroSection = () => {
         adults,
       },
       converted: {
-        fromId, // Send the ID instead of the name
-        toId,   // Send the ID instead of the name
+        fromId, 
+        toId,   
       },
     };
 
@@ -231,114 +246,115 @@ const HeroSection = () => {
 
       case "Flights":
         return (
-          <div className="flex flex-wrap gap-4 items-center justify-between">
-            {/* From Input */}
-            <div className="relative flex-grow">
-              <input
-                type="text"
-                placeholder="From: City or airport"
-                value={from}
-                onChange={async (e) => {
-                  setFrom(e.target.value);
-                  fetchSuggestions(e.target.value, setFromSuggestions);
-                }}
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-              />
-              {fromSuggestions.length > 0 && (
-                <ul className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
-                  {fromSuggestions.map((suggestion, index) => (
-                    <li
-                      key={index}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => {
-                        setFrom(suggestion.name); // Set the display name
-                        setFromId(suggestion.id); // Set the ID for conversion
-                        setFromSuggestions([]); // Clear suggestions
+          <div className="bg-white lg:bg-opacity-90 sm:bg-opacity-100 py-6 px-10 rounded-lg shadow-lg">
+            <div className="flex flex-col md:flex-col gap-4 ">
+
+              <form className="space-y-3" onSubmit={handleSearch}>
+                {/* Destination and Guest Input */}
+                <div className="flex flex-row space-x-4">
+                  <div className="relative flex-grow w-/3 md:w-auto">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Departure City</label>
+                    <input type="text" name="destination" placeholder="From: City or airport" 
+                      value={from}
+                      onChange={async (e) => {
+                        setFrom(e.target.value);
+                        fetchSuggestions(e.target.value, setFromSuggestions);
                       }}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                    />
+                    {fromSuggestions.length > 0 && (
+                      <ul className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
+                        {fromSuggestions.map((suggestion, index) => (
+                          <li
+                            key={index}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => {
+                              setFrom(suggestion.name); // Set the display name
+                              setFromId(suggestion.id); // Set the ID for conversion
+                              setFromSuggestions([]); // Clear suggestions
+                            }}
+                          >
+                            {suggestion.name} ({suggestion.type}, {suggestion.countryName})
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  <div className="relative flex-grow w-/3 md:w-auto">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Arrival City</label>
+                    <input type="text" name="destination" placeholder="To: City or airport"
+                            value={to}
+                            onChange={async (e) => {
+                              setTo(e.target.value);
+                              fetchSuggestions(e.target.value, setToSuggestions);
+                            }}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                    />
+                      {toSuggestions.length > 0 && (
+                        <ul className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
+                          {toSuggestions.map((suggestion, index) => (
+                            <li
+                              key={index}
+                              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                              onClick={() => {
+                                setTo(suggestion.name); // Set the display name
+                                setToId(suggestion.id); // Set the ID for conversion
+                                setToSuggestions([]); // Clear suggestions
+                              }}
+                            >
+                              {suggestion.name} ({suggestion.type}, {suggestion.countryName})
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  {/* From date */}
+                  <div className="lg:w-1/4 md:w-auto flex-grow">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">From</label>
+                    <input type="date" value={departureDate}
+                      onChange={(e) => setDepartureDate(e.target.value)}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* To Date */}
+                  <div className="lg:w-1/4 md:w-auto flex-grow">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">To</label>
+                    <input type="date" value={returnDate}
+                      onChange={(e) => setReturnDate(e.target.value)}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Cabin Class */}
+                  <div className="lg:w-1/4 md:w-auto flex-grow">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Cabin Class</label>
+                    <select value={cabinClass} onChange={(e) => setCabinClass(e.target.value)}
+                      className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
                     >
-                      {suggestion.name} ({suggestion.type}, {suggestion.countryName})
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+                      <option value="ECONOMY">Economy</option>
+                      <option value="PREMIUM_ECONOMY">Premium Economy</option>
+                      <option value="BUSINESS">Business</option>
+                      <option value="FIRST">First Class</option>
+                    </select>
+                  </div>
 
-            {/* To Input */}
-            <div className="relative flex-grow">
-              <input
-                type="text"
-                placeholder="To: City or airport"
-                value={to}
-                onChange={async (e) => {
-                  setTo(e.target.value);
-                  fetchSuggestions(e.target.value, setToSuggestions);
-                }}
-                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-              />
-              {toSuggestions.length > 0 && (
-                <ul className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
-                  {toSuggestions.map((suggestion, index) => (
-                    <li
-                      key={index}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => {
-                        setTo(suggestion.name); // Set the display name
-                        setToId(suggestion.id); // Set the ID for conversion
-                        setToSuggestions([]); // Clear suggestions
-                      }}
+                  {/* Search Button */}
+                <div className="flex-grow flex justify-end pt-6">
+                  <button
+                      onClick={handleSearch}
+                      className="bg-yellow-500 text-gray-900 px-6 py-1.5 rounded-md hover:bg-yellow-600 transition"
                     >
-                      {suggestion.name} ({suggestion.type}, {suggestion.countryName})
-                    </li>
-                  ))}
-                </ul>
-              )}
+                    Search
+                  </button>
+                </div>
+                </div>
+              </form>
             </div>
-
-            {/* Departure and Return Date */}
-            <div className="flex gap-4 items-center">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Departure
-                </label>
-                <input
-                  type="date"
-                  value={departureDate}
-                  onChange={(e) => setDepartureDate(e.target.value)}
-                  className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Return
-                </label>
-                <input
-                  type="date"
-                  value={returnDate}
-                  onChange={(e) => setReturnDate(e.target.value)}
-                  className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-                />
-              </div>
-            </div>
-
-            {/* Cabin Class */}
-            <select
-              value={cabinClass}
-              onChange={(e) => setCabinClass(e.target.value)}
-              className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-            >
-              <option value="ECONOMY">Economy</option>
-              <option value="PREMIUM_ECONOMY">Premium Economy</option>
-              <option value="BUSINESS">Business</option>
-              <option value="FIRST">First Class</option>
-            </select>
-
-            {/* Search Button */}
-            <button
-              onClick={handleSearch}
-              className="bg-yellow-500 text-gray-900 px-6 py-3 rounded-md hover:bg-yellow-600 transition"
-            >
-              Search
-            </button>
           </div>
         );
 

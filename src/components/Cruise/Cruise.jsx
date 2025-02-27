@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './CruiseHeader';
+import Footer from '../Dashboard/Footer';
+import SubscriptionSection from '../Dashboard/SubscriptionSection';
 
 function Cruise() {
   const [ships, setShips] = useState([]);
@@ -446,14 +448,10 @@ function Cruise() {
         </div>
       </section>
 
-      {showBackToTop && (
-        <button onClick={scrollToTop} className="fixed bottom-12 right-8 bg-blue-950 text-white p-3 rounded-full shadow-lg hover:bg-blue-900 transition-all duration-300 z-50"
-          aria-label="Back to top" >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          </svg>
-        </button>
-      )}
+      <div className={ships.length === 0 ? 'mt-[600px]' : ''}>
+          <SubscriptionSection />
+          <Footer />
+      </div>
     </>
   );
 }
