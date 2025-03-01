@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const HeaderBg = ({ title, images = [], flag = true, bgColor, height = '300px', style = "text-5xl font-extrabold  md:text-5xl" }) => {
+const HeaderBg = ({ title, images = [], categoryTabs=false, flag = true, bgColor, height = '300px', style = "text-5xl font-extrabold md:text-5xl" }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -21,12 +21,12 @@ const HeaderBg = ({ title, images = [], flag = true, bgColor, height = '300px', 
 
       <div className="w-full max-w-[1150px] h-full flex items-center -mt-12 lg:ml-16 md:ml-7 sm:ml-9 relative">
         <div className="w-full flex flex-row justify-between items-center">
-          <div className={`${style} text-white  font-poppins`}>
+          <div className={`${style} text-white font-poppins`}>
             {title}
           </div>
 
           {flag && 
-            <div id='buttons' className="flex flex-wrap items-center gap-2 ml-auto">
+            <div id='buttons' className="flex flex-wrap items-center gap-2 ml-auto -mr-20">
               <button className="cursor-pointer bg-[#31e0ff] bg-opacity-35 relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3 hover:-translate-y-0.5" >
                 <i className="fa-duotone fa-regular fa-island-tropical text-[#31e0ff]"></i>
                 <span className="text-white">Attractions</span>
@@ -49,6 +49,8 @@ const HeaderBg = ({ title, images = [], flag = true, bgColor, height = '300px', 
               </button>
             </div>
           }
+
+
         </div>
       </div>
     </section>

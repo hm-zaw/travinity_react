@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "/icons/logo.png";
 
-const NavBar = () => {
+const NavBar = (user) => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -9,6 +9,8 @@ const NavBar = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(false); // State for three dots dropdown
   const [visibleItems, setVisibleItems] = useState(6); // Number of visible items in the bottom navigation
+  const [username, setUsername] = useState("Travinity member");
+  
 
   // Handle scrolling behavior
   const handleScroll = () => {
@@ -22,10 +24,20 @@ const NavBar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
+
+  useEffect(() => {
+    if(user){
+      console.log("The user id for nav bar: ", user.user.user.id);
+      setUsername(user.user.user.name);
+    } else {
+      console.log("user not found")
+    }
+  }, [user])
 
   // Toggle search visibility and adjust visible items based on window width
   useEffect(() => {
@@ -124,14 +136,12 @@ const NavBar = () => {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <i className="fas fa-user-circle text-xl text-white"></i>
-                <span className="ml-2 hidden md:inline">Travinity Member</span>
+                <span className="ml-2 hidden md:inline">{username}</span>
                 {dropdownOpen && (
-                  <div
-                    className="absolute top-full right-0 mt-2 w-56 bg-gradient-to-b from-black via-black/70 to-transparent backdrop-blur-sm text-white rounded-lg shadow-lg"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <div className="absolute top-full right-0 mt-2 w-56 bg-gradient-to-b from-black via-black/70 to-transparent backdrop-blur-sm text-white rounded-lg shadow-lg"
+                    onClick={(e) => e.stopPropagation()} >
                     <ul className="py-2">
-                      {[
+                    {[
                         "My Bookings",
                         "Trip Coins: 0",
                         "Promo Codes",
@@ -141,11 +151,14 @@ const NavBar = () => {
                         "Flight Price Alerts",
                         "Member Tiers",
                       ].map((item, index) => (
-                        <li
-                          key={index}
-                          className="px-4 py-2 hover:text-yellow-500 flex items-center"
-                        >
-                          {item}
+                        <li key={index} className="px-4 py-2 hover:text-yellow-500 flex items-center">
+                          {item === "My Bookings" ? (
+                            <a href="/myBookings" className="w-full">
+                              {item}
+                            </a>
+                          ) : (
+                            item
+                          )}
                         </li>
                       ))}
                       <hr className="border-gray-300/50" />

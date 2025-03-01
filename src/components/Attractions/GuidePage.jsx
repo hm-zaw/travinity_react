@@ -20,7 +20,7 @@ import {
   IconSoup,
 } from "@tabler/icons-react";
 
-import Header from "../Header";
+import Header from "../Cruise/CruiseHeader";
 import HeaderBg from "../HeaderBg";
 import worldData from "../../data/world.json";
 import Blog from "../Blog";

@@ -1,4 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import BlogSection from "./BlogSection";
 import './dash.css';
 import Footer from "./Footer";
@@ -21,12 +24,18 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
-
 const UserDashboard = () => {
+  const location = useLocation();
+  const userData = location.state;
+
+  useEffect(() => {
+    console.log("The user data is ", userData.user);
+  }, [userData])
+
   return (
     <div className="Dashboard">
-      <NavBar />
-      <HeroSection />
+      <NavBar user={userData}/>
+      <HeroSection user={userData}/>
       <RecommendedSection />
       <TestimonialsSection />
       <BlogSection />

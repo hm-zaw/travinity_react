@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Header from './CruiseHeader';
 import Footer from '../Dashboard/Footer';
 import SubscriptionSection from '../Dashboard/SubscriptionSection';
 
 function Cruise() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [ships, setShips] = useState([]);
   const [departureCities, setDepartureCities] = useState([]);
   const [destinations, setDestinations] = useState([]);
@@ -46,6 +49,10 @@ function Cruise() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    console.log("The user data in cruise page: ", location.state.original.userData)
+  }, [])
 
   const fetchImageFromPixabay = async (query) => {
     const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(query + ' cruise ship')}&image_type=photo`;
@@ -126,6 +133,7 @@ function Cruise() {
       ? ship.price >= selectedPriceRange.min && ship.price <= selectedPriceRange.max
       : true)
   ));
+  
 
   const indexOfLastShip = currentPage * shipsPerPage;
   const indexOfFirstShip = indexOfLastShip - shipsPerPage;
@@ -143,11 +151,18 @@ function Cruise() {
       behavior: 'smooth'
     });
   };
+
+  const prepareDataForCruiseBooking = (e, ship) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    navigate(`/cruises/${ship.CruiseId}`, {
+      state: { userData: location.state.original.userData },
+    });
+  };
   
   return (
     
     <>
-    <Header/>
+    <Header user={location.state.original.userData}/>
       <section id="cruise-search" className="bg-cover bg-center w-full relative top-0 min-h-[640px] md:min-h-[400px]">
         <img
           className="absolute inset-0 w-full h-full object-cover brightness-90"
@@ -389,11 +404,11 @@ function Cruise() {
                             <p className='text-3xl font-medium text-blue-950'> <span className='font-normal text-blue-950 text-sm'>From </span> ${ship.Staterooms[0].Price}</p>
                             <p className='font-normal text-sm text-blue-950'>per person incl. taxes & fees</p>
                           </div>
-                          <Link to={`/cruises/${ship.CruiseId}`}>
-                            <button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-3xl mt-2 hover:bg-blue-900 md:w-auto">
+                          <form action="" onSubmit={(e) => prepareDataForCruiseBooking(e, ship)}>
+                            <button type="submit"  className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-3xl mt-2 hover:bg-blue-900 md:w-auto">
                               <span>Details</span>
                             </button>
-                          </Link>
+                            </form>
                         </div>
                       </div>
                     </div>

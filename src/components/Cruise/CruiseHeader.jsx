@@ -1,18 +1,36 @@
 import React, { useState } from "react";
 import Travinity from '/images/travinity_white.png';
+import { useNavigate } from "react-router-dom";
 
-function Header() {
+function Header(user) {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userData, setUserData] = useState(user.user);
+
+  console.log("userData for header:", user.user);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogoClick = () => {
+    if (user) {
+      navigate("/dashboard", { state: user }); // Pass user data when navigating
+    } else {
+      navigate("/dashboard"); // If no user data, just go to dashboard
+    }
   };
 
   return (
     <header id="header-section" className="absolute top-0 left-0 w-full text-white z-10">
       <div className="container mx-auto px-4 flex justify-between items-center -mt-3 lg-custom:max-w-[80vw] lg-custom:px-6">
         <div id="left-nav-bar" className="flex items-center space-x-4 lg-custom:-ml-28">
-          <img src={Travinity} alt="logo" className="h-24" />
+        <img
+            src={Travinity}
+            alt="logo"
+            className="h-24 cursor-pointer"
+            onClick={handleLogoClick} // Attach click handler
+          />
           <nav className="hidden lg-custom:flex space-x-6">
             {["Hotels", "Flights", "Car Services", "Attractions & Tours", "Flight + Hotel"].map(
               (item) => (

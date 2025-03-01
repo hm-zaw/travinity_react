@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Itinerary from "./Itinerary";
 import RequiredDocuments from "./RequiredDocuments";
 import RestrictionsPolicies from "./RestrictionsPolicies";
 import SelectRoom from "./SelectRoom";
 
 function CruiseBooking() {
+  const location = useLocation();
   const { CruiseId } = useParams();
   const [ship, setShip] = useState(null);
   const [shipImage, setShipImage] = useState('');
@@ -14,6 +15,8 @@ function CruiseBooking() {
   const [activeSection, setActiveSection] = useState("itinerary"); // State to track active section
   const [hasReadRestrictions, setHasReadRestrictions] = useState(false); // State to track if restrictions are read
   const navigate = useNavigate();
+
+  const [userData, setUserData] = useState(location.state.userData);
 
   const PIXABAY_API_KEY = '48566746-1f497e57e6596e43958245183';
 
@@ -256,7 +259,7 @@ function CruiseBooking() {
           )}
               
           {activeProgress === "rooms" && (
-              <SelectRoom ship={ship} />
+              <SelectRoom ship={ship} userData={userData} />
           )}
 
           </div>

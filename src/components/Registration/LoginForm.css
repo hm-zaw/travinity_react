@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Jost", italic;
+}
+
+.LoginForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LoginForm .container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 1000px;
+    max-width: 100%;
+    min-height: 650px;
+}
+
+.LoginForm .container h1 {
+    font-size: 40px;
+}
+
+.LoginForm .container p {
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+
+.LoginForm .container a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.LoginForm .container button {
+    background-color: #4c74e2;
+    color: #fff;
+    font-size: 14px;
+    padding: 12px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.LoginForm .container form {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+}
+
+.LoginForm .container input {
+    background-color: #eee;
+    border: none;
+    margin: 10px 0;
+    padding: 14px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.LoginForm .container.active .sign-in {
+    transform: translateX(100%);
+}
+
+.sign-up {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.LoginForm .container.active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-icons {
+    margin: 20px 0;
+}
+
+.social-icons a {
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 6px;
+    width: 45px;
+    height: 45px;
+}
+
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+    background-image: url('/img/img1.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.LoginForm .container.active .toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle {
+    background-color: rgba(47, 64, 93, 0.8); /* Semi-transparent overlay */
+    height: 100%;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.LoginForm .container.active .toggle {
+    transform: translateX(50%);
+}
+
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+.LoginForm .container.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.LoginForm .container.active .toggle-right {
+    transform: translateX(200%);
+}
+
+.text-danger {
+    color: #FF1493;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.LoginForm .containertext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-wrapper {
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: 20px;
+    padding: 0 20px; /* Adjust padding as needed */
+}
+
+.text-wrapper::before,
+.text-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px; /* Adjust the width as needed */
+    height: 1px;
+    background-color: #525151;
+}
+
+.text-wrapper::before {
+    left: -100px; /* Adjust this to control the distance from text */
+}
+
+.text-wrapper::after {
+    right: -100px; /* Adjust this to control the distance from text */
+}

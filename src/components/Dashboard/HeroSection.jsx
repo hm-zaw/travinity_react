@@ -16,7 +16,12 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
-const HeroSection = () => {
+const HeroSection = (user) => {
+  const [userId, setUserId] = useState(user.user.user.id);
+  const [userEmail, setUserEmail] = useState(user.user.user.email);
+  const [departureCities, setDepartureCities] = useState([]);
+  const [ships, setShips] = useState([]);
+  const [destinations, setDestinations] = useState([]);
   const [activeTab, setActiveTab] = useState("Hotels & Homes");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -29,13 +34,65 @@ const HeroSection = () => {
   const [fromId, setFromId] = useState("");
   const [toId, setToId] = useState("");
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
-  const [destId, setDestId] = useState("");
-  const [searchType, setSearchType] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
-  const [rooms, setRooms] = useState(1);
-  const [children, setChildren] = useState(0);
   const navigate = useNavigate();
+
+  // For Cruise ////////////////////////////////////////
+
+  const [formCruiseData, setFormCruiseData] = useState({
+    departFrom: "",
+    sailFor: "",
+    departureMonth: "",
+  });
+
+  useEffect(() => {
+    axios.get("../data/cruise.json")
+      .then(response => {
+        setShips(response.data.Ships); // Store fetched data
+      })
+      .catch(error => console.error("Error fetching data:", error));
+  }, []);
+
+  useEffect(() => {
+    console.log("ships are ", ships)
+    if (ships.length > 0) {
+      setDepartureCities([...new Set(ships.map(ship => ship.DepartCity))]);
+      setDestinations([...new Set(ships.map(ship => ship.Destination))]);
+
+      console.log("depart from:", departureCities);
+    }
+  }, [ships]);
+
+  const handleCruiseInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormCruiseData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    console.log("The id is: ", userId, " and the email is: ", userEmail)
+    console.log("the mail is ", user.user.user.email)
+  }, [user])
+
+  const handleCruiseSearch = (event) => {
+    event.preventDefault();
+    console.log("Collected user Data:", user.user.user);
+    const userData = user.user.user;
+
+    const searchData = {
+      original: {
+        formCruiseData,
+        userId,
+        userData
+      }
+    };
+
+    navigate("/cruises", { state: searchData });
+  };
+
+  //////////////////////////////////////////////////
+
 
   const [dataCarry, setDataCarry] = useState({
     "destination": "",
@@ -43,7 +100,10 @@ const HeroSection = () => {
     "checkoutDate": "",
     "rooms": 1,
     "adults": 2,
-    "children": 0
+    "children": 0,
+    "userId": userId,
+    "userEmail": userEmail,
+    "userData": user.user.user
   })
 
   const handleHotelDataInput = (e) => {
@@ -105,8 +165,8 @@ const HeroSection = () => {
 
   // Handle search button click for flights
   const handleSearch = (e) => {
-
     e.preventDefault();
+    const userData = user.user.user;
     const searchData = {
       original: {
         from,
@@ -115,6 +175,8 @@ const HeroSection = () => {
         returnDate,
         cabinClass,
         adults,
+        userId,
+        userData
       },
       converted: {
         fromId, 
@@ -359,10 +421,69 @@ const HeroSection = () => {
         );
 
       case "Cruises":
-        // Redirect to localhost:5173/cruises
-        window.location.href = "http://localhost:5173/cruises";
-        return null;
-      // Other cases (Hotels & Homes, Trains, Cars, Attractions & Tours, Flight + Hotel) remain unchanged
+        return (
+          <div className="bg-white lg:bg-opacity-90 sm:bg-opacity-100 py-6 px-10 rounded-lg shadow-lg">
+            <div className="flex flex-col md:flex-col gap-4 ">
+
+              <form className="space-y-3" onSubmit={handleCruiseSearch}>
+                {/* Destination and Guest Input */}
+                <div className="flex flex-row space-x-4">
+                  <div className="relative flex-grow w-/3 md:w-auto">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Depart From</label>
+                    <select name="departFrom"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                      value={formCruiseData.departFrom}
+                      onChange={handleCruiseInputChange}
+                    >
+                      <option value="">All Departure Cities</option>
+                      {departureCities.map((city, index) => (
+                        <option key={index} value={city}>{city}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="relative flex-grow w-/3 md:w-auto">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Sail For</label>
+                    <select name="sailFor"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                      value={formCruiseData.sailFor}
+                      onChange={handleCruiseInputChange}
+                    >
+                      <option value="">All Destinations</option>
+                      {destinations.map((destination, index) => (
+                        <option key={index} value={destination}>{destination}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  
+                  <div className="lg:w-3/4 md:w-auto flex-grow">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Departure Month</label>
+                    <select name="departureMonth"
+                      className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                      value={formCruiseData.departureMonth}
+                      onChange={handleCruiseInputChange}
+                    >
+                      <option value="">All Months</option>
+                      {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((month, index) => (
+                        <option key={index} value={month}>{month}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Search Button */}
+                <div className="flex-grow flex justify-end pt-6">
+                  <button type="submit" className="bg-yellow-500 text-gray-900 px-6 py-1.5 rounded-md hover:bg-yellow-600 transition">
+                    Search
+                  </button>
+                </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        );
       default:
         return null;
     }

@@ -2,6 +2,11 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080";
 
+export async function getBookingAll(){
+    const service_url = `${API_URL}/myBookings`;
+    return await axios.get(service_url);
+}
+
 export async function getDetailsOfCars(carDetail){
     const service_url = `${API_URL}/city`;
     return await axios.get(service_url , { params: carDetail });

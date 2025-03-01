@@ -77,7 +77,7 @@ const RoomDetailOverlay = ({ room, onClose, getRoomImage, className }) => {
   );
 };
 
-export default function SelectRoom({ ship }) {
+export default function SelectRoom({ ship, userData }) {
   const [selectedCategory, setSelectedCategory] = useState("Interior");
   const [isFixed, setIsFixed] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -90,7 +90,6 @@ export default function SelectRoom({ ship }) {
   const [grandTotalPrice, setGrandTotalPrice] = useState(0);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isPricePanelVisible, setIsPricePanelVisible] = useState(false);
-  
 
   // Calculate number of nights from ship itinerary
   const numberOfNights = useMemo(() => {
@@ -367,8 +366,8 @@ export default function SelectRoom({ ship }) {
       quantity: ship.Itinerary.length - 1,
       multiplier: 100,
       currency: 'USD',
-      email: 'hmzzzz2004@gmail.com', // to replace with user's email
-      user_id: 1, // to replace with user's id
+      email: userData.email, // to replace with user's email
+      user_id: userData.id, // to replace with user's id
       status: "PAID",
       category: "cruise",
       transaction_date: new Date().toISOString()

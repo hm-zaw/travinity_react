@@ -31,6 +31,10 @@ const Hotel = () => {
   const checkOutDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
   const [activeTab, setActiveTab] = useState('recommended');
+
+  useEffect(() => {
+    console.log("The user data from data carry is ", dataCarry.userData)
+  }, [dataCarry])
   
 
   const handleInputChange = (e) => {
@@ -55,7 +59,10 @@ const Hotel = () => {
 
     try {
       const response = await axios.get(`http://localhost:8080/searchHotels`, {
-        params: searchState
+        params: searchState, 
+        headers: {
+          "Content-Type": "application/json",
+      },
       });
       console.log(response);
       setHotels(response.data);
@@ -278,8 +285,8 @@ const Hotel = () => {
       quantity: validDayDifference,
       multiplier: 100,
       currency: 'USD',
-      email: 'hmzzzz2004@gmail.com', // to replace with user's email
-      user_id: 1, // to replace with user's id
+      email: dataCarry.userEmail, // to replace with user's email
+      user_id: dataCarry.userId, // to replace with user's id
       status: "PAID",
       category: "hotel",
       transaction_date: today.toISOString()
@@ -308,7 +315,7 @@ const Hotel = () => {
 
   return (
     <>
-      <Header />
+      <Header user={dataCarry.userData}/>
       <HeaderBg title={"Hotels"} flag={false} images={['/images/hotel-header-bg.jpg']} bgColor={'bg-black opacity-30'}/>
       
       <form onSubmit={handleSubmitForm} id="input-box" className="mx-4 sm:mx-8 lg:mx-12 px-6 -mt-28 relative">

@@ -47,21 +47,22 @@ const Flight = () => {
     returnDate: location.state?.original?.returnDate || '',
     cabinClass: location.state?.original?.cabinClass || 'ECONOMY',
     adults: location.state?.original?.adults || 1,
+    userId: location.state?.original?.userId || null,
+    userData: location.state?.original?.userData || null
   });
 
   const [suggestions, setSuggestions] = useState({ from: [], to: [] });
   const [activeField, setActiveField] = useState(null);
-
-  // Filter states
-  const [selectedAirlines, setSelectedAirlines] = useState([]);
-  const [priceRange, setPriceRange] = useState(2000);
-  const [selectedCabinClass, setSelectedCabinClass] = useState('');
 
   useEffect(() => {
     if (location.state?.converted) {
       handleAutoSearch();
     }
   }, [location.state]);
+
+  useEffect(() => {
+    console.log("The user id for flight is ",searchState.userId);
+  }, [searchState.userId])
 
   const fetchSuggestions = async (query, fieldType) => {
     if (!query || query.length < 3) {
@@ -256,6 +257,8 @@ const Flight = () => {
     setLoading(true);
     setError('');
 
+    console.log("handle search is called");
+
     try {
       const response = await axios.get('http://localhost:8080/searchFlights', {
         params: {
@@ -268,10 +271,12 @@ const Flight = () => {
           currency: 'USD',
         },
         headers: {
-          'X-RapidAPI-Key': '02670754a0msh0b854492645b241p191547jsncd32c651b0ba',
+          'X-RapidAPI-Key': '4093d6d8f8msh92b0c400a29339fp19adc9jsn25b9139bb6ea',
           'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com',
         },
       });
+
+      console.log("the response is ", response);
 
       const flightData = response.data.data?.flightOffers || [];
       setFlights(flightData.map(formatFlightData));
@@ -395,7 +400,7 @@ const Flight = () => {
 
   return (
     <>
-      <Header />
+      <Header user={searchState.userData} />
       <section id="flight-search" className="bg-cover bg-center w-full relative top-0 min-h-[740px] md:min-h-[500px]">
         <img
           className="absolute inset-0 w-full h-full object-cover brightness-90"
