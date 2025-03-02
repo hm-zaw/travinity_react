@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Header from './CruiseHeader';
 import Footer from '../Dashboard/Footer';
 import SubscriptionSection from '../Dashboard/SubscriptionSection';
@@ -9,6 +10,7 @@ import SubscriptionSection from '../Dashboard/SubscriptionSection';
 function Cruise() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [ships, setShips] = useState([]);
   const [departureCities, setDepartureCities] = useState([]);
   const [destinations, setDestinations] = useState([]);
@@ -67,18 +69,35 @@ function Cruise() {
     return 'https://via.placeholder.com/150';
   };
 
+  const getAvailableMonths = (ships) => {
+    const months = ships.map(ship => {
+      const departureDate = new Date(ship.Itinerary[0].Date);
+      return {
+        monthYear: departureDate.toLocaleString('default', { month: 'long', year: 'numeric' }),
+        date: departureDate // Keep the full date for sorting
+      };
+    });
+
+    // Remove duplicates and sort chronologically
+    return [...new Map(months.map(item => [item.monthYear, item]))].map(([_, value]) => value)
+      .sort((a, b) => a.date - b.date)
+      .map(item => item.monthYear);
+  };
+
   const handleSearch = () => {
     const matchedShips = ships.filter(ship => {
-      const shipMonth = new Date(ship.Date).toLocaleString('default', { month: 'long' });
+      const departureDate = new Date(ship.Itinerary[0].Date);
+      const shipMonthYear = departureDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+      
       return (
         (selectedCity ? ship.DepartCity === selectedCity : true) &&
         (selectedDestination ? ship.Destination === selectedDestination : true) &&
-        (selectedMonth ? shipMonth === selectedMonth : true)
+        (selectedMonth ? shipMonthYear === selectedMonth : true)
       );
     });
     setFilteredShips(matchedShips);
   };
-
+  
   const handleSortChange = (option) => {
     setSortOption(option);
     let sortedShips = [...filteredShips];
@@ -145,13 +164,6 @@ function Cruise() {
     window.scrollTo(0, document.getElementById('cruise-content').offsetTop);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   const prepareDataForCruiseBooking = (e, ship) => {
     e.preventDefault(); // Prevent default form submission behavior
     navigate(`/cruises/${ship.CruiseId}`, {
@@ -209,8 +221,8 @@ function Cruise() {
                   onChange={(e) => setSelectedMonth(e.target.value)}
                 >
                   <option value="">All Months</option>
-                  {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((month, index) => (
-                    <option key={index} value={month}>{month}</option>
+                  {getAvailableMonths(ships).map((monthYear, index) => (
+                    <option key={index} value={monthYear}>{monthYear}</option>
                   ))}
                 </select>
               </div>

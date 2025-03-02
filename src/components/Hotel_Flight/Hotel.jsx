@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import Header from '../Cruise/CruiseHeader';
 import HeaderBg from '../HeaderBg';
@@ -13,6 +13,7 @@ import SubscriptionSection from '../Dashboard/SubscriptionSection';
 const Hotel = () => {
   const location = useLocation();
   const dataCarry = location.state;
+  const [loading, setLoading] = useState(false);
   const [hotels, setHotels] = useState([]);
   const [dayDifference, setDayDifference] = useState(0);
   const [error, setError] = useState('');
@@ -32,10 +33,6 @@ const Hotel = () => {
 
   const [activeTab, setActiveTab] = useState('recommended');
 
-  useEffect(() => {
-    console.log("The user data from data carry is ", dataCarry.userData)
-  }, [dataCarry])
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,8 +44,19 @@ const Hotel = () => {
   };
 
   // hmz code
+
+  const [searchState, setSearchState] = useState({
+    destination: "",
+    checkInDate: checkInDate,
+    checkOutDate: checkOutDate,
+    rooms: 1,
+    adults: 2,
+    children: 0,
+  });
+
   const handleSubmitForm = async (e) => {
     if(e) e.preventDefault();
+    setLoading(true);
     console.log("handleSubmitForm is called");
 
     const checkin = new Date(searchState.checkInDate);
@@ -70,17 +78,10 @@ const Hotel = () => {
     } catch (error) {
       console.error('Error fetching hotels:', error);
       setError('Failed to fetch hotels. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
-
-  const [searchState, setSearchState] = useState({
-    destination: "",
-    checkInDate: checkInDate,
-    checkOutDate: checkOutDate,
-    rooms: 1,
-    adults: 2,
-    children: 0,
-  });
 
   useEffect(() => {
     if (location.state && !hasSubmitted) {
@@ -368,9 +369,19 @@ const Hotel = () => {
                 </div>
             </div>
             <div className="flex items-end justify-end w-full pt-4">
-                <button type="submit" className="font-poppins text-sm bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 py-3 px-8 rounded-lg hover:shadow-xl transition flex items-center justify-center gap-2 font-semibold transform hover:translate-y-[-2px]">
-                    <FontAwesomeIcon icon={faSearch} />
-                    Search Hotels
+                <button type="submit" className="font-poppins text-sm bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 py-3 px-8 rounded-lg hover:shadow-xl transition flex items-center justify-center gap-2 font-semibold transform hover:translate-y-[-2px]"
+                  disabled={!searchState.destination || !searchState.checkInDate || !searchState.checkOutDate || loading}>
+                    {loading ? (
+                      <>
+                        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+                        <span>Searching...</span>
+                      </>
+                    ) : (
+                      <>
+                        <FontAwesomeIcon icon={faSearch} />
+                        Search Hotels
+                      </>
+                    )}
                 </button>
             </div>
           </div>

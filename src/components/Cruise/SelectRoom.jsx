@@ -4,6 +4,7 @@ import { checkPaymentCruise } from '../../api/CarService';
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
+  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -96,6 +97,10 @@ export default function SelectRoom({ ship, userData }) {
     if (!ship.Itinerary || ship.Itinerary.length < 2) return 1;
     return ship.Itinerary.length - 1; // Subtract 1 from total days to get nights
   }, [ship.Itinerary]);
+
+  useEffect(() => {
+    console.log("userData at selectroom: ", userData);
+  }, [userData])
 
   // Calculate price for a passenger type
   const calculatePassengerPrice = (baseAdultPrice, passengerType) => {
@@ -355,7 +360,7 @@ export default function SelectRoom({ ship, userData }) {
     const formatDate = (date) => {
       const d = new Date(date);
       return d.toISOString().split("T")[0]; // Converts to "yyyy-MM-dd"
-  };
+    };
 
     const info = { 
       amount: validAmount/3,
@@ -366,8 +371,8 @@ export default function SelectRoom({ ship, userData }) {
       quantity: ship.Itinerary.length - 1,
       multiplier: 100,
       currency: 'USD',
-      email: userData.email, // to replace with user's email
-      user_id: userData.id, // to replace with user's id
+      email: userData.userData.email, // to replace with user's email
+      user_id: userData.userData.id, // to replace with user's id
       status: "PAID",
       category: "cruise",
       transaction_date: new Date().toISOString()

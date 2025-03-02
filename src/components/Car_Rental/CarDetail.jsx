@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { checkPayment } from '../../api/CarService';
 
 
-const CarDetail = ({ data, flag, dayDifference, fromDate, toDate }) => {
+const CarDetail = ({ data, flag, dayDifference, fromDate, toDate, userData }) => {
 
   console.log("Day difference got at component:", dayDifference);
   {/* Payment Backend Here */}
@@ -82,20 +82,19 @@ const CarDetail = ({ data, flag, dayDifference, fromDate, toDate }) => {
       quantity: validDayDifference,
       multiplier: 100,
       currency: 'USD',
-      email: 'hmzzzz2004@gmail.com', // to replace with user's email
-      user_id: 1, // to replace with user's id
+      email: userData.email, // to replace with user's email
+      user_id: userData.id, // to replace with user's id
       product_id: car.v_id,
       fromDate: formatDate,
       toDate: toDate,
       status: "PAID",
       category: "car",
-      transaction_date: today.toISOString()
+      transaction_date: today.toISOString(),
     };
   
     console.log("Payment input:", paymentInfo);
   
     try {
-      console.log("Car data:", car); 
       const response = await checkPayment({
         paymentInfo: paymentInfo
       });

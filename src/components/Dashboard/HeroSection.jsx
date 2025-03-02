@@ -36,7 +36,7 @@ const HeroSection = (user) => {
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const navigate = useNavigate();
 
-  // For Cruise ////////////////////////////////////////
+  //// For Cruise //////////////////////////////////////
 
   const [formCruiseData, setFormCruiseData] = useState({
     departFrom: "",
@@ -53,12 +53,9 @@ const HeroSection = (user) => {
   }, []);
 
   useEffect(() => {
-    console.log("ships are ", ships)
     if (ships.length > 0) {
       setDepartureCities([...new Set(ships.map(ship => ship.DepartCity))]);
       setDestinations([...new Set(ships.map(ship => ship.Destination))]);
-
-      console.log("depart from:", departureCities);
     }
   }, [ships]);
 
@@ -69,11 +66,6 @@ const HeroSection = (user) => {
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    console.log("The id is: ", userId, " and the email is: ", userEmail)
-    console.log("the mail is ", user.user.user.email)
-  }, [user])
 
   const handleCruiseSearch = (event) => {
     event.preventDefault();
@@ -93,6 +85,7 @@ const HeroSection = (user) => {
 
   //////////////////////////////////////////////////
 
+  //// For Hotel //////////////////////////////////
 
   const [dataCarry, setDataCarry] = useState({
     "destination": "",
@@ -106,6 +99,29 @@ const HeroSection = (user) => {
     "userData": user.user.user
   })
 
+  const fetchHotelDestinations = async (query) => {
+    if (!query || query.length < 3) {
+      setDestinationSuggestions([]);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination",
+        {
+          params: { query },
+          headers: {
+            "x-rapidapi-key": "02670754a0msh0b854492645b241p191547jsncd32c651b0ba",
+            "x-rapidapi-host": "booking-com15.p.rapidapi.com",
+          },
+        }
+      );
+      setDestinationSuggestions(response.data.data);
+    } catch (error) {
+      console.error("Error fetching hotel destinations:", error);
+      setDestinationSuggestions([]);
+    }
+  };
   const handleHotelDataInput = (e) => {
     const { name, value } = e.target;
     setDataCarry(prevState => ({
@@ -113,6 +129,27 @@ const HeroSection = (user) => {
       [name]: value
     }));
   }
+
+  const handleGuestChange = (e) => {
+    const [roomsVal, adultsVal, childrenVal] = e.target.value.split(',').map(Number);
+    setDataCarry(prevState => ({
+      ...prevState,
+      rooms: roomsVal,
+      adults: adultsVal,
+      children: childrenVal
+    }));
+  };
+  const handleHotelDataSubmitMainPg = (e) => {
+    e.preventDefault();
+    navigate('/hotel', { state: dataCarry });
+  }
+  useEffect(() => {
+    console.log(dataCarry);
+  }, [dataCarry])
+
+  /////////////////////////////////////////////////////////////
+
+  //// For Flights ////////////////////////////////////////////
 
   // Fetch suggestions from Booking.com RapidAPI
   const fetchSuggestions = async (query, setSuggestions) => {
@@ -136,30 +173,6 @@ const HeroSection = (user) => {
     } catch (error) {
       console.error("Error fetching suggestions:", error);
       setSuggestions([]);
-    }
-  };
-
-  const fetchHotelDestinations = async (query) => {
-    if (!query || query.length < 3) {
-      setDestinationSuggestions([]);
-      return;
-    }
-
-    try {
-      const response = await axios.get(
-        "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination",
-        {
-          params: { query },
-          headers: {
-            "x-rapidapi-key": "02670754a0msh0b854492645b241p191547jsncd32c651b0ba",
-            "x-rapidapi-host": "booking-com15.p.rapidapi.com",
-          },
-        }
-      );
-      setDestinationSuggestions(response.data.data);
-    } catch (error) {
-      console.error("Error fetching hotel destinations:", error);
-      setDestinationSuggestions([]);
     }
   };
 
@@ -187,33 +200,52 @@ const HeroSection = (user) => {
     navigate("/flight", { state: searchData });
   };
 
-  const handleGuestChange = (e) => {
-    const [roomsVal, adultsVal, childrenVal] = e.target.value.split(',').map(Number);
-    setDataCarry(prevState => ({
-      ...prevState,
-      rooms: roomsVal,
-      adults: adultsVal,
-      children: childrenVal
+  /////////////////////////////////////////////////////////////
+
+  //// For Cars ////////////////////////////////////////////
+
+  const [formCarData, setFormCarData] = useState({
+    pickup: "",
+    dropoff: "",
+    fromDate: "",
+    fromTime: "",
+    toDate: "",
+    toTime: "",
+    carType: "Economy",
+    driverAge: "30"
+  });
+
+  const handleCarInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormCarData((prevData) => ({
+      ...prevData,
+      [name]: value,
     }));
   };
 
-  const handleHotelDataSubmitMainPg = (e) => {
+  const handleCarSearch = (e) => {
     e.preventDefault();
-    navigate('/hotel', { state: dataCarry });
-  }
+    console.log("Form Data Submitted: ", formCarData);
+    const userData = user.user.user;
+
+    const searchData = {
+      original: {
+        formCarData,
+        userData,
+        userId,
+        userEmail
+      },
+    };
+    navigate("/car_rental", { state: searchData });
+  };
 
   const tabs = [
     { name: "Hotels & Homes", icon: <i class="fa-regular fa-hotel"></i> },
     { name: "Flights", icon: <i class="fa-regular  fa-plane"></i> },
     { name: "Cruises", icon: <i class="fa-regular  fa-ship"></i> },
     { name: "Cars", icon: <i class="fa-regular  fa-car-side"></i> },
-    { name: "Attractions & Tours", icon: <i class="fa-regular  fa-ferris-wheel"></i> },
-    { name: "Flight + Hotel", icon: <i class="fa-regular  fa-truck-plane"></i> },
+    { name: "Attractions & Tours", icon: <i class="fa-regular  fa-ferris-wheel"></i> }
   ];
-
-  useEffect(() => {
-    console.log(dataCarry);
-  }, [dataCarry])
 
   // Render the appropriate search form based on the active tab
   const renderSearchForm = () => {
@@ -484,6 +516,89 @@ const HeroSection = (user) => {
             </div>
           </div>
         );
+
+      case "Cars":
+        return (
+          <> 
+            <div className="bg-white lg:bg-opacity-90 sm:bg-opacity-100 py-6 px-10 rounded-lg shadow-lg">
+              <div className="flex flex-col md:flex-col gap-4 ">
+                <form className="space-y-3" onSubmit={handleCarSearch}>
+                  <div className="flex flex-row space-x-4">
+                    <div className="relative flex-grow w-/3 md:w-auto">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Pickup Location</label>
+                      <input type="text" name="pickup" placeholder="where to pickup" 
+                        value={formCarData.pickup}
+                        onChange={handleCarInputChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                      />
+                    </div>
+
+                    <div className="relative flex-grow w-/3 md:w-auto">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Dropoff Location</label>
+                      <input type="text" name="dropoff" placeholder="where to dropoff"
+                        value={formCarData.dropoff}
+                        onChange={handleCarInputChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-4">
+                    {/* From date */}
+                    <div className="lg:w-1/5 md:w-auto flex-grow">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">From</label>
+                      <input type="date" name="fromDate"
+                        value={formCarData.fromDate}
+                        onChange={handleCarInputChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                      />
+                    </div>
+
+                    {/* From time */}
+                    <div className="lg:w-1/5 md:w-auto flex-grow">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">From Time</label>
+                      <input type="time" name="fromTime"
+                        value={formCarData.fromTime}
+                        onChange={handleCarInputChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                      />
+                    </div>
+
+                    {/* To date */}
+                    <div className="lg:w-1/5 md:w-auto flex-grow">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">To</label>
+                      <input type="date" name="toDate"
+                        value={formCarData.toDate}
+                        onChange={handleCarInputChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                      />
+                    </div>
+
+                    {/* To time */}
+                    <div className="lg:w-1/5 md:w-auto flex-grow">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">To Time</label>
+                      <input type="time" name="toTime"
+                        value={formCarData.toTime}
+                        onChange={handleCarInputChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
+                      />
+                    </div>
+
+                    {/* Search Button */}
+                    <div className="flex-grow flex justify-end pt-6">
+                      <button onClick={handleCarSearch}
+                          className="bg-yellow-500 text-gray-900 px-6 py-1.5 rounded-md hover:bg-yellow-600 transition"
+                        >
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </>
+        );
+      
       default:
         return null;
     }

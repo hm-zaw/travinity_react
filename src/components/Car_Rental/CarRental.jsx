@@ -3,48 +3,24 @@ import Header from '../Cruise/CruiseHeader';
 import HeaderBg from '../HeaderBg';
 import CarDetail from '../Car_Rental/CarDetail';
 import AdsScroller from '../Car_Rental/AdsScroller';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getDetailsOfCars } from '../../api/CarService';
 import "jquery-ui/ui/widgets/autocomplete";
-import FilterSection from './FilterSection';
 import Footer from '../Dashboard/Footer';
 import SubscriptionSection from '../Dashboard/SubscriptionSection';
+import { useLocation } from 'react-router-dom';
 
 // Main Page of Car Rental
 
 const CarRental = () => {
-    const [carDetail, setCarDetail] = useState({
-        pickupCity: '',
-        dropOffCity: '',
-        pickupDate: '',
-        pickupTime: '',
-        dropOffDate: '',
-        dropOffTime: '',
-        carType: '',
-        driverAge: '',
-    });
-
-    const [currentCarDetail, setCurrentCarDetail] = useState(() => {
-        const storedDetails = sessionStorage.getItem('carDetail');
-        return storedDetails ? JSON.parse(storedDetails) : {
-            pickupCity: '',
-            dropOffCity: '',
-            pickupDate: '',
-            pickupTime: '',
-            dropOffDate: '',
-            dropOffTime: '',
-            carType: '',
-            driverAge: '',
-        };
-    });
-
-    // For Storing in SessionStorage for FilterCard Counts
-    const [orgDataFromAPI, setOrgDataFromAPI] = useState(() => {
-        const orgData = sessionStorage.getItem('carDataFromAPI');
-        return orgData ? JSON.parse(orgData) : [];
-    })
-
+    const location = useLocation();
+    const user = location.state.original.userData;
+    const [loading, setLoading] = useState(false);
+    
+    const [userData, setUserData] = useState(user);
     const [newFilteredCarData, setNewFilteredCarData] = useState([]);
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [dropoffSuggestions, setDropoffSuggestions] = useState([]);
@@ -52,26 +28,20 @@ const CarRental = () => {
     const [dropoffValue, setDropoffValue] = useState('');
     const [data, setData] = useState([]);
     const [dayDifference, setDayDifference] = useState(0);
+    const [isFilterVisible, setIsFilterVisible] = useState(false);
     
-    // Pickup+Dropoff Date and Time 
-    const [puTimeValue, setPuTimeValue] = useState(() => {
-        return new Date().toLocaleTimeString('it-IT', { hour12: false, hour: '2-digit', minute: '2-digit' });
-    });
-    const [puDateValue, setPuDateValue] = useState(() => {
-    const today = new Date();
-    return today.toISOString().split('T')[0]; // Format to YYYY-MM-DD
-    });
-    const [doTimeValue, setDoTimeValue] = useState(() => {
-    return new Date().toLocaleTimeString('it-IT', { hour12: false, hour: '2-digit', minute: '2-digit' });
-    });
-    const [doDateValue, setDoDateValue] = useState(() => {
-    const nextWeek = new Date(new Date().setDate(new Date().getDate() + 7));
-    return nextWeek.toISOString().split('T')[0];
-    });
+    const toggleFilterVisibility = () => { setIsFilterVisible(!isFilterVisible); };
+
+     // Pickup+Dropoff Date and Time 
+    const [puTimeValue, setPuTimeValue] = useState(() => { return new Date().toLocaleTimeString('it-IT', { hour12: false, hour: '2-digit', minute: '2-digit' });});
+    const [puDateValue, setPuDateValue] = useState(() => { const today = new Date(); return today.toISOString().split('T')[0]; });
+    const [doTimeValue, setDoTimeValue] = useState(() => { return new Date().toLocaleTimeString('it-IT', { hour12: false, hour: '2-digit', minute: '2-digit' }); });
+    const [doDateValue, setDoDateValue] = useState(() => { const nextWeek = new Date(new Date().setDate(new Date().getDate() + 7)); return nextWeek.toISOString().split('T')[0]; });
+    
     const handlePUDateValue = (event) => {
-    const date = event.target.value;
-    setPuDateValue(date);
-    setCarDetail({
+        const date = event.target.value;
+        setPuDateValue(date);
+        setCarDetail({
         ...carDetail,
         [event.target.name]: event.target.value
     })
@@ -108,6 +78,72 @@ const CarRental = () => {
     
         console.log(carDetail);
     }
+
+    const [carDetail, setCarDetail] = useState({
+        pickupCity: '',
+        dropOffCity: '',
+        pickupDate: '',
+        pickupTime: '',
+        dropOffDate: '',
+        dropOffTime: '',
+        carType: '',
+        driverAge: '',
+    });
+
+    useEffect(() => {
+        if (location.state?.original?.formCarData) {
+            const formData = location.state.original.formCarData;
+            console.log("hello CarRental: ", location.state.original.formCarData);
+            
+            setPickupValue(formData.pickup);
+            setDropoffValue(formData.dropoff);
+            setPuDateValue(formData.fromDate);
+            setDoDateValue(formData.toDate);
+            setPuTimeValue(formData.fromTime);
+            setDoTimeValue(formData.toTime);
+            setCarDetail(prev => ({
+              pickupCity: formData.pickup,
+              dropOffCity: formData.dropoff,
+              pickupTime: formData.fromTime,
+              dropOffTime: formData.toTime,
+              pickupDate: formData.fromDate,
+              dropOffDate: formData.toDate,
+              carType: formData.carType,
+              driverAge: formData.driverAge
+          }));
+        }
+    }, [location.state?.original?.formCarData]); 
+
+    
+    const handleFormSubmit = async (e) => {
+        if (e) e.preventDefault();
+        setLoading(true);
+    
+        const pickupDate = new Date(carDetail.pickupDate);
+        const dropOffDate = new Date(carDetail.dropOffDate);
+        const timeDifference = dropOffDate - pickupDate;
+        const dayDifference = timeDifference / (1000 * 3600 * 24);
+    
+        if (isNaN(dayDifference)) {
+            console.error("Invalid date calculation. Aborting API call.");
+            return;
+        }
+    
+        setDayDifference(dayDifference);
+    
+        try {
+            const response = await getDetailsOfCars(carDetail);
+            console.log("API response:", response);
+            setData(response);
+            setNewFilteredCarData(response.data);
+        } catch (error) {
+            console.error("Error fetching car details:", error);
+        } finally {
+          setLoading(false);
+        }
+    };
+
+    ////////////////////////////////////////////////////////////////
       
     // Utilize Data 
     const handleSelectChange = (event) => {
@@ -119,69 +155,6 @@ const CarRental = () => {
     
         console.log(carDetail); 
     };
-    
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        console.log("Form submitted:", carDetail);
-
-        const pickupDate = new Date(carDetail.pickupDate);
-        const dropOffDate = new Date(carDetail.dropOffDate);
-        const timeDifference = dropOffDate - pickupDate;
-        const dayDifference = timeDifference / (1000 * 3600 * 24);
-        setDayDifference(dayDifference);
-
-        console.log("Day difference got at form submit:", dayDifference);
-
-        try {
-          const response = await getDetailsOfCars(carDetail);
-          console.log("API response:", response);
-      
-          sessionStorage.setItem('carDetail', JSON.stringify(carDetail));
-          setCurrentCarDetail(JSON.parse(sessionStorage.getItem('carDetail')));
-
-          setData(response); // Update data state
-          sessionStorage.setItem('carDataFromAPI', JSON.stringify(response.data));
-          setOrgDataFromAPI(JSON.parse(sessionStorage.getItem('carDataFromAPI')));
-
-          setNewFilteredCarData(response.data);
-      
-          // Reset carDetail for the form
-          setCarDetail({
-            pickupCity: '',
-            dropOffCity: '',
-            pickupDate: '',
-            pickupTime: '',
-            dropOffDate: '',
-            dropOffTime: '',
-            carType: '',
-            driverAge: '',
-          });
-        } catch (error) {
-          console.log("Error fetching car details:", error);
-        }
-    };
-      
-    useEffect(() => {
-        console.log("Data state updated:", data);
-    }, [data]);
-
-    useEffect(() => {
-        console.log("Got a new filtered data: ", newFilteredCarData);
-    }, [newFilteredCarData]);
-
-    // Clearing session
-    useEffect(() => {
-        const handleBeforeUnload = () => {
-            sessionStorage.clear();
-        };
-
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        // Cleanup event listener on component unmount
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, []);
     
       // Jquery autocomplete 
     const fetchSuggestions = async (query, setSuggestions) => {
@@ -228,7 +201,7 @@ const CarRental = () => {
         }))
     }, [pickupValue])
 
-    {/* Filtering Data */}
+    ///// Filtering data /////////
     const filterData = ((data) => {
         const priceFilter = {
             first: data.filter(car => parseFloat(car.price) > 200 && parseFloat(car.price) <= 300).length,
@@ -256,22 +229,25 @@ const CarRental = () => {
         return { priceFilter, typeFilter, reviewFilter };
     });
 
-    const { priceFilter, typeFilter, reviewFilter } = orgDataFromAPI
-        ? filterData(orgDataFromAPI)
-        : { priceFilter: {}, typeFilter: {}, reviewFilter: {} };
-
-    
     const [activeFilters, setActiveFilters] = useState({
         rating: null,
         price: null,
         type: null,
     });
 
+    useEffect(() => {
+        console.log("newfilteredCarData is ", newFilteredCarData);
+    }, [newFilteredCarData]);
+
+    const { priceFilter, typeFilter, reviewFilter } = newFilteredCarData
+    ? filterData(newFilteredCarData)
+    : { priceFilter: {}, typeFilter: {}, reviewFilter: {} };
+        
     const extractCarOnFilter = (categoryName, categoryValue) => (event) => {
         const isChecked = event.target.checked;
     
         const updatedFilters = {
-          ...activeFilters, [categoryName]: isChecked ? categoryValue : null,
+            ...activeFilters, [categoryName]: isChecked ? categoryValue : null,
         };
     
         setActiveFilters(updatedFilters);
@@ -279,77 +255,73 @@ const CarRental = () => {
         let updatedData = data?.data || [];
     
         Object.keys(updatedFilters).forEach((key) => {
-          if (updatedFilters[key]) {
+            if (updatedFilters[key]) {
             if (key === "rating") {
-              if (updatedFilters[key] === "super") {
+                if (updatedFilters[key] === "super") {
                 updatedData = updatedData.filter((car) => car.rating >= 9);
-              } else if (updatedFilters[key] === "vgood") {
+                } else if (updatedFilters[key] === "vgood") {
                 updatedData = updatedData.filter((car) => car.rating >= 8);
-              } else if (updatedFilters[key] === "good") {
+                } else if (updatedFilters[key] === "good") {
                 updatedData = updatedData.filter((car) => car.rating >= 7);
-              }
+                }
             } else if (key === "price") {
-              if (updatedFilters[key] === "200-300") {
+                if (updatedFilters[key] === "200-300") {
                 updatedData = updatedData.filter(
-                  (car) => car.price >= 200 && car.price <= 300
+                    (car) => car.price >= 200 && car.price <= 300
                 );
-              } else if (updatedFilters[key] === "300-400") {
+                } else if (updatedFilters[key] === "300-400") {
                 updatedData = updatedData.filter(
-                  (car) => car.price > 300 && car.price <= 400
+                    (car) => car.price > 300 && car.price <= 400
                 );
-              } else if (updatedFilters[key] === "400-500") {
+                } else if (updatedFilters[key] === "400-500") {
                 updatedData = updatedData.filter(
-                  (car) => car.price > 400 && car.price <= 500
+                    (car) => car.price > 400 && car.price <= 500
                 );
-              } else if (updatedFilters[key] === "500-600") {
+                } else if (updatedFilters[key] === "500-600") {
                 updatedData = updatedData.filter(
-                  (car) => car.price > 500 && car.price <= 600
+                    (car) => car.price > 500 && car.price <= 600
                 );
-              } else if (updatedFilters[key] === "600") {
+                } else if (updatedFilters[key] === "600") {
                 updatedData = updatedData.filter(
-                  (car) => car.price > 600
+                    (car) => car.price > 600
                 );
-              }
+                }
             } else if (key === "type") {
                 if (updatedFilters[key] === "Mini") {
                     updatedData = updatedData.filter(
-                      (car) => car.group === "Mini"
+                        (car) => car.group === "Mini"
                     );
                 } else if (updatedFilters[key] === "Economy") {
                     updatedData = updatedData.filter(
-                      (car) => car.group === "Economy"
+                        (car) => car.group === "Economy"
                     );
                 } else if (updatedFilters[key] === "Compact") {
                     updatedData = updatedData.filter(
-                      (car) => car.group === "Compact"
+                        (car) => car.group === "Compact"
                     );
                 } else if (updatedFilters[key] === "Intermediate") {
                     updatedData = updatedData.filter(
-                      (car) => car.group === "Intermediate"
+                        (car) => car.group === "Intermediate"
                     );
                 } else if (updatedFilters[key] === "Standard") {
                     updatedData = updatedData.filter(
-                      (car) => car.group === "Standard"
+                        (car) => car.group === "Standard"
                     );
                 } else if (updatedFilters[key] === "Full-size") {
                     updatedData = updatedData.filter(
-                      (car) => car.group === "Full-size"
+                        (car) => car.group === "Full-size"
                     );
                 }
             }
-          }
+            }
         });
     
         setNewFilteredCarData(updatedData);
-      };
-
-    useEffect(() => {
-        console.log("Filtered data for component:", newFilteredCarData);
-    }, [newFilteredCarData]);
+        };
 
     return (
         <>
-        <Header />
+        <Header user={userData}/>
         <HeaderBg title={"Car Rental"} flag={false}/>
         
         <form onSubmit={handleFormSubmit} id="input-box" className="mx-4 sm:mx-8 lg:mx-12 px-6 -mt-28 relative">
@@ -441,7 +413,7 @@ const CarRental = () => {
                     {/* Car Categories */}
                     <label className="block text-gray-600 font-semibold text-sm mb-2">Car Categories</label>
                     <div className="relative">
-                        <select name="carType" onChange={handleSelectChange} className="appearance-none w-full bg-white border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+                        <select name="carType" value={carDetail.carType} onChange={handleSelectChange} className="appearance-none w-full bg-white border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
                         <option value="">Select car type</option>
                         <option value="Economy">Economy</option>
                         <option value="Compact">Compact</option>
@@ -459,7 +431,7 @@ const CarRental = () => {
                     {/* Air Con */}
                     <div className="mt-4">
                         <label className="inline-flex items-center">
-                        <input type="checkbox" name="hasAirConditioning" className="form-checkbox text-blue-500 border-gray-300 rounded-md focus:ring-blue-400" />
+                        <input type="checkbox" checked name="hasAirConditioning" className="form-checkbox text-blue-500 border-gray-300 rounded-md focus:ring-blue-400" />
                         <span className="ml-2 text-gray-600 font-semibold text-sm">Has Air Conditioning</span>
                         </label>
                     </div>
@@ -469,7 +441,7 @@ const CarRental = () => {
                     {/* Driver Age */}
                     <label className="block text-gray-600 font-semibold text-sm mb-2">Driver's Age</label>
                     <div className="relative">
-                        <select name="driverAge" onChange={handleSelectChange} className="appearance-none w-full bg-white border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+                        <select name="driverAge" value={carDetail.driverAge} onChange={handleSelectChange} className="appearance-none w-full bg-white border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
                         <option value="25">20+</option>
                         <option value="35">30+</option>
                         <option value="45">40+</option>
@@ -485,7 +457,7 @@ const CarRental = () => {
                     {/* Transmission */}
                     <div className="mt-4">
                         <label className="inline-flex items-center">
-                        <input type="checkbox" name="transmission" className="form-checkbox text-blue-500 border-gray-300 rounded-md focus:ring-blue-400" />
+                        <input type="checkbox" checked name="transmission" className="form-checkbox text-blue-500 border-gray-300 rounded-md focus:ring-blue-400" />
                         <span className="ml-2 text-gray-600 font-semibold text-sm">AUTO Transmission</span>
                         </label>
                     </div>
@@ -496,11 +468,20 @@ const CarRental = () => {
 
                 {/* Search Button */}
                 <div className="flex justify-end">
-                    <button className="flex max-w-48 items-center rounded-md bg-slate-800 py-2 px-6 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 mr-1.5 text-white" fill="currentColor">
-                        <path d="M135.2 117.4L109.1 192l293.8 0-26.1-74.6C372.3 104.6 360.2 96 346.6 96L165.4 96c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32l181.2 0c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2l0 144 0 48c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-48L96 400l0 48c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-48L0 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/>
-                        </svg>
-                        <span className="pl-2 font-semibold text-sm"> Search Car </span>
+                    <button disabled={loading}
+                     className="flex max-w-48 items-center rounded-md bg-slate-800 py-2 px-6 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="submit">
+                        
+                        {loading ? (
+                          <>
+                            <FontAwesomeIcon icon={faSpinner} className="animate-spin mr-2" />
+                            <span>Searching...</span>
+                          </>
+                        ) : (
+                          <> 
+                            <FontAwesomeIcon icon={faSearch} className='mr-2'/>
+                            Search Cars
+                          </>
+                        )}
                     </button>
                 </div>
             </div>
@@ -549,7 +530,7 @@ const CarRental = () => {
                         <span className="text-xs">Pickup Location</span>
                     </div>
                     <div className="px-2 py-1 text-sm font-semibold bg-gray-100 rounded-md">
-                        {currentCarDetail.pickupCity}
+                        {carDetail.pickupCity}
                     </div>
                     </div>
 
@@ -560,7 +541,7 @@ const CarRental = () => {
                         <span className="text-xs">Dropoff Location</span>
                         </div>
                         <div className="px-2 py-1 text-sm font-semibold bg-gray-100 rounded-md">
-                        {currentCarDetail.dropOffCity}
+                        {carDetail.dropOffCity}
                         </div>
                     </div>
 
@@ -571,9 +552,9 @@ const CarRental = () => {
                         <span className="font-semibold text-xs">Pickup Time</span>
                         </div>
                         <div className="flex justify-between items-center px-2 py-1 text-sm font-semibold bg-gray-100 rounded-md">
-                        <span className="text-gray-700">{currentCarDetail.pickupDate}</span>
+                        <span className="text-gray-700">{puDateValue}</span>
                         <div className="w-px bg-black h-4 mx-2"></div>
-                        <span className="text-gray-700">{currentCarDetail.pickupTime}</span>
+                        <span className="text-gray-700">{puTimeValue}</span>
                         </div>
                     </div>
 
@@ -584,21 +565,198 @@ const CarRental = () => {
                         <span className="font-semibold text-xs">Dropoff Time</span>
                         </div>
                         <div className="flex justify-between px-2 py-1 text-sm font-semibold bg-gray-100 rounded-md">
-                            <span className="text-gray-700">{currentCarDetail.dropOffDate}</span>
+                            <span className="text-gray-700">{doDateValue}</span>
                         <div className="w-px bg-black h-4 mx-2"></div>
-                            <span className="text-gray-700">{currentCarDetail.dropOffTime}</span>
+                            <span className="text-gray-700">{doTimeValue}</span>
                         </div>
                     </div>
                 </div>
 
-                <FilterSection orgDataFromAPI={orgDataFromAPI} currentCarDetail={currentCarDetail} activeFilters={activeFilters} extractCarOnFilter={extractCarOnFilter} priceFilter={priceFilter} reviewFilter={reviewFilter} typeFilter={typeFilter}/>
+                {newFilteredCarData.length > 0 && (
+                    <div>
+                    <button onClick={toggleFilterVisibility}
+                      className="md:hidden w-full p-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg mb-4 shadow-lg transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    >
+                      {isFilterVisible ? 'Hide Filters' : 'Show Filters'}
+                    </button>
+          
+                    {/* Filter Section Content */}
+                    <div id="filter-section"
+                        className={`w-full md:w-72 p-4 md:p-8 rounded-lg shadow-md bg-white transition-all duration-300 overflow-hidden ${
+                          isFilterVisible ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 md:max-h-screen md:opacity-100'
+                        }`}
+                      >
+                      <div className='flex justify-between items-center'>
+                        <h3 className='text-lg font-poppins font-semibold'> Filter </h3>
+                        <p className='text-blue-500 text-xs text-right font-poppins'> Clear all filter </p>
+                      </div>
+                      <hr className='my-5 border-t-1 border-gray-300'/>
+          
+                      {/* Price Filter */}
+                      <div className='space-y-1'>
+                        <h3 className='text-sm font-poppins font-semibold'> Price </h3>
+                        <div className='flex flex-col space-y-1'>
+                          <label className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <input type="checkbox" name="firstRange" checked={activeFilters.price === "200-300"} onChange={() => extractCarOnFilter("price", "200-300")}  />
+                              <span className="text-sm font-poppins ml-2"> $200 - $300</span>
+                            </div>
+                            <p className="text-xs font-poppins font-semibold">{priceFilter.first}</p>
+                          </label>
+          
+                          <label className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <input type="checkbox" name="secondRange" checked={activeFilters.price === "300-400"} onChange={() => extractCarOnFilter("price", "300-400")} />
+                              <span className="text-sm font-poppins ml-2"> $300 - $400</span>
+                            </div>
+                            <p className="text-xs font-poppins font-semibold">{priceFilter.second}</p>
+                          </label>
+          
+                          <label className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <input type="checkbox" name="thirdRange" checked={activeFilters.price === "400-500"} onChange={() => extractCarOnFilter("price", "400-500")} />
+                              <span className="text-sm font-poppins ml-2"> $400 - $500</span>
+                            </div>
+                            <p className="text-xs font-poppins font-semibold">{priceFilter.third}</p>
+                          </label>
+          
+                          <label className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="fourthRange"
+                                checked={activeFilters.price === "500-600"}
+                                onChange={() => extractCarOnFilter("price", "500-600")}
+                              />
+                              <span className="text-sm font-poppins ml-2"> $500 - $600</span>
+                            </div>
+                            <p className="text-xs font-poppins font-semibold">{priceFilter.fourth}</p>
+                          </label>
+          
+                          <label className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="fifthRange"
+                                checked={activeFilters.price === "600"}
+                                onChange={() => extractCarOnFilter("price", "600")}
+                              />
+                              <span className="text-sm font-poppins ml-2">$600+</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{priceFilter.fifth}</p>
+                          </label>
+                        </div>
+                      </div>
+                      <hr className='my-5 border-t-1 border-gray-300'/>
+          
+                      {/* Review Score Filter */}
+                      <div className='space-y-1'>
+                        <h3 className='text-sm font-poppins font-semibold'> Review Score </h3>
+                        <div className='flex flex-col space-y-1'>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input type="checkbox" name="super" checked={activeFilters.rating === "super"} onChange={() => extractCarOnFilter("rating", "super")} />
+                              <span className="text-sm font-poppins ml-2">Super : 9+</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{reviewFilter.super}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input type="checkbox" name="vgood" checked={activeFilters.rating === "vgood"} onChange={() => extractCarOnFilter("rating", "vgood")} />
+                              <span className="text-sm font-poppins ml-2">Very good : 8+</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{reviewFilter.vgood}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="good"
+                                checked={activeFilters.rating === "good"}
+                                onChange={() => extractCarOnFilter("rating", "good")} 
+                              />
+                              <span className="text-sm font-poppins ml-2">Good : 7+</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{reviewFilter.good}</p>
+                          </label>
+                        </div>
+                      </div>
+                      <hr className='my-5 border-t-1 border-gray-300'/>
+          
+                      {/* Car Categories Filter */}
+                      <div className='space-y-1'>
+                        <h3 className='text-sm font-poppins font-semibold'> Car Categories </h3>
+                        <div className='flex flex-col space-y-1'>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="mini"
+                                checked={activeFilters.type === "Mini"}
+                                onChange={() => extractCarOnFilter("type", "Mini")} 
+                              />
+                              <span className="text-sm font-poppins ml-2">Mini</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{typeFilter.Mini}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="economy"
+                                checked={activeFilters.type === "Economy"}
+                                onChange={() => extractCarOnFilter("type", "Economy")} 
+                              />
+                              <span className="text-sm font-poppins ml-2">Economy</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{typeFilter.Economy}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="compact"
+                                checked={activeFilters.type === "Compact"}
+                                onChange={() => extractCarOnFilter("type", "Compact")}
+                              />
+                              <span className="text-sm font-poppins ml-2">Compact</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{typeFilter.Compact}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input type="checkbox" name="Intermediate" checked={activeFilters.type === "Intermediate"} onChange={() => extractCarOnFilter("type", "Intermediate")} />
+                              <span className="text-sm font-poppins ml-2">Intermediate</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{typeFilter.Intermediate}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input type="checkbox" name="standard" checked={activeFilters.type === "Standard"} onChange={() => extractCarOnFilter("type", "Standard")}  />
+                              <span className="text-sm font-poppins ml-2">Standard</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{typeFilter.Standard}</p>
+                          </label>
+                          <label className="flex items-center justify-between"> 
+                            <div className="flex items-center">
+                              <input type="checkbox" name="full_size" checked={activeFilters.type === "Full-size"} onChange={() => extractCarOnFilter("type", "Full-size")}  />
+                              <span className="text-sm font-poppins ml-2">Full-size</span>
+                            </div>
+                            <p className="text-xs font-semibold font-poppins">{typeFilter.Full_size}</p>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
+                
             </div>
 
             {/* Car Result Display */}
             <div className="space-y-4 flex-1">
                 <AdsScroller />
-                <CarDetail className="w-full" data={newFilteredCarData} fromDate={carDetail.pickupDate} toDate={carDetail.dropOffDate} dayDifference={dayDifference}/>
+                <CarDetail className="w-full" userData={userData} data={newFilteredCarData} fromDate={carDetail.pickupDate} toDate={carDetail.dropOffDate} dayDifference={dayDifference}/>
             </div>
         </div>
 
@@ -606,7 +764,6 @@ const CarRental = () => {
             <SubscriptionSection />
             <Footer />
         </div>
-
             
         </>
     )

@@ -1,13 +1,59 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { fetchUser } from '../../api/CarService';
 
 const PaymentSuccess = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
 
     const carName = queryParams.get('car_name');
     const hotelName = queryParams.get('hotel_name');
     const cruiseName = queryParams.get('cruise_name');
+    const user_id = queryParams.get('user_id');
+
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        if (user_id) {
+            fetchUser(user_id).then((data) => {
+                if (data) {
+                    setUserData(data);
+                }
+            }).catch(error => {
+                console.error("Error fetching user data:", error);
+            });
+        }
+    }, [user_id]);
+
+    const searchData1 = {
+        original: {
+          userData,
+        },
+      };
+
+      const searchData2 = {
+        userData: {
+            userData
+        }
+      }
+
+    useEffect(() => {
+        console.log("userData for hotel: ", searchData2);
+    }, [searchData2]);
+
+    const handleGoBackHotel = () => {
+        navigate("/hotel", { state: searchData2 });
+    }
+
+    const handleGoBackCruise = () => {
+        navigate("/cruises", {state: searchData1});
+    }
+
+    const handleGoBackCar = () => {
+        navigate("/car_rental", {state: searchData1})
+    }
 
   return (
         <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
@@ -33,22 +79,22 @@ const PaymentSuccess = () => {
                     </p>
                 </div>
                 {carName ? (
-                    <div className="mt-8 text-center">
-                        <a href="/car_rental" className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600">
+                    <div className="mt-8 text-center" onClick={handleGoBackCar}>
+                        <p className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600" >
                         Back to Home
-                        </a>
+                        </p>
                     </div>
                 ) : hotelName ? (
-                    <div className="mt-8 text-center">
-                        <a href="/hotel" className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600" >
+                    <div className="mt-8 text-center" onClick={handleGoBackHotel}>
+                        <p className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600" >
                         Back to Home
-                        </a>
+                        </p>
                     </div>
                 ) : cruiseName ? (
-                    <div className="mt-8 text-center">
-                        <a href="/cruises" className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600" >
+                    <div className="mt-8 text-center" onClick={handleGoBackCruise}>
+                        <p className="inline-block px-6 py-2 text-lg font-medium text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600" >
                         Back to Home
-                        </a>
+                        </p>
                     </div>
                 ) : null}
                 
