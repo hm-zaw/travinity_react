@@ -9,6 +9,7 @@ import SubscriptionSection from "./SubscriptionSection";
 import TestimonialsSection from "./TestimonialsSection";
 import RecommendedSection from "./RecommendedSection";
 import NavBar from "./NavBar";
+import UserChatWindow from "../Chat/UserChatWindow";
 import HeroSection from "./HeroSection";
 import {
   faPlaneDeparture,
@@ -29,7 +30,7 @@ const UserDashboard = () => {
   const userData = location.state;
 
   useEffect(() => {
-    console.log("The user data is ", userData.user);
+    console.log("The user data in main is ", userData.user);
   }, [userData])
 
   return (
@@ -41,6 +42,7 @@ const UserDashboard = () => {
       <BlogSection />
       <SubscriptionSection />
       <Footer />
+      <UserChatWindow userId={userData.user.id} />
     </div>   
     
   )
