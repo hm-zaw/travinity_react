@@ -1,9 +1,7 @@
 import React from 'react'
 import CardGrids from './CardGrids'
 
-const Attracts_main = () => {
-
-  
+const Attracts_main = (user) => {
   return (
     <>
         <div id='main_title' className='font-poppins m-10 text-center'>
@@ -11,7 +9,7 @@ const Attracts_main = () => {
             <p className='text-4xl font-bold mb-5'> Discover Hidden Treasures </p>
             <p className='w-3/4 m-auto'> Embark on captivating journeys through our tales. Ignite your passion for exploration and uncover the world's most enchanting destinations. </p>
         </div>
-        <CardGrids />
+        <CardGrids user={user.user.user}/>
     </>
   )
 }

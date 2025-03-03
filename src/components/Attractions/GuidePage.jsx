@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { getFeedback, uploadPhotos } from "../../api/CityService";
 import { saveFeedback } from "../../api/CityService";
+import SubscriptionSection from "../Dashboard/SubscriptionSection";
+import Footer from "../Dashboard/Footer";
 
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,6 +28,7 @@ import worldData from "../../data/world.json";
 import Blog from "../Blog";
 import { ToastContainer, toast } from 'react-toastify';
 import Drawer from '@mui/material/Drawer';
+import { useLocation } from "react-router-dom";
 
 export function BentoGridDemo() {
   return (
@@ -45,6 +48,13 @@ export function BentoGridDemo() {
 }
 
 const GuidePage = () => {
+  const location = useLocation();
+  const [userData, setUserData] = useState(location.state || {});
+
+  useEffect(() => {
+    console.log("user in gp: ", userData.userData)
+  }, [userData])
+
   const { countryName } = useParams();
   const [images, setImages] = useState([]);
   const [attractionImg, setAttractionImg] = useState([]);
@@ -174,8 +184,6 @@ const GuidePage = () => {
         },
       ]);
     }
-    console.log(countryDetails);
-
   }, [countryDetails]);
 
   const toggleFaq = (index) => {
@@ -205,7 +213,7 @@ const GuidePage = () => {
 
   return (
     <>
-      {/* <Header />
+      {/* <Header user={userData}/>
       <HeaderBg title={`Travinity > Attractions > ${countryName}`}
         style={"text-sm font-semibold"}
         images={images}
@@ -430,374 +438,376 @@ const GuidePage = () => {
           </div>
         </>
       )}
-
-      <div className="my-40 mx-16">
-        {countryDetails && (
-          <GridBackgroundDemo countryDetails={countryDetails}/>
-        )}
+      <div className={'mt-[300px]'}>
+          <SubscriptionSection />
+          <Footer />
       </div>
 
-      
+      {/* <div className="my-40 mx-16">
+        {countryDetails && (
+          <GridBackgroundDemo countryDetails={countryDetails} user={userData.userData}/>
+        )}
+      </div> */}
     </>
   );
 };
 
-export function GridBackgroundDemo(countryDetails) {
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [countryId, setCountryId] = useState(countryDetails?.countryDetails?.country_id);
-  const [selectedFeedback, setSelectedFeedback] = useState(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+// export function GridBackgroundDemo({ countryDetails, user }) {
+//   const [feedbacks, setFeedbacks] = useState([]);
+//   const [countryId, setCountryId] = useState(countryDetails?.country_id);
+//   const [selectedFeedback, setSelectedFeedback] = useState(null);
+//   const [drawerOpen, setDrawerOpen] = useState(false);
+//   const [userData, setUserData] = useState(user);
 
-  const getFeedbackData = async (countryId) => {
-    try {
-      const { data } = await getFeedback(countryId);
-      setFeedbacks(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const getFeedbackData = async (countryId) => {
+//     try {
+//       const { data } = await getFeedback(countryId);
+//       setFeedbacks(data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
-  useEffect(() => {
-    if (countryId) {
-      getFeedbackData(countryId);
-    }
-  }, [countryId]);
+//   useEffect(() => {
+//     if (countryId) {
+//       getFeedbackData(countryId);
+//     }
+//     console.log("feedbacks are ", feedbacks)
+//   }, [countryId]);
 
-  const splitFeedbacksIntoColumns = (feedbacks, columns) => {
-    const columnSize = Math.ceil(feedbacks.length / columns);
-    return Array.from({ length: columns }, (_, i) =>
-      feedbacks.slice(i * columnSize, (i + 1) * columnSize)
-    );
-  };
+//   const splitFeedbacksIntoColumns = (feedbacks, columns) => {
+//     const columnSize = Math.ceil(feedbacks.length / columns);
+//     return Array.from({ length: columns }, (_, i) =>
+//       feedbacks.slice(i * columnSize, (i + 1) * columnSize)
+//     );
+//   };
 
-  const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-  };
+//   const shuffleArray = (array) => {
+//     return array.sort(() => Math.random() - 0.5);
+//   };
 
-  const getRandomFeedbacks = (feedbacks, count) => {
-    if (feedbacks.length > count) {
-      return shuffleArray(feedbacks).slice(0, count);
-    }
-    return feedbacks;
-  };
+//   const getRandomFeedbacks = (feedbacks, count) => {
+//     if (feedbacks.length > count) {
+//       return shuffleArray(feedbacks).slice(0, count);
+//     }
+//     return feedbacks;
+//   };
 
-  const selectedFeedbacks = useMemo(() => getRandomFeedbacks(feedbacks, 12), [feedbacks]);
-  const columns = splitFeedbacksIntoColumns(selectedFeedbacks, 4);
+//   const selectedFeedbacks = useMemo(() => getRandomFeedbacks(feedbacks, 8), [feedbacks]);
+//   const columns = splitFeedbacksIntoColumns(selectedFeedbacks, 4);
 
-  const imageStyles = [
-    [{ height: '300px' }, { height: '196px' }, { height: '219px' }],
-    [{ height: '233px' }, { height: '334px' }, { height: '148px' }],
-    [{ height: '331px' }, { height: '182px' }, { height: '202px' }],
-    [{ height: '165px' }, { height: '400px' }, { height: '150px' }],
-  ];
+//   const imageStyles = [
+//     [{ height: '300px' }, { height: '196px' }],
+//     [{ height: '233px' }, { height: '334px' }],
+//     [{ height: '331px' }, { height: '182px' }],
+//     [{ height: '165px' }, { height: '400px' }],
+//   ];
 
-  const handleImageClick = (feedback) => {
-    setSelectedFeedback(feedback);
-    setDrawerOpen(true);
-  };
+//   const handleImageClick = (feedback) => {
+//     setSelectedFeedback(feedback);
+//     setDrawerOpen(true);
+//   };
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
-  };
+//   const closeDrawer = () => {
+//     setDrawerOpen(false);
+//   };
 
-  return (
-    <div className="h-full w-full dark:bg-black bg-white dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative text-center">
-      <h1 className="bg-gradient-to-r font-extrabold text-xl mt-14 z-30 font-mono inline-block text-transparent bg-clip-text from-blue-800 to-pink-900">
-        03 / Through Travellers' Eye
-      </h1>
+//   return (
+//     <div className="h-full w-full dark:bg-black bg-white dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative text-center">
+//       <h1 className="bg-gradient-to-r font-extrabold text-xl mt-14 z-30 font-mono inline-block text-transparent bg-clip-text from-blue-800 to-pink-900">
+//         03 / Through Travellers' Eye
+//       </h1>
 
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] z-10"></div>
+//       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] z-10"></div>
 
-      <p className="text-3xl sm:text-6xl font-poppins font-semibold relative z-30 bg-clip-text text-transparent bg-gradient-to-t from-neutral-500 to-neutral-800 py-4">
-        Travellers' Moments
-      </p>
+//       <p className="text-3xl sm:text-6xl font-poppins font-semibold relative z-30 bg-clip-text text-transparent bg-gradient-to-t from-neutral-500 to-neutral-800 py-4">
+//         Travellers' Moments
+//       </p>
 
-      <MovingBorderDemo countryDetails={countryDetails} />
+//       <MovingBorderDemo countryDetails={countryDetails} user={userData} />
 
-      {/* Gallery grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 z-20 relative mx-16 mt-16">
-        {columns.map((column, columnIndex) => (
-          <div key={columnIndex} className="grid gap-4">
-            {column.map((feedback, feedbackIndex) => (
-              <div key={feedback.id} className="relative group cursor-pointer" onClick={() => handleImageClick(feedback)}>
-                <img
-                  className="rounded-lg"
-                  style={{
-                    width: '239px',
-                    ...imageStyles[columnIndex][feedbackIndex],
-                    objectFit: 'cover',
-                  }}
-                  src={feedback.photoUrl}
-                  alt={feedback.caption}
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
-                  <p className="text-white text-sm font-semibold">{feedback.caption}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+//       {/* Gallery grid */}
+//       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 z-20 relative mx-16 mt-16">
+//         {columns.map((column, columnIndex) => (
+//           <div key={columnIndex} className="grid gap-4">
+//             {column.map((feedback, feedbackIndex) => (
+//               <div key={feedback.id} className="relative group cursor-pointer" onClick={() => handleImageClick(feedback)}>
+//                 <img
+//                   className="rounded-lg"
+//                   style={{
+//                     width: '239px',
+//                     ...imageStyles[columnIndex][feedbackIndex],
+//                     objectFit: 'cover',
+//                   }}
+//                   src={feedback.photoUrl}
+//                   alt={feedback.caption}
+//                 />
+//                 <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
+//                   <p className="text-white text-sm font-semibold">{feedback.caption}</p>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         ))}
+//       </div>
 
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={closeDrawer}
-        PaperProps={{
-          style: {
-            transition: 'transform 1s ease-in-out',
-            transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
-          },
-        }}
-      >
-        <div style={{ width: 400, padding: 20, position: 'relative' }}>
-          {selectedFeedback && (
-            <>
-              <img
-                src={selectedFeedback.photoUrl}
-                alt={selectedFeedback.caption}
-                style={{ width: '100%', borderRadius: '8px' }}
-              />
-              <h2 className="text-gray-700 font-bold text-xl font-poppins mt-6">
-                {selectedFeedback.caption}
-              </h2>
-              <p className="text-gray-700 font-poppins mt-4 text-xs mb-40">
-                {selectedFeedback.body}
-              </p>
-            </>
-          )}
-          <button onClick={closeDrawer} style={{ position: 'absolute', left: 20, bottom: 20 }}>
-            Close
-          </button>
-        </div>
-      </Drawer>
+//       <Drawer
+//         anchor="right"
+//         open={drawerOpen}
+//         onClose={closeDrawer}
+//         PaperProps={{
+//           style: {
+//             transition: 'transform 1s ease-in-out',
+//             transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
+//           },
+//         }}
+//       >
+//         <div style={{ width: 400, padding: 20, position: 'relative' }}>
+//           {selectedFeedback && (
+//             <>
+//               <img
+//                 src={selectedFeedback.photoUrl}
+//                 alt={selectedFeedback.caption}
+//                 style={{ width: '100%', borderRadius: '8px' }}
+//               />
+//               <h2 className="text-gray-700 font-bold text-xl font-poppins mt-6">
+//                 {selectedFeedback.caption}
+//               </h2>
+//               <p className="text-gray-700 font-poppins mt-4 text-xs mb-40">
+//                 {selectedFeedback.body}
+//               </p>
+//             </>
+//           )}
+//           <button onClick={closeDrawer} style={{ position: 'absolute', left: 20, bottom: 20 }}>
+//             Close
+//           </button>
+//         </div>
+//       </Drawer>
 
-      {feedbacks && (
-        <h1> {countryId} </h1>
-      )}
-    </div>
-  );
-}
+//       {feedbacks && (
+//         <h1> {countryId} </h1>
+//       )}
+//     </div>
+//   );
+// }
 
-export function MovingBorderDemo(countryDetails) {
-  const country_id = countryDetails?.countryDetails?.countryDetails?.country_id;
-  const dialogCard = useRef(null);
-  const fileInputRef = useRef(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
-  const [file, setFile] = useState(null);
-  const [values, setValues] = useState({
-    caption: "",
-    body: "",
-    user: {
-      id: 1,
-    },
-    countryId: country_id,
-  });
+// export function MovingBorderDemo({ countryDetails, user }) {
+//   const [userData, setUserData] = useState(user);
+//   const country_id = countryDetails?.country_id;
+//   const dialogCard = useRef(null);
+//   const fileInputRef = useRef(null);
+//   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+//   const [file, setFile] = useState(null);
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [drawerContent, setDrawerContent] = useState({});
+//   const [values, setValues] = useState({
+//     caption: "",
+//     body: "",
+//     user: {
+//       id: userData.id,
+//     },
+//     countryId: country_id,
+//   });
 
-  const onChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-    console.log(values);
-  };
+//   const [drawerOpen, setDrawerOpen] = useState(false);
+//   const [drawerContent, setDrawerContent] = useState({});
 
-  const toastConfig = {
-    autoClose: 1500,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  };
+//   const onChange = (event) => {
+//     setValues({
+//       ...values,
+//       [event.target.name]: event.target.value,
+//     });
+//     console.log(values);
+//   };
 
-  const toastSuccess = (message) => {
-    toast.success(message, toastConfig);
-  };
-  const toastError = (message) => {
-    toast.error(message, toastConfig);
-  };
+//   const toastConfig = {
+//     autoClose: 1500,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "light",
+//   };
 
-  const toggleModal = (flag) => {
-    if (flag) {
-      dialogCard.current.showModal();
-    } else {
-      dialogCard.current.close();
-      setImagePreviewUrl(null);
-      setValues({
-        caption: "",
-        body: "",
-        user: {
-          id: 1,
-        },
-        countryId: country?.country?.country?.country_id,
-      });
-    }
-  };
+//   const toastSuccess = (message) => {
+//     toast.success(message, toastConfig);
+//   };
+//   const toastError = (message) => {
+//     toast.error(message, toastConfig);
+//   };
 
-  const handleFileChange = (event) => {
-    console.log("File input changed");
-    const file = event.target.files[0];
+//   const toggleModal = (flag) => {
+//     if (flag) {
+//       dialogCard.current.showModal();
+//     } else {
+//       dialogCard.current.close();
+//       setImagePreviewUrl(null);
+//       setValues({
+//         caption: "",
+//         body: "",
+//         user: {
+//           id: 1,
+//         },
+//         countryId: country?.country?.country?.country_id,
+//       });
+//     }
+//   };
 
-    if (!file) {
-      console.log("No file selected");
-      return;
-    }
+//   const handleFileChange = (event) => {
+//     console.log("File input changed");
+//     const file = event.target.files[0];
 
-    const maxSize = 15 * 1024 * 1024;
+//     if (!file) {
+//       console.log("No file selected");
+//       return;
+//     }
 
-    if (!file.type.startsWith("image/")) {
-      console.log("File is not an image:", file.name);
-      toastError(`File \"${file.name}\" is not an image`);
-      fileInputRef.current.value = "";
-      return;
-    }
+//     const maxSize = 15 * 1024 * 1024;
 
-    if (file.size > maxSize) {
-      console.log("File size is too large:", file.name);
-      toastError(`Image \"${file.name}\" size is larger than 15MB`);
-      fileInputRef.current.value = "";
-      return;
-    }
+//     if (!file.type.startsWith("image/")) {
+//       console.log("File is not an image:", file.name);
+//       toastError(`File \"${file.name}\" is not an image`);
+//       fileInputRef.current.value = "";
+//       return;
+//     }
 
-    const imageUrl = URL.createObjectURL(file);
-    setImagePreviewUrl(imageUrl);
-    setFile(file);
+//     if (file.size > maxSize) {
+//       console.log("File size is too large:", file.name);
+//       toastError(`Image \"${file.name}\" size is larger than 15MB`);
+//       fileInputRef.current.value = "";
+//       return;
+//     }
+
+//     const imageUrl = URL.createObjectURL(file);
+//     setImagePreviewUrl(imageUrl);
+//     setFile(file);
     
-    toastSuccess("Image uploaded successfully");
-  };
+//     toastSuccess("Image uploaded successfully");
+//   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    console.log("Submitting values:", values);
-    try {
-      const { data } = await saveFeedback(values);
+//   const handleFormSubmit = async (event) => {
+//     event.preventDefault();
+//     try {
+//       const { data } = await saveFeedback(values);
 
-      console.log(file.name);
+//       console.log(file.name);
 
-      const formData = new FormData();
-      formData.append("id", data.id);
-      formData.append("file", file, file.name);
+//       const formData = new FormData();
+//       formData.append("id", data.id);
+//       formData.append("file", file, file.name);
 
-      console.log("The formdata is ", formData);
+//       console.log("The formdata is ", formData);
 
-      const { data: filePaths } = await uploadPhotos(formData);
-      console.log("Uploaded file paths:", filePaths);
+//       const { data: filePaths } = await uploadPhotos(formData);
+//       console.log("Uploaded file paths:", filePaths);
 
-      toastSuccess("Your moment has been successfully saved!");
-    } catch (error) {
-      console.error("Error:", error.message);
-      toastError(error.message);
-    }
+//       toastSuccess("Your moment has been successfully saved!");
+//     } catch (error) {
+//       console.error("Error:", error.message);
+//       toastError(error.message);
+//     }
 
-    toggleModal(false);
-  };
+//     toggleModal(false);
+//   };
 
-  const handleImageClick = (image, caption, body) => {
-    setDrawerContent({ image, caption, body });
-    setDrawerOpen(true);
-  };
+//   const handleImageClick = (image, caption, body) => {
+//     setDrawerContent({ image, caption, body });
+//     setDrawerOpen(true);
+//   };
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
-  };
+//   const closeDrawer = () => {
+//     setDrawerOpen(false);
+//   };
 
-  return (
-    <div>
-      <Button onClick={() => toggleModal(true)} borderRadius="1.75rem" className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 hover:bg-sky-200 duration-300 transition-colors">
-        Click to share your moments
-      </Button>
+//   return (
+//     <div>
+//       <Button onClick={() => toggleModal(true)} borderRadius="1.75rem" className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 hover:bg-sky-200 duration-300 transition-colors">
+//         Click to share your moments
+//       </Button>
 
-      <dialog ref={dialogCard} className="bg-gray-50 w-[90%] p-6 rounded-lg shadow-lg backdrop:bg-black backdrop:opacity-50 text-left" >
-        <div className="px-6 py-6 space-y-4">
-          <p> Trip ≻ Destinations ≻ Moments </p>
-          <p className="text-xl font-semibold font-poppins pt-4"> Add A Trip Moment </p>
+//       <dialog ref={dialogCard} className="bg-gray-50 w-[90%] p-6 rounded-lg shadow-lg backdrop:bg-black backdrop:opacity-50 text-left" >
+//         <div className="px-6 py-6 space-y-4">
+//           <p> Trip ≻ Destinations ≻ Moments </p>
+//           <p className="text-xl font-semibold font-poppins pt-4"> Add A Trip Moment </p>
 
-          <form onSubmit={handleFormSubmit} className="space-y-4" encType="multipart/form-data">
-            <p
-              onMouseEnter={() => setTooltipVisible(true)}
-              onMouseLeave={() => setTooltipVisible(false)}
-              className="relative inline-flex items-center cursor-pointer"
-            >
-              Share your photos {country_id} <i className="fa-solid fa-circle-question pl-3" style={{ color: "#4d4c47" }} />
-            </p>
+//           <form onSubmit={handleFormSubmit} className="space-y-4" encType="multipart/form-data">
+//             <p
+//               onMouseEnter={() => setTooltipVisible(true)}
+//               onMouseLeave={() => setTooltipVisible(false)}
+//               className="relative inline-flex items-center cursor-pointer"
+//             >
+//               Share your photos {country_id} <i className="fa-solid fa-circle-question pl-3" style={{ color: "#4d4c47" }} />
+//             </p>
 
-            <div className="flex flex-row gap-4">
-              <div className="rounded-md border border-indigo-500 bg-gray-50 p-4 shadow-md w-36 h-32 flex items-center justify-center">
-                <label htmlFor="upload" className="flex flex-col items-center gap-2 cursor-pointer" >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 fill-white stroke-indigo-500" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span className="text-gray-600 font-medium text-xs">Upload file</span>
-                </label>
-                <input id="upload" type="file" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
-              </div>
+//             <div className="flex flex-row gap-4">
+//               <div className="rounded-md border border-indigo-500 bg-gray-50 p-4 shadow-md w-36 h-32 flex items-center justify-center">
+//                 <label htmlFor="upload" className="flex flex-col items-center gap-2 cursor-pointer" >
+//                   <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 fill-white stroke-indigo-500" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" >
+//                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+//                   </svg>
+//                   <span className="text-gray-600 font-medium text-xs">Upload file</span>
+//                 </label>
+//                 <input id="upload" type="file" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
+//               </div>
 
-              {imagePreviewUrl && (
-                <div className="relative rounded-md border border-indigo-500 bg-gray-50 p-4 shadow-md w-36 h-32 flex items-center justify-center">
-                  <button onClick={() => {
-                      setImagePreviewUrl(null);
-                      fileInputRef.current.value = "";
-                    }}
-                    className="absolute -top-2 -right-2 rounded-full w-6 h-6 flex items-center justify-center"
-                  >
-                    <i className="fa-solid fa-circle-xmark text-xl"></i>
-                  </button>
-                  <img src={imagePreviewUrl} alt="Preview" className="max-w-full max-h-full rounded-lg" />
-                </div>
-              )}
-            </div>
+//               {imagePreviewUrl && (
+//                 <div className="relative rounded-md border border-indigo-500 bg-gray-50 p-4 shadow-md w-36 h-32 flex items-center justify-center">
+//                   <button onClick={() => {
+//                       setImagePreviewUrl(null);
+//                       fileInputRef.current.value = "";
+//                     }}
+//                     className="absolute -top-2 -right-2 rounded-full w-6 h-6 flex items-center justify-center"
+//                   >
+//                     <i className="fa-solid fa-circle-xmark text-xl"></i>
+//                   </button>
+//                   <img src={imagePreviewUrl} alt="Preview" className="max-w-full max-h-full rounded-lg" />
+//                 </div>
+//               )}
+//             </div>
 
-            <div className="space-y-3">
-              <label className="relative items-center block mt-10"> Add a Caption </label>
-              <input type="text" name="caption" value={values.caption} onChange={onChange} placeholder="Add your unique captions" className="border-b border-gray-300 bg-transparent text-base w-full outline-none focus:ring-0" />
-            </div>
+//             <div className="space-y-3">
+//               <label className="relative items-center block mt-10"> Add a Caption </label>
+//               <input type="text" name="caption" value={values.caption} onChange={onChange} placeholder="Add your unique captions" className="border-b border-gray-300 bg-transparent text-base w-full outline-none focus:ring-0" />
+//             </div>
 
-            <div className="space-y-3">
-              <label className="relative items-center block mt-10">
-                Share your unique experience with us
-              </label>
-              <textarea name="body" value={values.body} onChange={onChange} id="hs-textarea-autoheight-to-destroy" className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600" ></textarea>
-            </div>
+//             <div className="space-y-3">
+//               <label className="relative items-center block mt-10">
+//                 Share your unique experience with us
+//               </label>
+//               <textarea name="body" value={values.body} onChange={onChange} id="hs-textarea-autoheight-to-destroy" className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600" ></textarea>
+//             </div>
 
-            <div className="flex flex-row space-x-4 justify-end mt-8">
-              <button type="button" onClick={() => toggleModal(false)} className="px-4 py-2 rounded-xl border border-neutral-600 text-black bg-white hover:bg-gray-100 transition duration-200" >
-                Cancel
-              </button>
-              <button type="submit" className="px-4 py-2 rounded-xl border border-neutral-600 text-white bg-gray-500 hover:bg-gray-600 transition duration-200" >
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-        <ToastContainer />
-      </dialog>
+//             <div className="flex flex-row space-x-4 justify-end mt-8">
+//               <button type="button" onClick={() => toggleModal(false)} className="px-4 py-2 rounded-xl border border-neutral-600 text-black bg-white hover:bg-gray-100 transition duration-200" >
+//                 Cancel
+//               </button>
+//               <button type="submit" className="px-4 py-2 rounded-xl border border-neutral-600 text-white bg-gray-500 hover:bg-gray-600 transition duration-200" >
+//                 Submit
+//               </button>
+//             </div>
+//           </form>
+//         </div>
+//         <ToastContainer />
+//       </dialog>
 
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={closeDrawer}
-        PaperProps={{
-          style: {
-            transition: 'transform 0.3s ease-in-out',
-            transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
-          },
-        }}
-      >
-        <div style={{ width: 300, padding: 20 }}>
-          <Button onClick={closeDrawer} style={{ float: 'right' }}>Close</Button>
-          <img src={drawerContent.image} alt={drawerContent.caption} style={{ width: '100%', borderRadius: '8px' }} />
-          <h2>{drawerContent.caption}</h2>
-          <p>{drawerContent.body}</p>
-        </div>
-      </Drawer>
-    </div>
-  );
-}
+//       <Drawer anchor="right" open={drawerOpen} onClose={closeDrawer}
+//         PaperProps={{
+//           style: {
+//             transition: 'transform 0.3s ease-in-out',
+//             transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
+//           },
+//         }}
+//       >
+//         <div style={{ width: 300, padding: 20 }}>
+//           <Button onClick={closeDrawer} style={{ float: 'right' }}>Close</Button>
+//           <img src={drawerContent.image} alt={drawerContent.caption} style={{ width: '100%', borderRadius: '8px' }} />
+//           <h2>{drawerContent.caption}</h2>
+//           <p>{drawerContent.body}</p>
+//         </div>
+//       </Drawer>
+//     </div>
+//   );
+// }
 
 // Sidebar component
 const Sidebar = ({ feedback, onClose }) => (

@@ -11,19 +11,7 @@ import RecommendedSection from "./RecommendedSection";
 import NavBar from "./NavBar";
 import UserChatWindow from "../Chat/UserChatWindow";
 import HeroSection from "./HeroSection";
-import {
-  faPlaneDeparture,
-  faPlaneArrival,
-  faClock,
-  faChair,
-  faExchangeAlt,
-  faDollarSign,
-  faCalendarAlt,
-  faUser,
-  faSuitcase,
-  faBriefcase,
-  faSpinner,
-} from '@fortawesome/free-solid-svg-icons';
+import Attracts_main from "../Attractions/attracts_main";
 
 const UserDashboard = () => {
   const location = useLocation();
@@ -39,6 +27,7 @@ const UserDashboard = () => {
       <HeroSection user={userData}/>
       <RecommendedSection />
       <TestimonialsSection />
+      <Attracts_main user={userData}/>
       <BlogSection />
       <SubscriptionSection />
       <Footer />

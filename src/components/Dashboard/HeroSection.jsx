@@ -2,19 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import vdo from "/vdo/vdo.mp4";
-import {
-  faPlaneDeparture,
-  faPlaneArrival,
-  faClock,
-  faChair,
-  faExchangeAlt,
-  faDollarSign,
-  faCalendarAlt,
-  faUser,
-  faSuitcase,
-  faBriefcase,
-  faSpinner,
-} from '@fortawesome/free-solid-svg-icons';
 
 const HeroSection = (user) => {
   const [userId, setUserId] = useState(user.user.user.id);
@@ -143,9 +130,6 @@ const HeroSection = (user) => {
     e.preventDefault();
     navigate('/hotel', { state: dataCarry });
   }
-  useEffect(() => {
-    console.log(dataCarry);
-  }, [dataCarry])
 
   /////////////////////////////////////////////////////////////
 
@@ -243,8 +227,7 @@ const HeroSection = (user) => {
     { name: "Hotels & Homes", icon: <i class="fa-regular fa-hotel"></i> },
     { name: "Flights", icon: <i class="fa-regular  fa-plane"></i> },
     { name: "Cruises", icon: <i class="fa-regular  fa-ship"></i> },
-    { name: "Cars", icon: <i class="fa-regular  fa-car-side"></i> },
-    { name: "Attractions & Tours", icon: <i class="fa-regular  fa-ferris-wheel"></i> }
+    { name: "Cars", icon: <i class="fa-regular  fa-car-side"></i> }
   ];
 
   // Render the appropriate search form based on the active tab
@@ -626,7 +609,7 @@ const HeroSection = (user) => {
           {tabs.map((tab) => (
             <button
               key={tab.name}
-              className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 rounded-full text-[15px] sm:text-[17px] transition ${
+              className={`flex items-center gap-2 sm:gap-3 lg:px-10 sm:px-5 py-2 rounded-full text-[15px] sm:text-[17px] transition ${
                 activeTab === tab.name
                   ? "bg-yellow-500 text-gray-900 shadow-lg"
                   : "bg-gray-900 text-white hover:bg-yellow-500 hover:text-gray-900"

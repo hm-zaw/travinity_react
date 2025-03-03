@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../../index.css";
 import worldData from "../../data/world.json";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const CardGrids = () => {
+const CardGrids = (user) => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(user.user);
   const getRandomCountries = (countries) => {
     const shuffled = [...countries].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 7);
@@ -67,7 +70,13 @@ const CardGrids = () => {
             const backgroundUrl = images[country.country_name];
 
             return (
-              <Link to={`/attractions/${country.country_name}`} key={index} href="#" className="group relative block w-72 h-72 sm:h-96 lg:h-[380px] mx-4 mt-4 overflow-hidden rounded-xl shadow-lg transition-transform transform hover:scale-105" >
+              <div key={index} href="#" 
+                onClick={() =>
+                  navigate(`/attractions/${country.country_name}`, {
+                    state: { userData },
+                  })
+                }
+                className="group relative block w-72 h-72 sm:h-96 lg:h-[380px] mx-4 mt-4 overflow-hidden rounded-xl shadow-lg transition-transform transform hover:scale-105" >
                 <div className="absolute inset-0 bg-cover bg-center transition-opacity duration-500 group-hover:opacity-80"  style={{ backgroundImage: `url(${backgroundUrl})` }} ></div>
 
                 <div className="absolute inset-0 bg-black bg-opacity-40"></div>
@@ -82,14 +91,14 @@ const CardGrids = () => {
                   </div>
 
                   <p className="mt-4 pl-6 text-sm sm:text-base text-white">
-                    {truncateText(country.history, 8)}
+                    {truncateText(country.cities["0"].textual.history["0"], 8)}
                   </p>
 
                   <p className="mt-6 pl-6 text-white font-bold underline cursor-pointer">
                     Read more
                   </p>
                 </div>
-              </Link>
+              </div>
             );
           })}
 

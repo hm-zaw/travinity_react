@@ -1,5 +1,6 @@
 import './index.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import "jquery-ui/ui/widgets/autocomplete";
 import CarRental from './components/Car_Rental/CarRental';
 import CarView from './components/Car_Rental/CarView';
@@ -14,9 +15,26 @@ import CruiseBooking from './components/Cruise/CruiseBooking';
 import MyBooking from './components/Dashboard/MyBooking';
 import LoginForm from './components/Registration/LoginForm';
 import RegisterForm from './components/Registration/RegisterForm';
-import AdminDashboard from './components/Chat/AdminDashboard';
+import SettingsPage from './components/Chat/SettingsPage';
+import ProfilePage from './components/Chat/ProfilePage';
+import HomePage from './components/Chat/HomePage';
+import SignUpPage from './components/Chat/SignUpPage';
+import LoginPage from './components/Chat/LoginPage';
+import { useAuthStore } from './components/Chat/store/useAuthStore';
+import { useThemeStore } from './components/Chat/store/useThemeStore';
 
 function App() {
+
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
+  const { theme } = useThemeStore();
+
+  console.log({ onlineUsers });
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log({ authUser });
 
   return (
     <>
@@ -34,7 +52,7 @@ function App() {
           <Route path='/dashboard' element={< UserDashboard />} />
           <Route path='/hotel' element={ <Hotel /> }></Route>
           <Route path='/flight' element={ <Flight />}> </Route>
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/log_in" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
 
           {/* Akm Route */}
@@ -43,8 +61,11 @@ function App() {
           <Route path='/myBookings' element={ <MyBooking />} ></Route>
 
           {/* Kkh Route */}
-          <Route path="/admin" element={<AdminDashboard />} />
-
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/chat" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
+          <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/chat" />} />
+          <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/chat" />} />
+          <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
         </Routes>
       </main>
 
