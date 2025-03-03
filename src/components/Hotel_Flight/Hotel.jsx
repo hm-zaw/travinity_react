@@ -314,6 +314,12 @@ const Hotel = () => {
     }
   }
 
+  useEffect(() => {
+    if (!dataCarry.userData) {
+      navigate("/log_in", { replace: true });
+    }
+  }, [dataCarry.userData, navigate]);
+
   return (
     <>
       <Header user={dataCarry.userData}/>

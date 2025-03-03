@@ -53,8 +53,10 @@ function Cruise() {
   }, []);
 
   useEffect(() => {
-    console.log("The user data in cruise page: ", location.state.original.userData)
-  }, [])
+    if (!location.state.original.userData) {
+      navigate("/log_in", { replace: true });
+    } 
+  }, [location.state.original.userData, navigate]);
 
   const fetchImageFromPixabay = async (query) => {
     const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(query + ' cruise ship')}&image_type=photo`;

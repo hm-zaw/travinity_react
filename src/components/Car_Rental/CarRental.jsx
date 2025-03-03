@@ -21,6 +21,15 @@ const CarRental = () => {
     const [loading, setLoading] = useState(false);
     
     const [userData, setUserData] = useState(user);
+
+    useEffect(() => {
+      if (!userData) {
+        navigate("/log_in", { replace: true });
+      } else {
+        console.log("The user data in main is ", userData.user);
+      }
+    }, [userData, navigate]);
+    
     const [newFilteredCarData, setNewFilteredCarData] = useState([]);
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [dropoffSuggestions, setDropoffSuggestions] = useState([]);

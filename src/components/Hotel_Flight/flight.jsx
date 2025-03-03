@@ -64,6 +64,12 @@ const Flight = () => {
     console.log("The user id for flight is ",searchState.userId);
   }, [searchState.userId])
 
+  useEffect(() => {
+    if (!location.state?.original?.userData) {
+      navigate("/log_in", { replace: true });
+    }
+  }, [location.state?.original?.userData, navigate]);
+
   const fetchSuggestions = async (query, fieldType) => {
     if (!query || query.length < 3) {
       setSuggestions((prev) => ({ ...prev, [fieldType]: [] }));

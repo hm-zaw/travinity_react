@@ -51,7 +51,11 @@ function Header(user) {
           <a href="#" className="text-white hover:text-blue-300 mt-1">Help</a>
           <button className="px-3 py-1 bg-white/30 rounded hover:text-blue-700 hover:bg-white whitespace-nowrap">SGD</button>
           <button className="px-3 py-1 bg-white/30 rounded hover:text-blue-700 hover:bg-white whitespace-nowrap">Find Booking</button>
-          <button className="px-3 py-1 bg-white text-blue-950 font-bold rounded hover:text-blue-700 whitespace-nowrap">Log In/Register</button>
+          {!user && (
+            <button className="px-3 py-1 bg-white text-blue-950 font-bold rounded hover:text-blue-700 whitespace-nowrap">
+              Log In/Register
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
