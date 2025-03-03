@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import logo from "/icons/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = (user) => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -11,6 +13,16 @@ const NavBar = (user) => {
   const [visibleItems, setVisibleItems] = useState(6); // Number of visible items in the bottom navigation
   const [username, setUsername] = useState("Travinity member");
   
+  const menuItems = [
+    "My Bookings",
+    "Trip Coins: 0",
+    "Promo Codes",
+    "Manage My Account",
+    "Favorites",
+    "My Posts",
+    "Flight Price Alerts",
+    "Member Tiers",
+  ];
 
   // Handle scrolling behavior
   const handleScroll = () => {
@@ -32,7 +44,6 @@ const NavBar = (user) => {
 
   useEffect(() => {
     if(user){
-      console.log("The user id for nav bar: ", user.user.user.id);
       setUsername(user.user.user.name);
     } else {
       console.log("user not found")
@@ -125,11 +136,6 @@ const NavBar = (user) => {
                 <span className="hidden md:inline">Customer Support</span>
               </a>
 
-              {/* USD */}
-              <a href="#" className="text-[16px] text-white hover:text-yellow-500">
-                USD
-              </a>
-
               {/* User Dropdown */}
               <button
                 className="relative flex items-center text-[16px] hover:text-yellow-500"
@@ -140,32 +146,18 @@ const NavBar = (user) => {
                 {dropdownOpen && (
                   <div className="absolute top-full right-0 mt-2 w-56 bg-gradient-to-b from-black via-black/70 to-transparent backdrop-blur-sm text-white rounded-lg shadow-lg"
                     onClick={(e) => e.stopPropagation()} >
-                    <ul className="py-2">
-                    {[
-                        "My Bookings",
-                        "Trip Coins: 0",
-                        "Promo Codes",
-                        "Manage My Account",
-                        "Favorites",
-                        "My Posts",
-                        "Flight Price Alerts",
-                        "Member Tiers",
-                      ].map((item, index) => (
-                        <li key={index} className="px-4 py-2 hover:text-yellow-500 flex items-center">
-                          {item === "My Bookings" ? (
-                            <a href="/myBookings" className="w-full">
-                              {item}
-                            </a>
-                          ) : (
-                            item
-                          )}
+                    <ul>
+                      {menuItems.map((item, index) => (
+                        <li key={index} className="px-4 py-2 hover:text-yellow-500 flex items-center cursor-pointer"
+                          onClick={() => {
+                            if (item === "My Bookings") {
+                              navigate("/myBookings", { state: { userData: user.user.user } }); // Example of passing data
+                            }
+                          }}
+                        >
+                          {item}
                         </li>
                       ))}
-                      <hr className="border-gray-300/50" />
-                      <li className="px-4 py-2 hover:text-yellow-500">
-                        <i className="fas fa-sign-out-alt text-white"></i> Sign
-                        Out
-                      </li>
                     </ul>
                   </div>
                 )}

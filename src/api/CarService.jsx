@@ -14,8 +14,8 @@ export async function fetchUser(user_id) {
     }
 }
 
-export async function getBookingAll(){
-    const service_url = `${API_URL}/myBookings`;
+export async function getMyBookingAll(userId) {
+    const service_url = `${API_URL}/myBookings?userId=${userId}`;
     return await axios.get(service_url);
 }
 
