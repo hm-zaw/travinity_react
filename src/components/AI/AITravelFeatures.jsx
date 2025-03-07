@@ -125,39 +125,136 @@ const getTravelStyle = (mbti) => {
 
 const getDestinationMatch = (mbti) => {
   const matches = {
-    ENFJ: [
-      "Barcelona",
-      "Rio de Janeiro",
-      "Sydney",
-      "Kyoto",
-      "Amsterdam",
-      "Cape Town",
-      "Marrakech",
-      "Dublin",
-      "Vancouver",
-      "Stockholm",
-      "Vienna",
-      "Buenos Aires",
-      "Seoul",
-      "Montreal",
-      "Edinburgh"
+    INTJ: [
+      "Vienna", "Edinburgh", "Kyoto", 
+      "Copenhagen", "Stockholm", "Tokyo",
+      "Zurich", "Berlin", "Boston",
+      "Helsinki", "Oslo", "Munich",
+      "Cambridge", "Oxford", "Geneva",
+      "Vancouver"
     ],
-    INTJ: ["Vienna", "Edinburgh", "Kyoto"],
-    INTP: ["Berlin", "Silicon Valley", "Cambridge"],
-    ENTJ: ["Singapore", "Dubai", "New York"],
-    ENTP: ["Amsterdam", "San Francisco", "Bangkok"],
-    INFJ: ["Ubud", "Kyoto", "Prague"],
-    INFP: ["Paris", "Venice", "Copenhagen"],
-    ISTJ: ["London", "Washington DC", "Munich"],
-    ISFJ: ["Charleston", "Copenhagen", "Kyoto"],
-    ESTJ: ["Geneva", "Singapore", "Toronto"],
-    ESFJ: ["Rome", "Barcelona", "Vienna"],
-    ISTP: ["Queenstown", "Alaska", "Swiss Alps"],
-    ISFP: ["Florence", "Santorini", "Chiang Mai"],
-    ESTP: ["Las Vegas", "Dubai", "Queenstown"],
-    ESFP: ["Ibiza", "Rio de Janeiro", "Miami"]
+    INTP: [
+      "Berlin", "Silicon Valley", "Cambridge",
+      "Tokyo", "Seoul", "Singapore",
+      "Boston", "Seattle", "Amsterdam",
+      "Copenhagen", "Munich", "Zurich",
+      "Stockholm", "Helsinki", "Portland",
+      "Austin"
+    ],
+    ENTJ: [
+      "Singapore", "Dubai", "New York",
+      "London", "Hong Kong", "Tokyo",
+      "Shanghai", "Frankfurt", "Toronto",
+      "Sydney", "Geneva", "San Francisco",
+      "Boston", "Vienna", "Berlin",
+      "Melbourne"
+    ],
+    ENTP: [
+      "Amsterdam", "San Francisco", "Bangkok",
+      "Berlin", "Tokyo", "New York",
+      "Barcelona", "Seoul", "Tel Aviv",
+      "London", "Singapore", "Austin",
+      "Copenhagen", "Melbourne", "Portland",
+      "Montreal"
+    ],
+    INFJ: [
+      "Ubud", "Kyoto", "Prague",
+      "Edinburgh", "Copenhagen", "Bergen",
+      "Vienna", "Amsterdam", "Vancouver",
+      "Salzburg", "Stockholm", "Montreal",
+      "Portland", "Wellington", "Boulder",
+      "Galway"
+    ],
+    INFP: [
+      "Paris", "Venice", "Copenhagen",
+      "Amsterdam", "Kyoto", "Dublin",
+      "Edinburgh", "Bergen", "Portland",
+      "Vancouver", "Wellington", "Reykjavik",
+      "Prague", "Vienna", "Montreal",
+      "Boulder"
+    ],
+    ENFJ: [
+      "Barcelona", "Rio de Janeiro", "Sydney",
+      "Kyoto", "Amsterdam", "Cape Town",
+      "Marrakech", "Dublin", "Vancouver",
+      "Stockholm", "Vienna", "Buenos Aires",
+      "Seoul", "Montreal", "Edinburgh",
+      "San Francisco"
+    ],
+    ENFP: [
+      "Barcelona", "Amsterdam", "Berlin",
+      "Bangkok", "Paris", "New York",
+      "Melbourne", "Rio de Janeiro", "Lisbon",
+      "Seoul", "Tel Aviv", "Mexico City",
+      "Montreal", "Dublin", "Austin",
+      "New Orleans"
+    ],
+    ISTJ: [
+      "London", "Washington DC", "Munich",
+      "Tokyo", "Singapore", "Vienna",
+      "Zurich", "Geneva", "Stockholm",
+      "Edinburgh", "Vancouver", "Boston",
+      "Copenhagen", "Oslo", "Toronto",
+      "Melbourne"
+    ],
+    ISFJ: [
+      "Charleston", "Copenhagen", "Kyoto",
+      "Vienna", "Vancouver", "Edinburgh",
+      "Stockholm", "Bath", "Boulder",
+      "Wellington", "Victoria", "Salzburg",
+      "Quebec City", "Bergen", "Galway",
+      "Portland"
+    ],
+    ESTJ: [
+      "Geneva", "Singapore", "Toronto",
+      "London", "Frankfurt", "Tokyo",
+      "New York", "Munich", "Vienna",
+      "Stockholm", "Vancouver", "Melbourne",
+      "Boston", "Dubai", "Berlin",
+      "Hong Kong"
+    ],
+    ESFJ: [
+      "Rome", "Barcelona", "Vienna",
+      "Paris", "Sydney", "Vancouver",
+      "Copenhagen", "Dublin", "Edinburgh",
+      "Montreal", "Stockholm", "Melbourne",
+      "San Francisco", "Amsterdam", "Wellington",
+      "Quebec City"
+    ],
+    ISTP: [
+      "Queenstown", "Alaska", "Swiss Alps",
+      "Banff", "Patagonia", "Iceland",
+      "New Zealand", "Norwegian Fjords", "Montana",
+      "Colorado Rockies", "Canadian Rockies", "Utah",
+      "Scottish Highlands", "Austrian Alps", "Hokkaido",
+      "Tasmania"
+    ],
+    ISFP: [
+      "Florence", "Santorini", "Chiang Mai",
+      "Kyoto", "Ubud", "Barcelona",
+      "Amsterdam", "Copenhagen", "Paris",
+      "Vancouver", "San Francisco", "Wellington",
+      "Queenstown", "Byron Bay", "Amalfi Coast",
+      "Provence"
+    ],
+    ESTP: [
+      "Las Vegas", "Dubai", "Queenstown",
+      "Rio de Janeiro", "Ibiza", "Bangkok",
+      "Bali", "Cape Town", "Miami",
+      "Sydney", "Hong Kong", "Maui",
+      "Costa Rica", "Swiss Alps", "Monaco",
+      "Singapore"
+    ],
+    ESFP: [
+      "Ibiza", "Rio de Janeiro", "Miami",
+      "Las Vegas", "Barcelona", "Bangkok",
+      "Sydney", "Los Angeles", "Dubai",
+      "Bali", "Cancun", "Mykonos",
+      "Phuket", "Monte Carlo", "Honolulu",
+      "Gold Coast"
+    ]
   };
-  return matches[mbti] || ["Paris", "London", "Tokyo"];
+  return matches[mbti] || ["Paris", "London", "Tokyo", "New York", "Singapore"];
 };
 
 const tripDatabase = {
@@ -433,6 +530,10 @@ const AITravelFeatures = ({ userMBTI }) => {
     satisfactionScores: []
   });
 
+  useEffect(() => {
+    console.log("usermbti: ", userMBTI)
+  }, [])
+
   // Find compatible travel buddies
   const findTravelBuddies = () => {
     const buddies = Object.entries(mbtiCompatibility[userMBTI] || {})
@@ -472,42 +573,35 @@ const AITravelFeatures = ({ userMBTI }) => {
 
   // Generate random trip based on MBTI
   const generateRandomTrip = () => {
-    const allTrips = [
-      ...tripDatabase.cultural,
-      ...tripDatabase.adventure,
-      ...tripDatabase.relaxation
-    ];
-    
-    const destinations = getDestinationMatch(userMBTI);
-    
-    // Filter trips based on MBTI compatibility
-    const compatibleTrips = allTrips.filter(trip => {
-      return destinations.some(dest => 
-        trip.destination.toLowerCase().includes(dest.toLowerCase())
-      );
-    });
-    
-    // Ensure we don't repeat the last destination
-    const availableTrips = compatibleTrips.filter(trip => 
-      !randomTrip || trip.destination !== randomTrip.destination
-    );
-    
-    // If no other options, use all compatible trips
-    const tripsToChooseFrom = availableTrips.length > 0 ? availableTrips : compatibleTrips;
-    
-    const randomIndex = Math.floor(Math.random() * tripsToChooseFrom.length);
-    const selectedTrip = tripsToChooseFrom[randomIndex];
-    
-    const enhancedTrip = {
-      ...selectedTrip,
-      mbtiRecommendation: {
-        personalityType: userMBTI,
-        description: getMBTIDescription(userMBTI),
-        travelStyle: getTravelStyle(userMBTI),
-        personalizedTips: `Perfect destination for ${userMBTI} travelers who love ${selectedTrip.type.toLowerCase()} experiences`
-      }
+    // Get all trip types
+    const tripTypes = Object.keys(tripDatabase);
+    if (!tripTypes.length) return null;
+
+    // Randomly select a trip type
+    const randomType = tripTypes[Math.floor(Math.random() * tripTypes.length)];
+    if (!tripDatabase[randomType] || !Array.isArray(tripDatabase[randomType])) return null;
+
+    // Get trips of selected type
+    const tripsOfType = tripDatabase[randomType];
+    if (!tripsOfType.length) return null;
+
+    // Randomly select a trip
+    const randomTrip = tripsOfType[Math.floor(Math.random() * tripsOfType.length)];
+    if (!randomTrip) return null;
+
+    // Get MBTI-specific recommendations
+    const mbtiRecommendation = {
+      description: getMBTIDescription(userMBTI),
+      travelStyle: getTravelStyle(userMBTI),
+      personalizedTips: `Based on your ${userMBTI} personality type, you might particularly enjoy ${randomTrip.highlights[0]} and ${randomTrip.activities[0]}.`
     };
-    
+
+    // Return enhanced trip data
+    const enhancedTrip = {
+      ...randomTrip,
+      mbtiRecommendation
+    };
+
     setRandomTrip(null);
     setTimeout(() => {
       setRandomTrip(enhancedTrip);
@@ -581,58 +675,58 @@ const AITravelFeatures = ({ userMBTI }) => {
     <div className="container mx-auto px-8 py-20">
       <h2 className="text-3xl font-bold text-blue-600 mb-8">AI Travel Analytics</h2>
       
-{/* Travel Buddies Section */}
-<div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-  <h3 className="text-xl font-semibold mb-4">Your Travel Compatibility Guide</h3>
-  <p className="text-gray-600 mb-6">Based on your {userMBTI} personality type: {getMBTIDescription(userMBTI)}</p>
-  
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    {travelBuddies.map((buddy, index) => (
-      <motion.div
-        key={index}
-        whileHover={{ scale: 1.02 }}
-        className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h4 className="text-lg font-semibold">{buddy.mbti}</h4>
-            <p className="text-sm text-gray-600">{getMBTIDescription(buddy.mbti)}</p>
-          </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-blue-600">
-              {(buddy.score * 100).toFixed(0)}%
-            </div>
-            <div className="text-xs text-gray-500">Match Rate</div>
-          </div>
-        </div>
+      {/* Travel Buddies Section */}
+      <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <h3 className="text-xl font-semibold mb-4">Your Travel Compatibility Guide</h3>
+        <p className="text-gray-600 mb-6">Based on your {userMBTI} personality type: {getMBTIDescription(userMBTI)}</p>
         
-        <div className="space-y-3">
-          <div>
-            <h5 className="font-medium text-sm text-gray-700">Preferred Travel Style</h5>
-            <ul className="text-sm text-gray-600">
-              {getTravelStyle(buddy.mbti).map((style, i) => (
-                <li key={i} className="flex items-center">
-                  <span className="mr-2">•</span>{style}
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h5 className="font-medium text-sm text-gray-700">Recommended Destinations</h5>
-            <div className="flex flex-wrap gap-2">
-              {getDestinationMatch(buddy.mbti).map((dest, i) => (
-                <span key={i} className="px-2 py-1 bg-white rounded-full text-xs text-blue-600">
-                  {dest}
-                </span>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {travelBuddies.map((buddy, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.02 }}
+              className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h4 className="text-lg font-semibold">{buddy.mbti}</h4>
+                  <p className="text-sm text-gray-600">{getMBTIDescription(buddy.mbti)}</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-blue-600">
+                    {(buddy.score * 100).toFixed(0)}%
+                  </div>
+                  <div className="text-xs text-gray-500">Match Rate</div>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <div>
+                  <h5 className="font-medium text-sm text-gray-700">Preferred Travel Style</h5>
+                  <ul className="text-sm text-gray-600">
+                    {getTravelStyle(buddy.mbti).map((style, i) => (
+                      <li key={i} className="flex items-center">
+                        <span className="mr-2">•</span>{style}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div>
+                  <h5 className="font-medium text-sm text-gray-700">Recommended Destinations</h5>
+                  <div className="flex flex-wrap gap-2">
+                    {getDestinationMatch(buddy.mbti).map((dest, i) => (
+                      <span key={i} className="px-2 py-1 bg-white rounded-full text-xs text-blue-600">
+                        {dest}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</div>
+      </div>
 
       {/* Monthly Travel Trends */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
@@ -858,4 +952,4 @@ const AITravelFeatures = ({ userMBTI }) => {
   );
 };
 
-export default AITravelFeatures; 
+export default AITravelFeatures;

@@ -111,11 +111,17 @@ const HeroSection = (user) => {
   };
   const handleHotelDataInput = (e) => {
     const { name, value } = e.target;
-    setDataCarry(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  }
+    
+    setDataCarry(prevState => {
+      let newState = { ...prevState, [name]: value };
+  
+      if (name === "checkinDate" && newState.checkoutDate && newState.checkoutDate <= value) {
+        newState.checkoutDate = ""; 
+      }
+  
+      return newState;
+    });
+  };
 
   const handleGuestChange = (e) => {
     const [roomsVal, adultsVal, childrenVal] = e.target.value.split(',').map(Number);
@@ -301,6 +307,7 @@ const HeroSection = (user) => {
                         type="date" name="checkoutDate"
                         value={dataCarry.checkoutDate}
                         onChange={handleHotelDataInput}
+                        min={dataCarry.checkinDate ? new Date(new Date(dataCarry.checkinDate).setDate(new Date(dataCarry.checkinDate).getDate() + 1)).toISOString().split("T")[0] : ""}
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
                       />
                     </div>
@@ -393,7 +400,10 @@ const HeroSection = (user) => {
                   <div className="lg:w-1/4 md:w-auto flex-grow">
                     <label className="block text-sm font-medium text-gray-700 mb-1">From</label>
                     <input type="date" value={departureDate}
-                      onChange={(e) => setDepartureDate(e.target.value)}
+                      onChange={(e) => {
+                        setDepartureDate(e.target.value);
+                        setReturnDate("");
+                      }}
                       className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
                     />
                   </div>
@@ -402,7 +412,13 @@ const HeroSection = (user) => {
                   <div className="lg:w-1/4 md:w-auto flex-grow">
                     <label className="block text-sm font-medium text-gray-700 mb-1">To</label>
                     <input type="date" value={returnDate}
-                      onChange={(e) => setReturnDate(e.target.value)}
+                      onChange={(e) => {
+                        if (departureDate && e.target.value <= departureDate) {
+                          alert("Return date must be greater than departure date!");
+                        } else {
+                          setReturnDate(e.target.value);
+                        }
+                      }}
                       className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all"
                     />
                   </div>

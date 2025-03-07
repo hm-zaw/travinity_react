@@ -54,23 +54,7 @@ function CruiseBooking() {
         return <Itinerary ship={ship} />;
 
       case "requiredDocuments":
-        return <RequiredDocuments />;
-
-      case "shipInfo":
-        return (
-          <div className="text-blue-950">
-            <h3 className="text-xl font-bold mb-4">Ship Information</h3>
-            <p>Placeholder content for Ship Info tab.</p>
-          </div>
-        );
-
-      case "feedback":
-        return (
-          <div className="text-blue-950">
-            <h3 className="text-xl font-bold mb-4">Feedback</h3>
-            <p>Placeholder content for Feedback tab.</p>
-          </div>
-        );
+        return <RequiredDocuments />
 
       case "restrictionsPolicies":
         return (
@@ -187,22 +171,7 @@ function CruiseBooking() {
                   >
                     Itinerary
                   </button>
-                  <button 
-                    onClick={() => setActiveSection("shipInfo")}
-                    className={`${
-                      activeSection === "shipInfo" ? "bg-yellow-400" : "border border-blue-950"
-                    } text-blue-950 font-semibold px-4 py-2 rounded-full shadow-md`}
-                  >
-                    Ship Info
-                  </button>
-                  <button 
-                    onClick={() => setActiveSection("feedback")}
-                    className={`${
-                      activeSection === "feedback" ? "bg-yellow-400" : "border border-blue-950"
-                    } text-blue-950 font-semibold px-4 py-2 rounded-full shadow-md`}
-                  >
-                    Feedback
-                  </button>
+                  
                   <button 
                     onClick={() => setActiveSection("requiredDocuments")}
                     className={`${

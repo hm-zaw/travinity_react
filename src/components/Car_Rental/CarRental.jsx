@@ -11,12 +11,13 @@ import { getDetailsOfCars } from '../../api/CarService';
 import "jquery-ui/ui/widgets/autocomplete";
 import Footer from '../Dashboard/Footer';
 import SubscriptionSection from '../Dashboard/SubscriptionSection';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Main Page of Car Rental
 
 const CarRental = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const user = location.state.original.userData;
     const [loading, setLoading] = useState(false);
     

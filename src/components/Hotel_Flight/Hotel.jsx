@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import SubscriptionSection from '../Dashboard/SubscriptionSection';
 
 const Hotel = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const dataCarry = location.state;
   const [loading, setLoading] = useState(false);
   const [hotels, setHotels] = useState([]);

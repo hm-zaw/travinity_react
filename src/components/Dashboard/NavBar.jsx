@@ -80,13 +80,20 @@ const NavBar = (user) => {
 
   // Bottom navigation items
   const navItems = [
-    "Hotels & Homes",
-    "Flights",
-    "Cruises",
-    "Car Services",
-    "Attractions & Tours",
-    "Flight + Hotel",
+    { name: "Hotels & Homes", path: "/hotel", state: { userData: user.user.user } },
+    { name: "Flights", path: "/flight", state: { original: { userData: user.user.user } } },
+    { name: "Cruises", path: "/cruises", state: { original: { userData: user.user.user } } },
+    { name: "Car Services", path: "/car_rental", state: { original: { userData: user.user.user } } },
+    { name: "Attractions & Tours", path: "#attractions" } // Scroll behavior
   ];
+
+  const handleNavigation = (item) => {
+    if (item.path.startsWith("/")) {
+      navigate(item.path, { state: item.state });
+    } else {
+      document.getElementById("attractions")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -177,15 +184,15 @@ const NavBar = (user) => {
             {/* Visible Items */}
             {navItems
               .slice(0, visibleItems) // Show only the number of visible items
-              .map((item) => (
-                <a
+              .map((item, index) => (
+                <button
                   key={item}
-                  href="#"
+                  onClick={() => handleNavigation(item)}
                   className="text-white text-[16px] hover:text-yellow-500 relative group transition duration-300 whitespace-nowrap"
                 >
-                  {item}
+                  {item.name}
                   <span className="absolute left-0 -bottom-1 w-0 h-[2.5px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                </button>
               ))}
             {/* Three dots for small screens */}
             {isSmallScreen && visibleItems < navItems.length && (

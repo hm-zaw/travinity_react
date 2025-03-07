@@ -371,8 +371,8 @@ export default function SelectRoom({ ship, userData }) {
       quantity: ship.Itinerary.length - 1,
       multiplier: 100,
       currency: 'USD',
-      email: userData.userData.email, // to replace with user's email
-      user_id: userData.userData.id, // to replace with user's id
+      email: userData.email, // to replace with user's email
+      user_id: userData.id, // to replace with user's id
       status: "PAID",
       category: "cruise",
       transaction_date: new Date().toISOString()

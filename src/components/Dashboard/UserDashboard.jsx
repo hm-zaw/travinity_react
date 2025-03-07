@@ -33,7 +33,7 @@ const UserDashboard = () => {
     <div className="Dashboard">
       <NavBar user={userData}/>
       <HeroSection user={userData}/>
-      <AITravelFeatures userMBTI="ENFJ" /> 
+      <AITravelFeatures userMBTI={userData.user.mbti} /> 
       <RecommendedSection />
       <TestimonialsSection />
       <Attracts_main user={userData}/>

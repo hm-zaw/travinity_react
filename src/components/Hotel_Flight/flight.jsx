@@ -20,7 +20,6 @@ import Header from '../Cruise/CruiseHeader';
 import Footer from '../Dashboard/Footer';
 import SubscriptionSection from '../Dashboard/SubscriptionSection';
 
-
 const Flight = () => {
   const location = useLocation();
   const navigate = useNavigate();
